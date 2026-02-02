@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
     <!---------------- Fav icon starts --------------------->
     	<!--<link rel="shortcut icon" href="{{asset('images/favicon.png')}}">-->
     	<!--<link rel="apple-touch-icon-precomposed" href="{{asset('images/favicon.png')}}">-->
@@ -201,9 +201,9 @@
                             <?php /* <li class="{{ (Request::segment(2) == 'tripgroup')?'active':'' }}">
                     <a href="{{ route('tripgroup.index') }}">
                       <span class="fa fa fa-arrows-h"></span>
-                      Trip Group                
-                    </a>                
-                  </li> 
+                      Trip Group
+                    </a>
+                  </li>
                 <li class="{{ (Request::segment(2) == 'region'||Request::segment(2) == 'trip-region')?'active':'' }}">
                     <a href="{{ url('admin/region') }}">
                         <span class="fa fa fa-arrows-h"></span>
@@ -223,12 +223,12 @@
                                     <span class="sidebar-title"> Trip List </span>
                                 </a>
                             </li>
-                            <li class="{{ Request::segment(2) == 'training-list' ? 'active' : '' }}">
+                            {{-- <li class="{{ Request::segment(2) == 'training-list' ? 'active' : '' }}">
                                 <a href="{{ route('training.list.index','training') }}">
                                     <span class="fa fa fa-arrows-h"></span>
                                     <span class="sidebar-title"> Training list </span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
 
@@ -246,15 +246,15 @@
                      <li class="{{ (Request::segment(2) == 'teamcategory')?'active':'' }}">
                     <a href="{{ url('admin/teamcategory') }}">
                       <span class="fa fa fa-arrows-h"></span>
-                      Team Category                
-                    </a>                
-                  </li>               
+                      Team Category
+                    </a>
+                  </li>
                     <li class="{{ (Request::segment(2) == 'teams')?'active':'' }}">
                     <a href="{{ url('admin/teams') }}">
                       <span class="fa fa fa-arrows-h"></span>
-                      Teams                 
-                    </a>                
-                  </li>              
+                      Teams
+                    </a>
+                  </li>
                   </ul>
               </li>
                     <?php /*
@@ -264,9 +264,9 @@
                 <!--        <span class="sidebar-title">  Manage Team  </span>-->
                 <!--    </a>-->
                 <!--</li>           -->
-                 
-         
-                
+
+
+
                 <!--  <li class="">-->
                 <!--   @if(Request::segment(1) == 'newsletter-create' || Request::segment(1) == 'subscriber-create'|| Request::segment(1) == 'send-newsletter'|| Request::segment(1) == 'subscriber-index'|| Request::segment(1) == 'subscriber-edit'|| Request::segment(1) == 'newsletter-index'|| Request::segment(1) == 'newsletter-edit')-->
                 <!--    <a class="accordion-toggle menu-open">-->
@@ -369,8 +369,8 @@
                    <!--     <span class="sidebar-title">Tailor Made</span>-->
                    <!-- </a>-->
                    <!--</li>-->
-                  
-              
+
+
                    */
                             ?>
                         </ul>

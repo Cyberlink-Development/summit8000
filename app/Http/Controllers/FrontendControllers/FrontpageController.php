@@ -88,7 +88,7 @@ class FrontpageController extends Controller
             $package_list = TripModel::whereIn('id', $tripIds)->get();
         }
         $packages = ActivityModel::where('activity_parent','package')->orderBy('ordering','asc')->take(2)->get();
-        $aboutUs = PostTypeModel::where(['status'=>'1','is_menu'=>'1','id' => '22'])->orderBy('ordering','asc')->first(); 
+        $aboutUs = PostTypeModel::where(['status'=>'1','is_menu'=>'1','id' => '22'])->orderBy('ordering','asc')->first();
         $blog = PostTypeModel::where('id', '33')->first();
         $blogs = PostModel::where(['post_type' => $blog->id])->orderBy('post_order', 'desc')->take(2)->get();
         $contact = PostTypeModel::where('id', '26')->first();
@@ -111,10 +111,10 @@ class FrontpageController extends Controller
         if ($data) {
             // $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'asc')->paginate(16);
             $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'asc');
-            
+
             $posts = $query->paginate($data->uri === 'blog' ? 4 : 16);
             $multiphotos = PostImageModel::where('post_id', $posts->first()?->id)->latest()->get();
-            
+
         }
         $team_category = TeamCategory::where(['team_parent'=>'0' , 'status'=> 1])->get();
         $related_teams =  TeamModel::all()->groupBy('category');
@@ -240,7 +240,7 @@ class FrontpageController extends Controller
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
             'photo_videos', 'activity','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri'));
-    }  
+    }
 
     //<------------------------------------------Activity Frontend---------------------------------------------->
 
@@ -354,7 +354,7 @@ class FrontpageController extends Controller
                             'arrival_from' => $request->arrival_from,
                             'arrival_date'=> $request->arrival_date,
                             'arrival_time'=> $request->arrival_time. ' '.$request->time1
-                            
+
                         ]);
                         if($flight && $request->has_departure_detail == 1){
                             $flight->update([
@@ -395,7 +395,7 @@ class FrontpageController extends Controller
                         return redirect()->route('himalayan.payment.verify', ['data' => $dataJson]);
                     }
                     // return new AdminBookingMail();
-                    // return new BookTrip($request->email);  
+                    // return new BookTrip($request->email);
                     Mail::send(new AdminBookingMail($setting->email_secondary));
                     Mail::send(new BookTrip($request->email));
                     $name = $request->full_name;
@@ -538,7 +538,7 @@ class FrontpageController extends Controller
         return redirect()->intended(url('/'))->with('success', $status);
     }
 
-    public function contact_us(Request $request)  
+    public function contact_us(Request $request)
     {
         // $g_recaptcha_response = $request->input('g_recaptcha_response');
         // $result = $this->getCaptcha($g_recaptcha_response);
@@ -676,11 +676,11 @@ class FrontpageController extends Controller
     public function search_all(Request $request)
     {
         $content_search = $request->search;
-        // Search Trips 
+        // Search Trips
         // dd($content_search);
         $trip = TripModel::where('status', '1')->where('trip_title', 'like', '%' . trim($content_search) . '%')->orWhere('uri', 'like', '%' . trim($content_search) . '%')->paginate(8);
 
-        //Search Category 
+        //Search Category
         $category = ActivityModel::where('title', 'like', '%' . trim($content_search) . '%')->orWhere('uri', 'like', '%' . trim($content_search) . '%')->get();
 
         //Search Post(Company)
@@ -711,7 +711,7 @@ class FrontpageController extends Controller
                     'contact' => 'required|string|max:20',
                     'country' => 'required|string|max:100',
                     'activity_type' => 'nullable',
-                    'trip' => 'required|exists:cl_trip_details,id', 
+                    'trip' => 'required|exists:cl_trip_details,id',
                     'start_date' => 'required|date|after_or_equal:today',
                     'end_date' => 'required|date|after_or_equal:today',
                     'peoples' => 'required|integer|min:1|max:100',
@@ -897,17 +897,18 @@ class FrontpageController extends Controller
                 return back()->with('error', 'You are a robot');
             }
         }
-     
+
     }
 
-    public function expedition(Request $request)
+    public function trip_lists(Request $request)
     {
         $item= ActivityModel::where('uri',$request->uri)->first();
         $data = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc')->paginate(6);
-        
+
         // dd($item,$data);
-        return view('themes.default.expedition', compact('data','item'));
+        return view('themes.default.trip-list', compact('data','item'));
     }
+
     public function package($uri)
     {
         $item= ActivityModel::where('uri',$uri)->first();
@@ -921,24 +922,10 @@ class FrontpageController extends Controller
         if ($item->id) {
             $itinerary = $item->itineraries()->orderBy('ordering', 'asc')->get();
         }
-        $data = $item->activities()->first(); 
+        $data = $item->activities()->first();
         $setting = SettingModel::where('id',1)->first();
         // dd($uri,$item,$data);
         return view('themes.default.packagedetail', compact('item','data','itinerary','setting'));
-    }
-
-    public function tour()
-    {
-        $data = DestinationModel::where('status', '1')->get();
-        $destination= PostTypeModel::where('id', '29')->first();
-        return view('themes.default.tour', compact('data','destination'));
-    }
-
-    public function trekking(Request $request)  
-    {
-        $item= ActivityModel::where('uri',$request->uri)->first();
-        $data = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc')->paginate(8);
-        return view('themes.default.trekking', compact('data','item'));
     }
 
     public function activitylist()
@@ -996,7 +983,7 @@ class FrontpageController extends Controller
 
     public function teamlist($uri)
     {
-        $team = TeamCategory::where(['uri' => $uri])->first(); 
+        $team = TeamCategory::where(['uri' => $uri])->first();
         $team_cat = TeamCategory::where('team_parent','0')->get();
         $category2 = TeamCategory::where('team_parent','4')->orderBy('ordering', 'asc')->get();
         $first_team = TeamModel::where(['category' => $team->id, 'status' => '1'])->orderBy('ordering', 'asc')->get();
@@ -1013,7 +1000,7 @@ class FrontpageController extends Controller
     public function teamdetail($uri)
     {
         $data = TeamModel::where(['uri'=> $uri])->orWhere('team_key', $uri)->first();
-        
+
         $certificates = $data->certificates()->orderBy('ordering','asc')->get();
         $related=$relatedData = TeamModel::where('id', '!=', optional($data)->id)
         ->where('category', optional($data)->category)

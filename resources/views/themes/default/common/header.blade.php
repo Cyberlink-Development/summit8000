@@ -166,8 +166,9 @@
                                 <ul class="p-2 text-sm  font-medium" aria-labelledby="multiLevelDropdownButton">
                                     @foreach ($trekking as $trek)
                                         <li>
-                                            <a href="{{ route('trekking-list', $trek->uri) }}"
-                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">{{ $trek->title }}</a>
+                                            <a href="{{ route('trekking-list', $trek->uri) }}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
+                                                {{ $trek->title }}
+                                            </a>
                                         </li>
                                     @endforeach
 
@@ -191,18 +192,13 @@
                             <div id="NepalTours"
                                 class="z-50 hidden bg-white border border-gray-100 rounded-b-xl shadow-sm  min-w-48">
                                 <ul class="p-2 text-sm  font-medium" aria-labelledby="multiLevelDropdownButton">
-
-                                    <li>
-                                        <a href="trip-list.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">Best
-                                            Tour of Nepal</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="trip-list.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">Luxury
-                                            Tour of Nepal</a>
-                                    </li>
+                                    @foreach ($tours as $tour)
+                                        <li>
+                                            <a href="{{ route('tour-list', $tour->uri) }}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
+                                                {{ $tour->title}}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </li>
@@ -222,57 +218,36 @@
                             <div id="AboutUs"
                                 class="z-50 hidden bg-white border border-gray-100 rounded-b-xl shadow-sm  min-w-64">
                                 <ul class=" p-2 text-sm  font-medium" aria-labelledby="multiLevelDropdownButton">
+                                    @foreach($navigations as $nav)
+                                        <li>
+                                            <a href="{{route('page.posttype_detail',$nav->uri)}}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
+                                                {{ $nav->post_type }}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                     <li>
-                                        <a href="who-we-are.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
-                                            Who We Are?</a>
+                                        <a href="" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
+                                            Read Reviews
+                                        </a>
                                     </li>
-
-                                    <li>
-                                        <a href="team.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
-                                            Our Team</a>
-                                    </li>
-                                    <li>
-                                        <a href="legal-documents.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
-                                            Legal Documents</a>
-                                    </li>
-                                    <li>
-                                        <a href="reviews.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
-                                            Read Reviews</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.php"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
-                                            Blog</a>
-                                    </li>
-
-
                                 </ul>
                             </div>
                         </li>
                         <li class="relative group">
-                            <a href="contact-us.php"
-                                class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">Contact
-                                Us</a>
+                            <a href="{{route('page.posttype_detail',$contact_us->uri)}}" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">
+                                Contact Us
+                            </a>
                         </li>
                     </ul>
                 </nav>
                 <!-- CTA Button -->
-                <a href="plan-your-trip.php"
-                    class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500
-               font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm">
+                <a href="plan-your-trip.php" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm">
                     Plan Your Trip
                 </a>
 
-
-
                 <!-- Hamburger Menu -->
                 <button
-                    class="lg:hidden inline-flex items-center justify-center w-10 h-10
-               rounded-lg hover:bg-gray-100 transition"
+                    class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition"
                     type="button" data-drawer-target="drawer-disable-body-scrolling"
                     data-drawer-show="drawer-disable-body-scrolling" data-drawer-body-scrolling="false"
                     aria-controls="drawer-disable-body-scrolling" data-drawer-placement="right">
