@@ -909,6 +909,13 @@ class FrontpageController extends Controller
         return view('themes.default.trip-list', compact('data','item'));
     }
 
+    public function all_reviews()
+    {
+
+        return view('themes.default.review-list');
+    }
+
+
     public function package($uri)
     {
         $item= ActivityModel::where('uri',$uri)->first();

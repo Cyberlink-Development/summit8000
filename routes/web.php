@@ -41,6 +41,7 @@ Route::get('type-{uri}', 'FrontendControllers\FrontpageController@posttype')->na
 Route::get('expeditions/{uri}', 'FrontendControllers\FrontpageController@trip_lists')->name('expedition-list');
 Route::get('treks/{uri}', 'FrontendControllers\FrontpageController@trip_lists')->name('trekking-list');
 Route::get('tours/{uri}', 'FrontendControllers\FrontpageController@trip_lists')->name('tour-list');
+Route::get('reviews', 'FrontendControllers\FrontpageController@all_reviews')->name('reviews');
 
 // Route::get('page/expedition/{uri}.html', 'FrontendControllers\FrontpageController@expedition')->name('expedition-list');
 // Route::get('page/tour.html', 'FrontendControllers\FrontpageController@tour')->name('tour');

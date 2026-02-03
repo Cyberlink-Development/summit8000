@@ -226,7 +226,7 @@
                                         </li>
                                     @endforeach
                                     <li>
-                                        <a href="" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
+                                        <a href="{{route('reviews')}}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
                                             Read Reviews
                                         </a>
                                     </li>
