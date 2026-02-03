@@ -8,7 +8,7 @@
 
             <!-- Slide 1 -->
             <div class="swiper-slide relative h-full w-full">
-                <img src="{{ asset('theme-assets/hero/1.jpg') }}" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/hero/1.jpg') }}" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover object-center"
                     alt="Manaslu Base Camp">
                 <div class="absolute inset-0 bg-black/40"></div>
@@ -42,7 +42,7 @@
 
             <!-- Slide 2 -->
             <div class="swiper-slide relative h-full w-full">
-                <img src="{{ asset('theme-assets/hero/2.jpg') }}" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/hero/2.jpg') }}" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover object-center"
                     alt="Everest Base Camp">
                 <div class="absolute inset-0 bg-black/40"></div>
@@ -75,7 +75,7 @@
 
             <!-- Slide 3 -->
             <div class="swiper-slide relative h-full w-full">
-                <img src="assets/hero/3.jpg" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/hero/3.jpg') }}" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover object-center"
                     alt="Annapurna Base Camp">
                 <div class="absolute inset-0 bg-black/40"></div>
@@ -94,9 +94,7 @@
                         </div>
 
                         <div class="flex-1 flex justify-center">
-                            <a href="trip-details.php" class="border border-white/60 hover:border-white hover:bg-white/10
-                                      text-white px-8 py-2 rounded-xl text-sm font-medium
-                                      transition-all backdrop-blur-sm">
+                            <a href="trip-details.php" class="border border-white/60 hover:border-white hover:bg-white/10 text-white px-8 py-2 rounded-xl text-sm font-medium transition-all backdrop-blur-sm">
                                 Explore Annapurna
                             </a>
                         </div>
@@ -157,7 +155,7 @@
             <!-- Large Card: 8000m -->
             <a href="trip-list.php"
                 class="group relative overflow-hidden rounded-2xl h-[400px] lg:col-span-2 cursor-pointer transition-all duration-500">
-                <img src="assets/trip/8000.jpg" alt="8000m Expedition" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/trip/8000.jpg') }}" alt="8000m Expedition" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -186,7 +184,7 @@
 
             <!-- Card: 7000m -->
             <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[400px] cursor-pointer">
-                <img src="assets/trip/7000.jpg" alt="7000m Expedition" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/trip/7000.jpg') }}" alt="7000m Expedition" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -215,7 +213,7 @@
 
             <!-- Small Card: 6000m -->
             <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                <img src="assets/trip/6000.jpg" alt="6000m Peaks" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/trip/6000.jpg') }}" alt="6000m Peaks" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -241,7 +239,7 @@
 
             <!-- Small Card: 7Summit -->
             <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                <img src="assets/trip/7summit.jpg" alt="7Summit" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/trip/7summit.jpg') }}" alt="7Summit" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -267,7 +265,7 @@
 
             <!-- Small Card: 14 Peaks -->
             <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                <img src="assets/trip/14peaks.jpg" alt="14 Peaks" loading="lazy"
+                <img src="{{ asset('theme-assets/assets/trip/14peaks.jpg') }}" alt="14 Peaks" loading="lazy"
                     class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -298,7 +296,7 @@
 
                 <!-- Small Card:  Treks in Nepal -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/treks-in-nepal.jpg" alt="6000m Peaks" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/treks-in-nepal.jpg') }}" alt="6000m Peaks" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -326,7 +324,7 @@
 
                 <!-- Small Card: Popular Treks -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/popular-treks.jpg" alt="7Summit" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/popular-treks.jpg') }}" alt="7Summit" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -354,7 +352,7 @@
 
                 <!-- Small Card: Nepal Tours -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/nepal-tours.jpg" alt="14 Peaks" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/nepal-tours.jpg') }}" alt="14 Peaks" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -380,7 +378,7 @@
                 </a>
                 <!-- Small Card: Bhutan Tours -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/bhutan-tours.jpg" alt="14 Peaks" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/bhutan-tours.jpg') }}" alt="14 Peaks" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -407,7 +405,7 @@
 
                 <!-- Small Card: Tibet Tours -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/tibet-tours.jpg" alt="14 Peaks" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/tibet-tours.jpg') }}" alt="14 Peaks" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -434,7 +432,7 @@
 
                 <!-- Small Card: India Tours -->
                 <a href="trip-list.php" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                    <img src="assets/trip/india-tours.jpg" alt="14 Peaks" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/india-tours.jpg') }}" alt="14 Peaks" loading="lazy"
                         class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                     </div>
@@ -468,8 +466,7 @@
 
         <div class="mt-12 flex item-center justify-center">
             <!-- CTA Button -->
-            <button id="showMoreBtn" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500
-               font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
+            <button id="showMoreBtn" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
                 Show More
 
             </button>
@@ -514,7 +511,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/1.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/1.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -530,12 +527,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 50
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/summer.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/summer.svg') }}" class="h-4"
                                         alt="">
                                     Autumn</span>
                             </div>
@@ -557,7 +554,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/2.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/2.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -573,12 +570,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 33
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/spring.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/spring.svg') }}" class="h-4"
                                         alt="">
                                     Spring</span>
                             </div>
@@ -600,7 +597,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/3.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/3.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -616,12 +613,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 40
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/summer.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/summer.svg') }}" class="h-4"
                                         alt="">
                                     Summer</span>
                             </div>
@@ -644,7 +641,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/2.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/2.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -660,12 +657,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 33
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/spring.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/spring.svg') }}" class="h-4"
                                         alt="">
                                     Spring</span>
                             </div>
@@ -731,7 +728,7 @@
 
     <!-- Mountain Background Bottom -->
     <div class="w-full h-[500px] mt-[-100px] bg-bottom bg-no-repeat bg-cover pointer-events-none"
-        style="background-image: url('assets/about-banner.jpg'); opacity: 0.4; mix-blend-mode: multiply;">
+        style="background-image: url('{{ asset('theme-assets/assets/about-banner.jpg') }}'); opacity: 0.4; mix-blend-mode: multiply;">
     </div>
     <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent"></div>
 </section>
@@ -923,7 +920,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/1.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/1.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -939,12 +936,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 50
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/summer.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/summer.svg') }}" class="h-4"
                                         alt="">
                                     Autumn</span>
                             </div>
@@ -966,7 +963,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/2.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/2.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -982,12 +979,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 33
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/spring.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/spring.svg') }}" class="h-4"
                                         alt="">
                                     Spring</span>
                             </div>
@@ -1009,7 +1006,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/3.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/3.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -1025,12 +1022,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 40
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/summer.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/summer.svg') }}" class="h-4"
                                         alt="">
                                     Summer</span>
                             </div>
@@ -1053,7 +1050,7 @@
                     <a href="trip-details.php"
                         class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="assets/trip/2.jpg" alt="Everest" loading="lazy"
+                            <img src="{{ asset('theme-assets/assets/trip/2.jpg') }}" alt="Everest" loading="lazy"
                                 class="lazy-image w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -1069,12 +1066,12 @@
                             <div
                                 class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                 <span class="flex items-center gap-1 text-xs">
-                                    <img src="assets/icons/map-point.svg" class="h-4" alt=""> Nepal,
+                                    <img src="{{ asset('theme-assets/assets/icons/map-point.svg') }}" class="h-4" alt=""> Nepal,
                                     Khumbu</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/clock.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/clock.svg') }}" class="h-4"
                                         alt=""> 33
                                     Days</span>
-                                <span class="flex items-center gap-1"><img src="assets/icons/spring.svg" class="h-4"
+                                <span class="flex items-center gap-1"><img src="{{ asset('theme-assets/assets/icons/spring.svg') }}" class="h-4"
                                         alt="">
                                     Spring</span>
                             </div>
@@ -1128,7 +1125,7 @@
             <a href="blog-details.php"
                 class="group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="relative overflow-hidden h-64">
-                    <img src="assets/trip/1.jpg?height=400&width=400" alt="Annapurna Circuit Trek" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/1.jpg') }}?height=400&width=400" alt="Annapurna Circuit Trek" loading="lazy"
                         class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
                 </div>
@@ -1146,7 +1143,7 @@
             <a href="blog-details.php"
                 class="group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="relative overflow-hidden h-64">
-                    <img src="assets/trip/2.jpg?height=400&width=400" alt="Langtang Valley" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/2.jpg') }}?height=400&width=400" alt="Langtang Valley" loading="lazy"
                         class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
                 </div>
@@ -1164,7 +1161,7 @@
             <a href="blog-details.php"
                 class="group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="relative overflow-hidden h-64">
-                    <img src="assets/trip/3.jpg?height=400&width=400" alt="Manaslu Circuit" loading="lazy"
+                    <img src="{{ asset('theme-assets/assets/trip/3.jpg') }}?height=400&width=400" alt="Manaslu Circuit" loading="lazy"
                         class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
                 </div>
