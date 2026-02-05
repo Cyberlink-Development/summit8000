@@ -35,7 +35,7 @@ Route::get('/verify/{token}', 'FrontendControllers\FrontpageController@verifyUse
 Route::get('/contact-verify/{token}', 'FrontendControllers\FrontpageController@verifyContact')->name('verify-contact');
 
 // Normal Pages
-Route::get('{uri}.html', 'FrontendControllers\FrontpageController@pagedetail')->name('page.pagedetail');
+Route::get('blogs/{uri}', 'FrontendControllers\FrontpageController@pagedetail')->name('page.pagedetail');
 Route::get('type-{uri}', 'FrontendControllers\FrontpageController@posttype')->name('page.posttype_detail');
 
 Route::get('expeditions/{uri}', 'FrontendControllers\FrontpageController@trip_lists')->name('expedition-list');
@@ -79,14 +79,6 @@ Route::get('activity-list', 'FrontendControllers\FrontpageController@activitylis
 Route::get('trekking-list', 'FrontendControllers\FrontpageController@trekkinglist')->name('page.trekkinglist');
 Route::get('expedition-list', 'FrontendControllers\FrontpageController@expeditionlist')->name('page.expeditionlist');
 Route::get('related-list/{tripId}', 'FrontendControllers\FrontpageController@relatedlist')->name('page.relatedlist');
-Route::get('blog/{uri}.html', 'FrontendControllers\FrontpageController@blog')->name('page.blogdetail');
-
-Route::get('team/{uri}','FrontendControllers\FrontpageController@teamdetail')->name('team.teamdetail');
-
-
-Route::get('team/{uri}','FrontendControllers\FrontpageController@teamdetail')->name('team.teamdetail');
-
-
 
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

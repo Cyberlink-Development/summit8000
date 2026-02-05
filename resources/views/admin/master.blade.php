@@ -127,13 +127,11 @@
                     <li class="">
                         @if (Request::segment(2) == 'posttype' ||
                                 Request::segment(2) == 'postcategory' ||
-                                Request::segment(2) == 'useful-info' ||
-                                Request::segment(2) == '7-summit-trek' ||
-                                Request::segment(2) == 'partners' ||
+                                Request::segment(2) == 'contact-us' ||
+                                Request::segment(2) == 'legal-documents' ||
                                 Request::segment(2) == 'blogs' ||
-                                Request::segment(2) == 'cms-pages' ||
-                                Request::segment(3) == 'cms-pages' ||
-                                Request::segment(2) == 'about-us')
+                                Request::segment(2) == 'our-team' ||
+                                Request::segment(2) == 'who-we-are')
                             <a class="accordion-toggle menu-open">
                             @else
                                 <a class="accordion-toggle">
