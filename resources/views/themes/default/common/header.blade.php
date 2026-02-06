@@ -477,7 +477,7 @@
 
     <!-- Sticky Right Contact Button -->
     <div class="fixed right-0 bottom-20 z-40 w-auto">
-        <a href="https://wa.me/9779851058678" target="_blank"
+        <a href="https://wa.me/9779851015875" target="_blank"
             class="flex items-center border-l border-gray-200 pl-3 pr-4 py-2 bg-white rounded-l-full shadow-lg hover:shadow-xl transition-all
             max-w-[90vw] sm:max-w-[300px]">
 
@@ -493,7 +493,7 @@
 
             <!-- Text -->
             <div class="leading-tight truncate">
-                <div class="text-sm sm:text-base font-medium text-brand-400 truncate">+9779851058678</div>
+                <div class="text-sm sm:text-base font-medium text-brand-400 truncate">+9779851015875</div>
                 <div class="text-xs sm:text-sm font-medium text-gray-500 truncate">Direct Call or WhatsApp 24/7</div>
             </div>
 
