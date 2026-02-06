@@ -5,7 +5,7 @@
 @section('thumbnail', $data->thumbnail)
 @section('content')
 <!-- hero section -->
-<section class="relative ">     
+<section class="relative ">
     <div class="container">
         <!-- Breadcrumbs -->
         <nav aria-label="Breadcrumb" class="mx-auto px-4 my-6 text-xs sm:text-sm text-gray-500">
@@ -29,7 +29,7 @@
                 <!-- Current Page -->
                 <li class="flex items-center max-w-full">
                     <i class="fas fa-chevron-right mx-2 text-[8px]"></i>
-                    <span class="text-brand font-medium truncate max-w-[220px] sm:max-w-none"> 
+                    <span class="text-brand font-medium truncate max-w-[220px] sm:max-w-none">
                         {{ $data->trip_title }}
                     </span>
                 </li>
@@ -41,9 +41,9 @@
                     @foreach ($photos as $key => $photo)
                         @if ($key === 0)
                             <div>
-                                <a href="{{$photo->thumbnail ? asset('theme-assets/assets/trip/8000.jpg') : asset('/uploads/original/' . $photo->thumbnail)}}" data-fancybox="trip-gallery" data-caption="{{ $photo->title }}">
+                                <a href="{{$photo->thumbnail ? asset('/uploads/original/'.$photo->thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}" data-fancybox="trip-gallery" data-caption="{{ $photo->title }}">
                                     <div class="relative rounded-2xl overflow-hidden group cursor-pointer h-full md:h-[480px]">
-                                        <img src="{{asset('theme-assets/assets/trip/8000.jpg')}}" alt="{{ $photo->title }}" loading="lazy"
+                                        <img src="{{$photo->thumbnail ? asset('/uploads/original/'.$photo->thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}" alt="{{ $photo->title }}" loading="lazy"
                                             class="lazy-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors">
                                         </div>
@@ -350,7 +350,7 @@
                 </section>
                 <!-- end -->
                 <!-- WhyWithSummit8000 -->
-                <section class="rounded-xl p-5 bg-brand-50  text-gray-700" id="WhyWithSummit8000"> 
+                <section class="rounded-xl p-5 bg-brand-50  text-gray-700" id="WhyWithSummit8000">
                     <div class=" space-y-3">
                         <h2 class="text-2xl font-bold text-brand-400">Why with Summit 8000?</h2>
                         <p>Because Summit 8000 is a trekking and expedition company built on experience, passion, and a
@@ -381,7 +381,7 @@
                                             class="flex items-center justify-between w-full p-5 font-semibold  rtl:text-right text-base rounded-t-base border border-t-0 border-x-0 border-b-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 text-left"
                                             data-accordion-target="#body-{{ $key+1 }}" aria-expanded="true" aria-controls="body-{{$key+1}}">
                                             <span class="text-brand-900">
-                                                <span class="text-brand-400 mr-1">Day {{ $value->days }}:</span> 
+                                                <span class="text-brand-400 mr-1">Day {{ $value->days }}:</span>
                                                 {{ $value->title }}</span>
                                             <i data-accordion-icon
                                                 class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400 text-sm text-brand-400"></i>
@@ -471,7 +471,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                               
+
                                 </div>
                             </div>
                             <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
