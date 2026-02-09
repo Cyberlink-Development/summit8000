@@ -18,24 +18,24 @@
                         <table class="table admin-form table-striped dataTable" id="datatable3">
                             <thead>
                                 <tr class="bg-light">
-                                    <th> SN </th>
-                                    <th>Trip Title</th>
-                                    <th>Visiter</th>
-                                    <th>Trip of the Month</th>
-                                    <th>Category</th>
-                                    <th>Trip Group</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Order</th>
+                                    <th style="width:5%;"> SN </th>
+                                    <th style="width:40%;">Trip Title</th>
+                                    <th style="width:10%;" class="text-center">Visiter</th>
+                                    <th style="width:10%;">Best Seller?</th>
+                                    <th style="width:10%;">Category</th>
+                                    <th style="width:10%;">Luxury Trip?</th>
+                                    <th style="width:5%;" class="text-center">Status</th>
+                                    <th style="width:10%;" class="text-center">Order</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($data as $row)
                                     <tr class="id{{ $row->id }}">
-                                        <td>
+                                        <td style="width:5%;">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="post_title title_hi_sh">
+                                        <td style="width:40%;" class=" title_hi_sh">
                                             <strong> {{ ucfirst($row->trip_title) }} </strong>
                                             <div class="row_actions">
                                                 <span class="id">ID: {{ $row->id }} | </span>
@@ -47,23 +47,21 @@
                                                         class="submitdelete1">Delete</a> </span>
                                             </div>
                                         </td>
-                                        <td class="text-center">{{ $row->visiter }}</td>
-                                        <td class="">
+                                        <td style="width:10%;" class="text-center">{{ $row->visiter }}</td>
+                                        <td class="text-center" style="width:10%;">
                                             <form action="{{ route('trip_of_the_month', $row->id) }}" method="POST">
                                                 @csrf
                                                 @if ($row->trip_of_the_month == 0)
-                                                    <button class="btn btn-danger btn btn-sm" name="trip_of_the_month"
-                                                        value="0" type="submit"><i class="fa fa-times"></i>
+                                                    <button class="btn btn-danger btn btn-sm" name="trip_of_the_month" value="0" type="submit"><i class="fa fa-times"></i>
                                                     </button>
                                                 @else
-                                                    <button class="btn btn-success btn btn-sm" name="trip_of_the_month"
-                                                        value="1" type="submit"><i class="fa fa-check"></i>
+                                                    <button class="btn btn-success btn btn-sm" name="trip_of_the_month" value="1" type="submit"><i class="fa fa-check"></i>
                                                     </button>
                                                 @endif
 
                                             </form>
                                         </td>
-                                        <td>
+                                        <td style="width:10%;">
                                             @if ($row->activities)
                                                 @foreach ($row->activities as $value)
                                                     <span>{{ $value->title }}</span><br>
@@ -71,19 +69,19 @@
                                             @endif
                                         </td>
 
-                                        <td>
-                                            {{ $row->video_status == 1 ? 'Famous' : '' }}
+                                        <td style="width:10%;">
+                                            {{ $row->video_status == 1 ? 'Luxury Trip' : '' }}
                                             @if ($row->tripgroups)
                                                 @foreach ($row->tripgroups as $_row)
                                                     <span>{{ $_row->title }}</span><br>
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" style="width:5%;">
                                             <input class="CheckStatus" type="checkbox" name="status"
                                                 data-rowid="{{ $row->id }}" {{ $row->status == 1 ? 'checked' : '' }} />
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" style="width:10%;">
                                             {{ $row->ordering }}
                                         </td>
                                     </tr>

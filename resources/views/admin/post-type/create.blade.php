@@ -50,10 +50,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-3 control-label"> Is Menu ? </label>
+                        <label for="inputStandard" class="col-lg-3 control-label"> Is Header ? </label>
                         <div class="col-lg-8">
                             <div class="bs-component">
                                 <select name="is_menu" class="form-control input-sm">
+                                    <option value="0"> No </option>
+                                    <option value="1"> Yes </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStandard" class="col-lg-3 control-label"> Is Things To Know? ? </label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <select name="is_footer" class="form-control input-sm">
                                     <option value="0"> No </option>
                                     <option value="1"> Yes </option>
                                 </select>

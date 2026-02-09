@@ -20,7 +20,12 @@ class FooterComposer{
     }
 
 	public function compose(View $view){
-	  
+
+		$view->with('best_sellers', TripModel::where(['trip_of_the_month' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get());
+		$view->with('luxury_tirps', TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get());
+        $view->with('footer', PostTypeModel::where(['is_footer' => '0'])->orderBy('ordering', 'asc')->get());
+        $view->with('ttk', PostTypeModel::where(['is_footer' => '1'])->orderBy('ordering', 'asc')->get());
+
 		$view->with('expedition', ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->get());
 		$view->with('trekking',ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get());
 		$view->with('destination',DestinationModel::where('status','1')->orderBy('ordering','asc')->get());
@@ -34,5 +39,5 @@ class FooterComposer{
 		$view->with('term_condition', PostModel::where(['id'=>'134'])->first());
 		$view->with('privacy', PostModel::where(['id'=>'135'])->first());
 
-	}	
+	}
 }

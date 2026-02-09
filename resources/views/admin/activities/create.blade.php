@@ -152,7 +152,7 @@
                     <h4>Select Parent</h4>
                     <label class="field select">
                         <select name="activity_parent" required>
-                            <option value="">---- Select ----</option>
+                            <option value="" disabled selected>---- Select ----</option>
                             <option value="expedition">Expedition</option>
                             <option value="trekking">Trekking</option>
                             <option value="activity">Tours</option>
@@ -169,12 +169,12 @@
                     </label>
                 </div>
 
-                <!-- <div class="sid_bvijay mb10">-->
-                <!--  <div class="hd_show_con">-->
-                <!--   Show in Home-->
-                <!--    <input type="checkbox" name="status" value="1" />-->
-                <!--  </div>-->
-                <!--</div>-->
+                <div class="sid_bvijay mb10">
+                  <div class="hd_show_con">
+                   Show in Home
+                    <input type="checkbox" name="status" value="1" />
+                  </div>
+                </div>
 
                 <div class="sid_bvijay mb10">
                     <h4> Thumbnail </h4>
