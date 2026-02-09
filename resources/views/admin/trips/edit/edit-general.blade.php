@@ -160,7 +160,7 @@
                     <!--</div>-->
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Is Famous ?</label>
+                            <label>Is Luxury Trip?</label>
                             <select class="form-control" name="video_status">
                                 <option @if ($data->video_status == 1) selected @endif value="1">Yes</option>
                                 <option @if ($data->video_status == 0) selected @endif value="0">No</option>
@@ -303,7 +303,7 @@
                             @foreach ($trip_type as $row)
                                 @if($row->trip_type != 'Package')
                                     <option value="{{ $row->id }}" @if ($data->trip_type == $row->id) selected @endif>
-                                        {{ $row->trip_type }} 
+                                        {{ $row->trip_type }}
                                     </option>
                                 @endif
                             @endforeach
@@ -316,7 +316,7 @@
         <h4> Regions </h4>
         <div class="hd_show_con">
          <div class=" has-feedback has-search">
-              <input class="category-search form-control" type="text" placeholder="Search.."> 
+              <input class="category-search form-control" type="text" placeholder="Search..">
               <span class="glyphicon glyphicon-search form-control-feedback"></span>
             </div>
             <div class="tab-content mb15">
@@ -337,7 +337,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
      <div class="sid_bvijay mb10">
             <h4> Trip Groups </h4>
             <div class="hd_show_con">
@@ -359,7 +359,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         */
             ?>
 

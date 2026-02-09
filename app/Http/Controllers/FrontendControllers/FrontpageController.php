@@ -67,33 +67,32 @@ class FrontpageController extends Controller
     public function index()
     {
         $banners = BannerModel::all();
-        $homeBrief = HomeBriefModel::where('id', 1)->first();
-        $whoweare = PostModel::where('id', '157')->first();
-        $whywork= PostModel::where('id',149)->first();
-        $images=PostImageModel::where('post_id',148)->get();
-        $famous_trips = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
-        $trekking = TripModel::where(['trip_type' => '1', 'status' => '1'])->take(8)->get();
-        $expedition = ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->get();
-        $expeditionParent = ActivityModel::where(['id'=>'58'])->first();
-        $tripofMonth = TripModel::where('trip_of_the_month', '1')->first();
+        $expedition = ActivityModel::where(['activity_parent'=>'expedition', 'status' => '1'])->orderBy('ordering','asc')->get();
+        $trekking = ActivityModel::where(['activity_parent'=>'trekking', 'status' => '1'])->orderBy('ordering','asc')->get();
+        $activities =  ActivityModel::where(['activity_parent'=>'activity', 'status' => '1'])->orderBy('ordering', 'asc')->get();
+        // $allActivities = collect()->merge($expedition)->merge($trekking)->merge($activities);
+        $allActivities = ActivityModel::where('status', 1)
+            ->whereIn('activity_parent', ['expedition', 'trekking', 'activity'])
+            ->orderByRaw("FIELD(activity_parent, 'expedition', 'trekking', 'activity')")
+            ->orderBy('ordering', 'asc')
+            ->get()
+            ->map(function ($item) {
+                $item->route_url = match ($item->activity_parent) {
+                    'expedition' => route('expedition-list', $item->uri),
+                    'trekking'   => route('trekking-list', $item->uri),
+                    default      => route('tour-list', $item->uri),
+                };
+                return $item;
+            });
+        $best_seller = TripModel::where(['trip_of_the_month' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
+        $about = PostTypeModel::where('id' , 22)->first();
+        $luxury_tirps = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
         $reviews = TripReview::where('status', 1)->get();
-        $team = AssociatedPostModel::where(['post_id' => '125'])->where('show_in_home',1)->limit(2)->get();
-        $guide= PostModel::where('id',125)->first();
-        $activity_list =  ActivityModel::where(['activity_parent'=>'activity'])->orderBy('ordering', 'asc')->get();
-        $destination = DestinationModel::where('status', '1')->take(4)->get();
-        $sevenSummit = ActivityModel::where(['id'=>'55'])->first();
-        $package_list = collect();
-        if ($sevenSummit) {
-            $tripIds = $sevenSummit->trips()->pluck('trip_id');
-            $package_list = TripModel::whereIn('id', $tripIds)->get();
-        }
-        $packages = ActivityModel::where('activity_parent','package')->orderBy('ordering','asc')->take(2)->get();
-        $aboutUs = PostTypeModel::where(['status'=>'1','is_menu'=>'1','id' => '22'])->orderBy('ordering','asc')->first();
-        $blog = PostTypeModel::where('id', '33')->first();
-        $blogs = PostModel::where(['post_type' => $blog->id])->orderBy('post_order', 'desc')->take(2)->get();
-        $contact = PostTypeModel::where('id', '26')->first();
-        // dd($packages);
-        return view('themes.default.frontpage', compact('banners','homeBrief','whoweare','famous_trips','trekking','expedition','tripofMonth','blog','blogs','reviews','contact','images','whywork','team','guide','activity_list','destination','expeditionParent','sevenSummit','package_list','packages','aboutUs'));
+        $blog = PostTypeModel::where('id' , 33)->first();
+        $blogs = PostModel::where('post_type' , $blog->id)->latest()->take(3)->get();
+
+        // dd($reviews);
+        return view('themes.default.frontpage', compact('banners','allActivities','best_seller','about','luxury_tirps','blog','blogs','reviews'));
     }
 
 

@@ -209,12 +209,12 @@
                     </label>
                 </div>
 
-                <!--<div class="sid_bvijay mb10">-->
-                <!--  <div class="hd_show_con">-->
-                <!--   Show in Home-->
-                <!--    <input type="checkbox" name="status" value="{{ $data->status }}"  {{ $data->status == 1 ? 'checked' : '' }}/>-->
-                <!--  </div>-->
-                <!--</div>-->
+                <div class="sid_bvijay mb10">
+                  <div class="hd_show_con">
+                   Show in Home
+                    <input type="checkbox" name="status" value="{{ $data->status }}"  {{ $data->status == 1 ? 'checked' : '' }}/>
+                  </div>
+                </div>
 
                 <div class="sid_bvijay mb10">
                     <h4> Thumbnail </h4>

@@ -26,7 +26,7 @@ class PostTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {       
+    {
       $fileList = scandir(resource_path('views/themes/default/'));
       $filterArray = $this->filter_template($fileList);
 
@@ -38,7 +38,7 @@ class PostTypeController extends Controller
     foreach ($filename as $file) {
         $file1[$file] = $file;
     }
-    $templates = $file1;     
+    $templates = $file1;
     $ordering = PostTypeModel::max('ordering');
     $ordering = $ordering + 1;
     return view('admin.post-type.create',compact('ordering','templates'));
@@ -63,7 +63,7 @@ class PostTypeController extends Controller
 
       $data = $request->all();
       $file =  $request->file('banner');
-      
+
       $product_name = '';
       if($request->hasfile('banner')){
         $product = $request->file('banner')->getClientOriginalName();
@@ -76,14 +76,14 @@ class PostTypeController extends Controller
 
         $product_picture = Image::make($file->getRealPath());
         $width = Image::make($file->getRealPath())->width();
-        $height = Image::make($file->getRealPath())->height();      
+        $height = Image::make($file->getRealPath())->height();
 
         $product_picture->resize($medium_width, $medium_height, function($constraint){
           $constraint->aspectRatio();
-        })->save($destinationPath_medium .'/'. $product_name ); 
+        })->save($destinationPath_medium .'/'. $product_name );
 
         /*Upload Original banner*/
-        $product_picture->save($destinationOriginal .'/'. $product_name ); 
+        $product_picture->save($destinationOriginal .'/'. $product_name );
       }
 
         $data['banner'] = $product_name;
@@ -152,7 +152,7 @@ class PostTypeController extends Controller
            $file =  $request->file('banner');
         $file_name = '';
         if($request->hasfile('banner')){
-            $data = PostTypeModel::find($id);  
+            $data = PostTypeModel::find($id);
             if ($data->banner) {
                 if (file_exists(env('PUBLIC_PATH') . 'uploads/medium/' . $data->banner)) {
                     unlink(env('PUBLIC_PATH') . 'uploads/medium/' . $data->banner);
@@ -167,27 +167,28 @@ class PostTypeController extends Controller
             $file_name = Str::slug($category_file[0]) . '-' . Str::random(40) . '.' . $extension;
             $destinationPath_medium = public_path('uploads/medium');
             $destinationOriginal = public_path('uploads/original');
-            
+
 
         $product_picture = Image::make($file->getRealPath());
         $width = Image::make($file->getRealPath())->width();
-        $height = Image::make($file->getRealPath())->height();        
-      
+        $height = Image::make($file->getRealPath())->height();
+
         $product_picture->resize($medium_width, $medium_height, function($constraint){
           $constraint->aspectRatio();
-        })->save($destinationPath_medium .'/'. $file_name ); 
+        })->save($destinationPath_medium .'/'. $file_name );
 
         /****Upload Original Image****/
-        $product_picture->save($destinationOriginal .'/'. $file_name ); 
+        $product_picture->save($destinationOriginal .'/'. $file_name );
 
         $data->banner = $file_name;
-        } 
+        }
         $data->post_type = $request->post_type;
         $data->template = $request->template;
         $data->uri = Str::slug($request->uri);
         $data->ordering = $request->ordering;
-        $data->is_menu = $request->is_menu;  
-         $data->content = $request->content; 
+        $data->is_menu = $request->is_menu;
+        $data->is_footer = $request->is_footer;
+         $data->content = $request->content;
          $data->associated_title = $request->associated_title;
         $data->save();
         return redirect()->back()->with('success','Update Successful.');
@@ -220,7 +221,7 @@ class PostTypeController extends Controller
         foreach($template as $tmp){
           if(strpos($tmp, "posttypeTemplate-") !== false){
             $tmpl[] = $tmp;
-        }   
+        }
     }
 }
 return $tmpl;
