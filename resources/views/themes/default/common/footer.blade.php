@@ -1,7 +1,7 @@
 <footer class="relative">
     <!-- Top Mountain Silhouette -->
     <div class="w-full overflow-hidden bg-transparent">
-        <img src="{{asset('theme-assets/assets/footer/footer-mountains.svg')}}" alt="Mountain Range"
+        <img src="{{asset('theme-assets/assets/footer/footer-mountains.svg')}}" alt="Summit8000"
             class="w-full object-cover h-auto">
     </div>
 
@@ -17,8 +17,7 @@
                     </div>
                 </div>
                 <!-- Subscription Box -->
-                <div
-                    class="w-full max-w-3xl border border-white/30 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-sm">
+                <div class="w-full max-w-3xl border border-white/30 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-sm">
                     <div class="flex items-center gap-3 text-white">
                         <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -100,7 +99,7 @@
                     <ul class="space-y-4 text-sm text-gray-300">
                         @foreach($ttk as $row)
                             <li>
-                                <a href="{{route('page.posttype_detail',$row->uri)}}" class="hover:text-white transition-colors">{{ $row->post_type }}</a>
+                                <a href="{{ route('page.posttype_detail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->post_type }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -114,9 +113,9 @@
                         </div>
                         <div>
                             <h4 class="font-bold mb-2 text-white">Emergency SOS (24/7):</h4>
-                            <p class="text-sm text-gray-300">Landline: +977 1 4488541</p>
-                            <p class="text-sm text-gray-300">Mobile: +977 9880082828</p>
-                            <p class="text-sm text-gray-300">WhatsApp: 977-9880082829</p>
+                            <p class="text-sm text-gray-300">Landline: {{ $setting->phone }}</p>
+                            <p class="text-sm text-gray-300">Mobile: {{ $setting->fax }}</p>
+                            <p class="text-sm text-gray-300">WhatsApp: {{ $setting->usa_phone }}</p>
                         </div>
                     </div>
 
@@ -127,7 +126,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold mb-2 text-white">Email:</h4>
-                            <p class="text-sm text-gray-300">info@summit8000.com</p>
+                            <p class="text-sm text-gray-300">{{ $setting->email_primary }} <br> {{ $setting->email_secondary }}</p>
                         </div>
                     </div>
 
@@ -135,14 +134,11 @@
                     <div class="flex items-start gap-3">
                         <div class="flex-shrink-0 w-6 h-6 text-white flex items-center justify-center overflow-hidden">
                             <i class="fa-solid fa-location-dot"></i>
-
-
                         </div>
                         <div>
                             <h4 class="font-bold mb-2 text-white">Address:</h4>
                             <p class="text-sm text-gray-300 leading-relaxed">
-                                House 23, Street A Kapan,<br>
-                                Budhanilkantha-11, Kathmandu 44600
+                                {{ $setting->address }}
                             </p>
                         </div>
                     </div>
@@ -154,7 +150,7 @@
 
     <!-- Wavy Divider Transition -->
     <div class="w-full bg-summit-teal">
-        <img src="{{asset('theme-assets/assets/footer/vector.svg')}}" alt="Wavy Divider" class="w-full object-cover">
+        <img src="{{asset('theme-assets/assets/footer/vector.svg')}}" alt="Summit8000" class="w-full object-cover">
     </div>
 
     <!-- White Background Associations Section -->
@@ -164,7 +160,7 @@
             <div>
                 <h4 class="text-gray-500 font-bold mb-6 text-sm">We Accept</h4>
                 <div class="flex flex-wrap gap-4 items-center">
-                    <img src="{{asset('theme-assets/assets/online-pay.webp')}}" alt="Sectigo" class="h-8">
+                    <img src="{{ $homebrief->image ? asset('uploads/original/'.$homebrief->image) : asset('theme-assets/assets/online-pay.webp')}}" alt="Sectigo" class="h-8">
                 </div>
             </div>
 
@@ -186,29 +182,42 @@
             <div>
                 <h4 class="text-gray-500 font-bold mb-6 text-sm ">Connect with us</h4>
                 <div class="flex gap-4">
-                    <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/youtube.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/instagram.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/twitter.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/facebook.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/linkedIn.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a> <a href="#">
-                        <img src="{{asset('theme-assets/assets/social/tiktok.svg')}}" alt=""
-                            class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                    </a>
+                    @if($setting->youtube_link)
+                        <a href="{{ $setting->youtube_link }}">
+                            <img src="{{asset('theme-assets/assets/social/youtube.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
+                    @if($setting->instagram_link)
+                        <a href="{{ $setting->instagram_link }}">
+                            <img src="{{asset('theme-assets/assets/social/instagram.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
+                    @if($setting->twitter_link)
+                        <a href="{{ $setting->twitter_link }}">
+                            <img src="{{asset('theme-assets/assets/social/twitter.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
+                    @if($setting->facebook_link)
+                        <a href="{{ $setting->facebook_link }}">
+                            <img src="{{asset('theme-assets/assets/social/facebook.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
+                    @if($setting->linkedin_link)
+                        <a href="{{ $setting->linkedin_link }}">
+                            <img src="{{asset('theme-assets/assets/social/linkedIn.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
+                    @if($setting->tiktok_link)
+                        <a href="{{ $setting->tiktok_link }}">
+                            <img src="{{asset('theme-assets/assets/social/tiktok.svg')}}"
+                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -218,11 +227,9 @@
     <div class="bg-summit-teal py-6 px-4">
         <div
             class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
-            <p class="text-white/60 text-sm">© Summit 8000 Pvt. Ltd 2025</p>
+            <p class="text-white/60 text-sm">{{ $setting->copyright_text }}</p>
             <p class="text-white/60 text-xs max-w-2xl">
-                All content on this website, including text and photographs, is the exclusive property of Summit
-                8000.
-                Reproduction or use without prior written permission is strictly prohibited. © Summit 8000, 2025.
+                {{ $setting->flight_brief }}
             </p>
         </div>
     </div>

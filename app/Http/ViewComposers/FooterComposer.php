@@ -11,6 +11,7 @@ use App\Models\Travels\ActivityModel;
 use App\Models\Destinations\DestinationModel;
 use App\Models\Posts\PostImageModel;
 use App\Models\Posts\PostTypeModel;
+use App\Models\HomeBrief\HomeBriefModel;
 
 class FooterComposer{
 
@@ -25,19 +26,7 @@ class FooterComposer{
 		$view->with('luxury_tirps', TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get());
         $view->with('footer', PostTypeModel::where(['is_footer' => '0'])->orderBy('ordering', 'asc')->get());
         $view->with('ttk', PostTypeModel::where(['is_footer' => '1'])->orderBy('ordering', 'asc')->get());
-
-		$view->with('expedition', ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->get());
-		$view->with('trekking',ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get());
-		$view->with('destination',DestinationModel::where('status','1')->orderBy('ordering','asc')->get());
-		$view->with('contact',PostModel::where(['id'=>131,'show_in_home'=>'1'])->first());
-		$view->with('partners',PostImageModel::where('post_id', 151)->orderBy('id', 'desc')->take(5)->get());
-		$view->with('associated',PostImageModel::where('post_id', 152)->orderBy('id', 'desc')->take(5)->get());
-		$view->with('activity', ActivityModel::where('activity_parent','activity')->orderBy('ordering','asc')->get());
-		$view->with('useful_info', PostModel::where(['post_type' => '24', 'status' => '1','post_parent' => '0'])->get());
-	    $view->with('about', PostModel::where(['post_type' => '22', 'status' => '1','post_parent' => '0'])->get());
-		$view->with('post_types', PostTypeModel::where(['status'=>'1','is_menu'=>'1'])->orderBy('ordering','asc')->get());
-		$view->with('term_condition', PostModel::where(['id'=>'134'])->first());
-		$view->with('privacy', PostModel::where(['id'=>'135'])->first());
+        $view->with('homebrief', HomeBriefModel::where('id',1)->first());
 
 	}
 }

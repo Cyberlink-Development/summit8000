@@ -241,7 +241,7 @@ class TripController extends Controller
                     // $tripSchedule->group_size = $request->schedule_group_size[$key];
                     $tripSchedule->availability = $request->schedule_availability[$key];
                     $tripSchedule->price = $request->schedule_price[$key];
-                    $tripSchedule->remarks = $request->schedule_remarks[$key];
+                    // $tripSchedule->remarks = $request->schedule_remarks[$key];
                     $tripSchedule->ordering = $request->schedule_ordering[$key];
                     $tripSchedule->save();
                     $sn_schedule++;
@@ -640,6 +640,7 @@ class TripController extends Controller
             $data->walking_per_day = $request->walking_per_day;
             $data->group_size = $request->group_size;
             $data->accommodation = $request->accommodation;
+            $data->meals = $request->meals;
             $data->route = $request->route;
             $data->trip_highlight = $request->trip_highlight;
             $data->peak_name = $request->peak_name;
@@ -692,7 +693,7 @@ class TripController extends Controller
                         // $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         $scheduleData->price = $request->schedule_price[$key];
-                        $scheduleData->remarks = $request->schedule_remarks[$key];
+                        // $scheduleData->remarks = $request->schedule_remarks[$key];
                         $scheduleData->save();
                     } else if ($request->schedule_id[$value] !== null && $request->schedule_id[$value] !== "") {
                         $schedule_id = $request->schedule_id[$value];
@@ -704,7 +705,7 @@ class TripController extends Controller
                         // $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         $scheduleData->price = $request->schedule_price[$key];
-                        $scheduleData->remarks = $request->schedule_remarks[$key];
+                        // $scheduleData->remarks = $request->schedule_remarks[$key];
                         $scheduleData->save();
                     }
                     $sn_schedule++;

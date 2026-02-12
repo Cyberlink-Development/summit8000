@@ -60,7 +60,7 @@
                     {{-- @if ($setting->logo)
                         <img src="{{ asset('uploads/original/' . $setting->logo) }}" alt="{{ config('app.name') }}" width="100" />
                     @else --}}
-                        <img src="{{ asset('theme-assets/img/logo1.png') }}"
+                        <img src="{{ asset('theme-assets/logo.svg') }}"
                             alt="{{ config('app.name') }}" width="100" />
                     {{-- @endif --}}
                 </a>

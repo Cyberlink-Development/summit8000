@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summit 8000 IT - Expedition Services</title>
+    <title>Summit8000- Expedition Services</title>
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -95,13 +95,7 @@
 
                                                 @foreach ($expedition as $index => $value)
                                                     <li>
-                                                        <button
-                                                            class="w-full text-left px-5 py-4 rounded-xl transition hover:bg-gray-50 aria-selected:bg-brand-100 aria-selected:text-gray-900 aria-selected:ring-1 aria-selected:ring-brand-200"
-                                                            id="tab-{{ $value->id }}"
-                                                            data-tabs-target="#content-{{ $value->id }}"
-                                                            type="button" role="tab"
-                                                            aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
-
+                                                        <button class="w-full text-left px-5 py-4 rounded-xl transition hover:bg-gray-50 aria-selected:bg-brand-100 aria-selected:text-gray-900 aria-selected:ring-1 aria-selected:ring-brand-200" id="tab-{{ $value->id }}" data-tabs-target="#content-{{ $value->id }}" type="button" role="tab" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
                                                             <div class="text-base">{{ $value->title }}</div>
                                                             <div class="text-sm font-normal text-gray-500 mt-1">
                                                                 {{ $value->sub_title }}
@@ -175,17 +169,9 @@
                                 </ul>
                             </div>
                         </li>
-
-
                         <li class="relative group">
-                            <button id="mega-menu-button" data-dropdown-toggle="NepalTours" data-dropdown-delay="1"
-                                data-dropdown-trigger="hover" data-dropdown-placement="bottom"
-                                data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0"
-                                class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">Tours<svg
-                                    class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m19 9-7 7-7-7" />
+                            <button id="mega-menu-button" data-dropdown-toggle="NepalTours" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">Tours<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                                 </svg>
                             </button>
                             <!-- Dropdown menu -->
@@ -202,22 +188,14 @@
                                 </ul>
                             </div>
                         </li>
-
                         <li class="relative group">
-                            <button id="mega-menu-button" data-dropdown-toggle="AboutUs" data-dropdown-delay="1"
-                                data-dropdown-trigger="hover" data-dropdown-placement="bottom"
-                                data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0"
-                                class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl "> About
-                                Us<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m19 9-7 7-7-7" />
+                            <button id="mega-menu-button" data-dropdown-toggle="AboutUs" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl "> About Us<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                                 </svg>
                             </button>
                             <!-- Dropdown menu -->
-                            <div id="AboutUs"
-                                class="z-50 hidden bg-white border border-gray-100 rounded-b-xl shadow-sm  min-w-64">
-                                <ul class=" p-2 text-sm  font-medium" aria-labelledby="multiLevelDropdownButton">
+                            <div id="AboutUs" class="z-50 hidden bg-white border border-gray-100 rounded-b-xl shadow-sm  min-w-64">
+                                <ul class="p-2 text-sm  font-medium" aria-labelledby="multiLevelDropdownButton">
                                     @foreach($navigations as $nav)
                                         <li>
                                             <a href="{{route('page.posttype_detail',$nav->uri)}}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium-medium hover:text-brand-400 rounded-lg">
@@ -246,11 +224,7 @@
                 </a>
 
                 <!-- Hamburger Menu -->
-                <button
-                    class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition"
-                    type="button" data-drawer-target="drawer-disable-body-scrolling"
-                    data-drawer-show="drawer-disable-body-scrolling" data-drawer-body-scrolling="false"
-                    aria-controls="drawer-disable-body-scrolling" data-drawer-placement="right">
+                <button class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition" type="button" data-drawer-target="drawer-disable-body-scrolling" data-drawer-show="drawer-disable-body-scrolling" data-drawer-body-scrolling="false" aria-controls="drawer-disable-body-scrolling" data-drawer-placement="right">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -268,17 +242,12 @@
         class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-neutral-primary-soft w-full border-e border-default"
         tabindex="-1" aria-labelledby="drawer-disable-body-scrolling-label">
         <div class="border-b border-default pb-4 flex items-center ">
-            <a href="index.php" class="flex items-center space-x-2 rtl:space-x-reverse">
-                <img src="assets/logo.svg" alt="logo" class="h-8 md:h-10">
-
+            <a href="{{ url('/') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
+                <img src="{{ asset('theme-assets/logo.svg') }}" alt="Summit8000" class="h-8 md:h-10">
             </a>
-            <button type="button" data-drawer-hide="drawer-disable-body-scrolling"
-                aria-controls="drawer-disable-body-scrolling"
-                class=" bg-transparent hover:text-heading hover:bg-neutral-tertiary-medium rounded-base w-9 h-9 absolute top-2.5 end-2.5 flex items-center justify-center">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18 17.94 6M18 18 6.06 6" />
+            <button type="button" data-drawer-hide="drawer-disable-body-scrolling" aria-controls="drawer-disable-body-scrolling" class=" bg-transparent hover:text-heading hover:bg-neutral-tertiary-medium rounded-base w-9 h-9 absolute top-2.5 end-2.5 flex items-center justify-center">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
@@ -305,25 +274,15 @@
                         </svg>
                     </button>
                     <ul id="m-expeditions" class="hidden py-2 space-y-2 text-sm">
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">8000m</a>
-                        </li>
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">7000m</a>
-                        </li>
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">6000m</a>
-                        </li>
+                        @foreach ($expedition as $value)
+                            <li>
+                                <a href="{{ route('expedition-list',$value->uri) }}" class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">{{ $value->title }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
-
-
                 <li>
-                    <button type="button"
-                        class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group"
+                    <button type="button" class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group"
                         aria-controls="m-trekkings" data-collapse-toggle="m-trekkings">
 
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"> Trekkings </span>
@@ -334,140 +293,59 @@
                         </svg>
                     </button>
                     <ul id="m-trekkings" class="hidden py-2 space-y-2 text-sm">
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Popular
-                                Treks</a>
-                        </li>
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Luxury
-                                Treks</a>
-                        </li>
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Short
-                                Treks</a>
-                        </li>
-
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Long
-                                Treks</a>
-                        </li>
+                        @foreach ($trekking as $trek)
+                            <li>
+                                <a href="{{ route('trekking-list', $trek->uri) }}" class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">{{ $trek->title }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
-
-
                 <li>
-                    <button type="button"
-                        class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group"
-                        aria-controls="m-NepalTours" data-collapse-toggle="m-NepalTours">
+                    <button type="button" class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group" aria-controls="m-NepalTours" data-collapse-toggle="m-NepalTours">
 
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"> Tours </span>
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="m19 9-7 7-7-7" />
                         </svg>
                     </button>
                     <ul id="m-NepalTours" class="hidden py-2 space-y-2 text-sm">
-
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Best
-                                Tour of Nepal</a>
-                        </li>
-
-                        <li>
-                            <a href="trip-list.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">Luxury
-                                Tour of Nepal</a>
-                        </li>
-
+                        @foreach ($tours as $tour)
+                            <li>
+                                <a href="{{ route('tour-list', $tour->uri) }}" class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">{{ $tour->title }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
-
                 <li>
-                    <a href="trip-list.php"
-                        class="flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-
-                        <span class="ms-3">Bhutan Tours</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="trip-list.php"
-                        class="flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-
-                        <span class="ms-3">Tibet Tours</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="trip-list.php"
-                        class="flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-
-                        <span class="ms-3">India Tours</span>
-                    </a>
-                </li>
-                <li>
-                    <button type="button"
-                        class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group"
-                        aria-controls="m-AboutUs" data-collapse-toggle="m-AboutUs">
-
+                    <button type="button" class="flex items-center w-full justify-between px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group" aria-controls="m-AboutUs" data-collapse-toggle="m-AboutUs">
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"> About Us </span>
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m19 9-7 7-7-7" />
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                         </svg>
                     </button>
                     <ul id="m-AboutUs" class="hidden py-2 space-y-2 text-sm">
-
-
-
+                        @foreach($navigations as $nav)
+                            <li>
+                                <a href="{{route('page.posttype_detail',$nav->uri)}}" class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
+                                    {{ $nav->post_type }}</a>
+                            </li>
+                        @endforeach
                         <li>
-                            <a href="who-we-are.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-                                Who We Are?</a>
-                        </li>
-
-                        <li>
-                            <a href="team.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-                                Our Team</a>
-                        </li>
-                        <li>
-                            <a href="legal-documents.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-                                Legal Documents</a>
-                        </li>
-                        <li>
-                            <a href="reviews.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
+                            <a href="{{ route('reviews') }}" class="pl-10 flex items-center px-2 py-1.5 rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
                                 Read Reviews</a>
                         </li>
-                        <li>
-                            <a href="blog.php"
-                                class="pl-10 flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-                                Blog</a>
-                        </li>
-
                     </ul>
                 </li>
                 <li>
-                    <a href="contact-us.php"
-                        class="flex items-center px-2 py-1.5  rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
-
+                    <a href="{{ route('page.posttype_detail',$contact_us->uri) }}" class="flex items-center px-2 py-1.5 rounded-base hover:bg-neutral-tertiary-medium hover:text-brand-400 group">
                         <span class="ms-3">Contact Us</span>
                     </a>
                 </li>
 
             </ul>
             <div class="block">
-                <a href="plan-your-trip.php"
-                    class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500
-               font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
+                <a href="plan-your-trip.php" class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
                     Plan Your Trip
                 </a>
             </div>
@@ -477,15 +355,10 @@
 
     <!-- Sticky Right Contact Button -->
     <div class="fixed right-0 bottom-20 z-40 w-auto">
-        <a href="https://wa.me/9779851015875" target="_blank"
-            class="flex items-center border-l border-gray-200 pl-3 pr-4 py-2 bg-white rounded-l-full shadow-lg hover:shadow-xl transition-all
-            max-w-[90vw] sm:max-w-[300px]">
-
+        <a href="https://wa.me/9779851015875" target="_blank" class="flex items-center border-l border-gray-200 pl-3 pr-4 py-2 bg-white rounded-l-full shadow-lg hover:shadow-xl transition-all max-w-[90vw] sm:max-w-[300px]">
             <!-- Icon Circle -->
-            <div
-                class="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center text-brand-400 mr-2 sm:mr-3 flex-shrink-0">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <div class="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center text-brand-400 mr-2 sm:mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
                 </svg>

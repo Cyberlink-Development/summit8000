@@ -106,11 +106,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Is Luxury Trip?</label>
-                            <select class="form-control" name="video_status">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
+                            <label>Meals</label>
+                            <input type="text" name="meals" class="form-control"
+                                value="{{ old('meals') }}" />
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -124,6 +122,15 @@
                         <div class="bs-component">
                             <label>Start/End</label>
                             <input type="text" name="route" class="form-control" value="{{ old('route') }}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Is Luxury Trip?</label>
+                            <select class="form-control" name="video_status">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
                         </div>
                     </div>
                 </div>
