@@ -7,6 +7,7 @@ use App\Models\Inquiry\Insurance;
 use App\Models\Team\TeamCategory;
 use Newsletter;
 use App\Mail\BookTrip;
+use App\Mail\AdminContactMail;
 use App\Mail\SendMail;
 use App\Model\Contact;
 use App\Mail\VerifyMail;
@@ -542,33 +543,97 @@ class FrontpageController extends Controller
 
     public function contact_us(Request $request)
     {
-        // $g_recaptcha_response = $request->input('g_recaptcha_response');
-        // $result = $this->getCaptcha($g_recaptcha_response);
-        // if ($result->success == true && $result->score > 0.6) {
+        $g_recaptcha_response = $request->input('g_recaptcha_response');
+        $result = $this->getCaptcha($g_recaptcha_response);
+        if ($result->success == true) {
             $request->validate([
                 'full_name' => 'required',
-                'number' => 'required',
                 'email' => 'required|email',
+                'number' => 'required',
+                'country' => 'required',
+                'comments' => 'nullable|string',
             ]);
 
             if ($request->isMethod('post')) {
-                $setting = SettingModel::where('id', 1)->first();
+                // dd($request->all());
                 $create = Contact::create([
                     'full_name' => $request->full_name,
                     'email' => $request->email,
                     'number' => $request->number,
-                    'message' => $request->comments,
                     'country' => $request->country,
-                    'trip'=>$request->trip
+                    'message' => $request->comments,
                 ]);
-                // Mail::send(new \App\Mail\AdminContactMail($request->email));
+                $setting = SettingModel::where('id', 1)->first();
+                return new AdminContactMail($request->all());
+                // Mail::to($setting->email_primary)->send(new AdminContactMail($request->all()));
+
                 $name = $request->full_name;
-                $message = "<p>Thanks for contacting us. One of our team will be in touch with you soon.</p>";
-                return view('themes.default.booking-success', compact('message', 'name'));
+                $heading = 'Thank You for Reaching Out!';
+                $information = "We’ve received your message and truly appreciate you getting in touch with us. Our team will review your inquiry and respond as soon as possible. We look forward to assisting you.";
+
+                return view('themes.default.booking-success', compact('information','heading', 'name'));
             }
-        // } else {
-        //     return back()->with('error', 'You are a robot');
-        // }
+        } else {
+            return back()->with([
+                'error' => true,
+                'message' => 'You are robot.'
+            ]);
+        }
+    }
+    public function plan_trip()
+    {
+        $category = ActivityModel::all();
+
+        $trips = $category->flatMap(function ($cat) {
+            return $cat->trips;
+        });
+        // dd($category,$trips);
+
+        return view('themes.default.plantrip',compact('trips'));
+    }
+    public function custom_trip_post(Request $request)
+    {
+        $result = $this->getCaptcha($request->input('g_recaptcha_response'));
+        if ($result->success == true) {
+            $request->validate([
+                'trip_id'  => 'required|exists:cl_trip_details,id',
+                'name'     => 'required|string|max:255',
+                'email'    => 'required|email|max:255',
+                'phone'    => 'required|string|max:20',
+                'peoples'  => 'required|integer|min:1',
+                'message'  => 'nullable|string',
+            ]);
+            $trip = TripModel::where('id', $request->trip_id)->first();
+            if(!$trip)
+            {
+                return back()->with([
+                    'error' => true,
+                    'message' => 'Trip Not Found.'
+                ]);
+            }
+
+            // dd($request->all(), $trip );
+            CustomizeModel::create([
+                'trip_id'       => $request->trip_id,
+                'title'         => $trip->trip_title,
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'phone'         => $request->phone,
+                'no_of_people'  => $request->peoples,
+                'comments'      => $request->message,
+                'type'          => $request->type,
+            ]);
+
+            return back()->with([
+                'success' => true,
+                'message' => 'Your request has been submitted successfully.'
+            ]);
+        } else {
+            return back()->with([
+                'error' => true,
+                'message' => 'You are robot.'
+            ]);
+        }
     }
 
     public function verifyContact($token)
