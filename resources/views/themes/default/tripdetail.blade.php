@@ -19,12 +19,12 @@
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-chevron-right mx-2 text-[8px]"></i>
-                    <span>Trekking</span>
+                    <span>{{$activity->activity_parent== 'activity' ? 'Tours' : ucfirst($activity->activity_parent) }}</span>
                 </li>
                 <!-- Popular Treks -->
                 <li class="flex items-center">
                     <i class="fas fa-chevron-right mx-2 text-[8px]"></i>
-                    <a href="trip-list.php" class="hover:text-brand transition"> Popular Treks </a>
+                    <span class="hover:text-brand transition"> {{ ucfirst($activity->title) }} </span>
                 </li>
                 <!-- Current Page -->
                 <li class="flex items-center max-w-full">
@@ -122,10 +122,12 @@
                                     <div class="inline-flex items-center justify-center text-brand-400">
                                         <i class="fas fa-map-marker-alt text-brand"></i>
                                     </div>
-                                    <div>
-                                        <p class="text-xs text-gray-500 font-medium">Destination</p>
-                                        <p class="text-sm font-semibold text-black/80">Nepal</p>
-                                    </div>
+                                    @if($destinations)
+                                        <div>
+                                            <p class="text-xs text-gray-500 font-medium">Destination</p>
+                                            <p class="text-sm font-semibold text-black/80">{{ optional($destinations)->title }}</p>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="flex items-start space-x-2">
                                     <div class="inline-flex items-center justify-center text-brand-400">
@@ -201,57 +203,72 @@
     font-weight: 600;
 }
 </style>
+
 <section class="py-12">
     <!-- MOBILE SELECT (visible on small screens) -->
     <div class="lg:hidden sticky top-[80px] z-40 bg-brand-50 border-b flex items-center mb-6 py-2">
         <div class="container flex items-center gap-2">
             <label for="tripSelect">Section:</label>
-            <select id="tripSelect"
-                class="w-full   text-base font-semibold text-brand-400 border-none  bg-transparent border-0">
+            <select id="tripSelect" class="w-full text-base font-semibold text-brand-400 border-none  bg-transparent border-0">
                 <option value="#overview">Overview</option>
-                <option value="#itinerary">Itinerary</option>
-                <option value="#price-includes">Price Includes</option>
-                <option value="#departures">Fixed Departures</option>
-                <option value="#RouteMapVideo">Route Map / Video</option>
-                <option value="#gears">Gears</option>
+                @if($itinerary)
+                    <option value="#itinerary">Itinerary</option>
+                @endif
+                @if($cost_includes->count()> 0 || $cost_excludes->count() > 0)
+                    <option value="#price-includes">Price Includes</option>
+                @endif
+                @if($schedules->count()>0)
+                    <option value="#departures">Fixed Departures</option>
+                @endif
+                @if($data->trip_map || $data->trip_video)
+                    <option value="#RouteMapVideo">Route Map / Video</option>
+                @endif
+                @if(!empty($data->trip_highlight))
+                    <option value="#gears">Gears</option>
+                @endif
                 <option value="#reviews">Reviews</option>
-                <option value="#faqs">FAQs</option>
+                @if($faqs && count($faqs) > 0)
+                    <option value="#faqs">FAQs</option>
+                @endif
                 <option value="#SimilarTrips">Similar Trips</option>
             </select>
         </div>
     </div>
     <div class="container">
         <!-- DESKTOP LEFT SIDEBAR -->
-        <div class="  flex gap-8">
+        <div class="flex gap-8">
             <aside id="secondaryNav"
                 class="hidden lg:block w-64 sticky top-[96px] border rounded-xl h-fit bg-white   p-4">
                 <nav class="space-y-2 text-base font-medium">
-                    <a href="#overview"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                    <a href="#overview" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
                         <i class="far fa-eye w-5"></i> Overview </a>
-                    <a href="#itinerary"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="far fa-map w-5"></i> Itinerary </a>
-                    <a href="#price-includes"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="fas fa-tags w-5"></i> Price Includes </a>
-                    <a href="#departures"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="fas fa-calendar-alt w-5"></i> Fixed Departures </a>
-                    <a href="#RouteMapVideo"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="fas fa-video w-5"></i> Route Map / Video </a>
-                    <a href="#gears"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="fas fa-hiking w-5"></i> Gears </a>
-                    <a href="#reviews"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                    @if($itinerary)
+                        <a href="#itinerary" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="far fa-map w-5"></i> Itinerary </a>
+                    @endif
+                    @if($cost_includes->count()> 0 || $cost_excludes->count() > 0)
+                        <a href="#price-includes" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="fas fa-tags w-5"></i> Price Includes </a>
+                    @endif
+                    @if($schedules->count()>0)
+                        <a href="#departures" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="fas fa-calendar-alt w-5"></i> Fixed Departures </a>
+                    @endif
+                    @if($data->trip_map || $data->trip_video)
+                        <a href="#RouteMapVideo" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="fas fa-video w-5"></i> Route Map / Video </a>
+                    @endif
+                    @if(!empty($data->trip_highlight))
+                        <a href="#gears" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="fas fa-hiking w-5"></i> Gears </a>
+                    @endif
+                    <a href="#reviews" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
                         <i class="fas fa-star w-5"></i> Reviews </a>
-                    <a href="#faqs"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
-                        <i class="far fa-question-circle w-5"></i> FAQs </a>
-                    <a href="#SimilarTrips"
-                        class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                    @if($faqs && count($faqs) > 0)
+                        <a href="#faqs" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="far fa-question-circle w-5"></i> FAQs </a>
+                    @endif
+                    <a href="#SimilarTrips" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
                         <i class="fa-solid fa-mountain w-5"></i> Similar Trips </a>
                 </nav>
             </aside>
@@ -271,7 +288,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500 font-medium">Destination</p>
-                                    <p class="text-base font-semibold text-black/80">Nepal</p>
+                                    <p class="text-base font-semibold text-black/80">{{ optional($destinations)->title }}</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-2">
@@ -289,7 +306,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500 font-medium">Trip Difficulty</p>
-                                    <p class="text-base font-semibold text-black/80">{{ $data->best_season}}</p>
+                                    <p class="text-base font-semibold text-black/80">{{ grade_message_trek($data->trip_grade)}}</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-2">
@@ -307,7 +324,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500 font-medium">Meals</p>
-                                    <p class="text-base font-semibold text-black/80">B, L, D</p>
+                                    <p class="text-base font-semibold text-black/80">{{ $data->meals }}</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-2">
@@ -349,8 +366,10 @@
                     </div>
                 </section>
                 <!-- end -->
+
                 <!-- WhyWithSummit8000 -->
-                <section class="rounded-xl p-5 bg-brand-50  text-gray-700" id="WhyWithSummit8000">
+
+                <!-- <section class="rounded-xl p-5 bg-brand-50  text-gray-700" id="WhyWithSummit8000">
                     <div class=" space-y-3">
                         <h2 class="text-2xl font-bold text-brand-400">Why with Summit 8000?</h2>
                         <p>Because Summit 8000 is a trekking and expedition company built on experience, passion, and a
@@ -359,330 +378,134 @@
                             ensuring every journey is well-planned, culturally respectful, and unforgettable—from the
                             first step on the trail to the summit and back.</p>
                     </div>
-                </section>
+                </section> -->
+
                 <!-- end WhyWithSummit8000 -->
+
                 <!-- Itinerary -->
-                <section class="py-6" id="itinerary">
-                    <div class=" space-y-3">
-                        <div class="accordion-wrapper" id="">
-                            <div
-                                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
-                                <h2 class="text-2xl font-bold text-gray-900">Detailed Itinerary</h2>
-                                <button
-                                    class="toggle-accordion text-brand-400 border border-brand-400 hover:bg-brand-50 transition-colors font-medium rounded-xl text-sm px-4 py-2.5 transition shadow-sm">Expand
-                                    All</button>
-                            </div>
-                            <div id="accordion-itinerary" data-accordion="collapse"
-                                class="rounded-base border border-default overflow-hidden shadow-xs">
-                                <!--  -->
-                                @foreach($itinerary as $key => $value)
-                                    <div id="heading-{{ $key+1 }}">
-                                        <button type="button"
-                                            class="flex items-center justify-between w-full p-5 font-semibold  rtl:text-right text-base rounded-t-base border border-t-0 border-x-0 border-b-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 text-left"
-                                            data-accordion-target="#body-{{ $key+1 }}" aria-expanded="true" aria-controls="body-{{$key+1}}">
-                                            <span class="text-brand-900">
-                                                <span class="text-brand-400 mr-1">Day {{ $value->days }}:</span>
-                                                {{ $value->title }}</span>
-                                            <i data-accordion-icon
-                                                class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400 text-sm text-brand-400"></i>
-                                        </button>
-                                    </div>
-                                    <div id="body-{{ $key+1}}" class="hidden border border-s-0 border-e-0 border-t-0 border-b-default" aria-labelledby="heading-{{ $key+1 }}">
-                                        <div
-                                            class="space-y-3 py-5 text-base font-normal text-gray-700 p-4 md:p-5 p-4 md:p-5">
-                                            <p>
-                                                {!! $value->content !!}
-                                            </p>
-                                            @if($value->extra_info)
-                                                <div class="flex items-start   p-4 mb-4 text-sm text-fg-brand-strong rounded-base bg-brand-50"
-                                                    role="alert">
-                                                    <i class="fa fa-info-circle me-2 shrink-0 mt-0.5 sm:mt-0"></i>
-                                                    <p>
-                                                        {{ $value->extra_info }}
-                                                    </p>
-                                                </div>
-                                            @endif
+                @if($itinerary)
+                    <section class="py-6" id="itinerary">
+                        <div class=" space-y-3">
+                            <div class="accordion-wrapper" id="">
+                                <div
+                                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+                                    <h2 class="text-2xl font-bold text-gray-900">Detailed Itinerary</h2>
+                                    <button
+                                        class="toggle-accordion text-brand-400 border border-brand-400 hover:bg-brand-50 transition-colors font-medium rounded-xl text-sm px-4 py-2.5 transition shadow-sm">Expand
+                                        All</button>
+                                </div>
+                                <div id="accordion-itinerary" data-accordion="collapse"
+                                    class="rounded-base border border-default overflow-hidden shadow-xs">
+                                    <!--  -->
+                                    @foreach($itinerary as $key => $value)
+                                        <div id="heading-{{ $key+1 }}">
+                                            <button type="button"
+                                                class="flex items-center justify-between w-full p-5 font-semibold  rtl:text-right text-base rounded-t-base border border-t-0 border-x-0 border-b-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 text-left"
+                                                data-accordion-target="#body-{{ $key+1 }}" aria-expanded="true" aria-controls="body-{{$key+1}}">
+                                                <span class="text-brand-900">
+                                                    <span class="text-brand-400 mr-1">Day {{ $value->days }}:</span>
+                                                    {{ $value->title }}</span>
+                                                <i data-accordion-icon
+                                                    class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400 text-sm text-brand-400"></i>
+                                            </button>
+                                        </div>
+                                        <div id="body-{{ $key+1}}" class="hidden border border-s-0 border-e-0 border-t-0 border-b-default" aria-labelledby="heading-{{ $key+1 }}">
                                             <div
-                                                class="flex flex-wrap gap-4 mt-4 text-sm text-fg-brand-strong rounded-full bg-brand-100 p-1">
-                                                <div class="flex items-center">
-                                                    <span
-                                                        class="  text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Accommodation:</span>
-                                                    <span class="font-semibold">{{ $value->max_altitude }}</span>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <span
-                                                        class="  text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Meals:</span>
-                                                    <span class="font-semibold">{{ $value->duration }}</span>
-                                                </div>
+                                                class="space-y-3 py-5 text-base font-normal text-gray-700 p-4 md:p-5 p-4 md:p-5">
+                                                <p>
+                                                    {!! $value->content !!}
+                                                </p>
+                                                @if($value->extra_info)
+                                                    <div class="flex items-start   p-4 mb-4 text-sm text-fg-brand-strong rounded-base bg-brand-50"
+                                                        role="alert">
+                                                        <i class="fa fa-info-circle me-2 shrink-0 mt-0.5 sm:mt-0"></i>
+                                                        <p>
+                                                            {{ $value->extra_info }}
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                                @if($value->max_altitude || $value->duration)
+                                                    <div
+                                                        class="flex flex-wrap gap-4 mt-4 text-sm text-fg-brand-strong rounded-full bg-brand-100 p-1">
+                                                        @if($value->max_altitude || $value->duration)
+                                                            <div class="flex items-center">
+                                                                <span
+                                                                    class="  text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Accommodation:</span>
+                                                                <span class="font-semibold">{{ $value->max_altitude }}</span>
+                                                            </div>
+                                                        @endif
+                                                        @if($value->max_altitude || $value->duration)
+                                                            <div class="flex items-center">
+                                                                <span class="text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Meals:</span>
+                                                                <span class="font-semibold">{{ $value->duration }}</span>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div id="alert-additional-content-1"
-                                class="p-4 mb-4 text-sm text-brand-900 rounded-base bg-brand-50 border border-brand-100"
-                                role="alert">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-start">
-                                        <svg class="w-4 h-4 shrink-0 me-2" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M10 11h2v5m-2 0h3m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                        <span class="sr-only">Info</span>
-                                        <div>
-                                            <h3 class="font-medium">If the above {{ $data->trip_title }} itinerary does
-                                                not meet your needs, we can design individualized travel plans based on
-                                                your preferences and specifications.</h3>
-                                            <a href="customized-trip.php" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 mt-2
-                                             font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm"> Customized Trip </a>
+                            <div>
+                                <div id="alert-additional-content-1" class="p-4 mb-4 text-sm text-brand-900 rounded-base bg-brand-50 border border-brand-100" role="alert">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-start">
+                                            <svg class="w-4 h-4 shrink-0 me-2" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h3m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                            <span class="sr-only">Info</span>
+                                            <div>
+                                                <h3 class="font-medium">If the above {{ $data->trip_title }} itinerary does not meet your needs, we can design individualized travel plans based on your preferences and specifications.</h3>
+                                                <a href="customized-trip.php" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 mt-2
+                                                font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm"> Customized Trip </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                @endif
                 <!-- end -->
                 <!-- Cost Includes -->
-                @if($cost_includes->count()> 0)
                 <section class="py-6" id="price-includes">
                     <div class="">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-                            <div class="bg-green-50 p-6 rounded-2xl border border-green-100">
-                                <h2 class="text-2xl font-bold text-gray-900 mb-8">Cost Includes</h2>
-                                <div class="space-y-8">
-                                    <div>
-                                        {{-- <h3 class="font-bold text-sm uppercase text-brand-900 mb-4 tracking-wider">
-                                            Accommodation </h3> --}}
-                                        <ul class="space-y-3 text-sm">
-                                            @foreach($cost_includes as $key => $value)
-                                                <li class="flex items-start">
-                                                    <i class="far fa-check-circle text-green-500 mt-1 mr-3 shrink-0"></i>
-                                                    <span>
-                                                        <span >
+                            @if($cost_includes->count()> 0 )
+                                <div class="bg-green-50 p-6 rounded-2xl border border-green-100">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-8">Cost Includes</h2>
+                                    <div class="space-y-8">
+                                        <div>
+                                            <ul class="space-y-3 text-sm">
+                                                @foreach($cost_includes as $key => $value)
+                                                    <li class="flex items-start">
+                                                        <i class="far fa-check-circle text-green-500 mt-1 mr-3 shrink-0"></i>
+                                                        <span>
                                                             {{ $value->title }}
-                                                    </span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
-                                <h2 class="text-2xl font-bold text-gray-900 mb-8">Cost Excludes</h2>
-                                <div class="space-y-8">
-                                    <div>
-                                        <ul class="space-y-3 text-sm">
-                                            @foreach($cost_excludes as $key => $value)
-                                                <li class="flex items-start">
-                                                    <i class="far fa-times-circle text-red-500 mt-1 mr-3 shrink-0"></i>
-                                                    <span>{{ $value->title }}</span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                @endif
-                <!-- end -->
-                <!-- Dates Table -->
-                <section class="py-6" id="departures">
-                    <div class="">
-                        <div class="mb-8">
-                            <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-2xl font-bold text-gray-900">Cost and Date</h2>
-                            </div>
-                            <div
-                                class="p-4 mb-4 text-sm text-brand-900 rounded-base bg-brand-50 border border-brand-100   ">
-                                <b> Start dates</b> indicate your arrival in Nepal, and <b>end dates</b> reflect your
-                                Departures from Nepal. The scheduled Departuress for the Everest Base Camp Trek are
-                                specifically organized for group joining option. If the listed dates do not fit your
-                                availability, please reach out to us, and our team will provide alternative date
-                                options.
-                            </div>
-                            <div class="relative overflow-x-auto border rounded-xl shadow-sm">
-                                {{-- <form class="p-4  bg-white border-b gap-4">
-                                    <select
-                                        class="block md:w-3xl bg-gray-50  px-4 max-w-4xl py-2 text-xs border rounded-lg focus:ring-2 focus:ring-brand-400 outline-0 pr-12">
-                                        <option>Select Month, Year</option>
-                                        <option value="2025-12">Dec, 2025</option>
-                                        <option value="2026-01">Jan, 2026</option>
-                                        <option value="2026-02">Feb, 2026</option>
-                                        <option value="2026-03">Mar, 2026</option>
-                                        <option value="2026-04">Apr, 2026</option>
-                                        <option value="2026-05">May, 2026</option>
-                                        <option value="2026-06">Jun, 2026</option>
-                                        <option value="2026-07">Jul, 2026</option>
-                                        <option value="2026-08">Aug, 2026</option>
-                                        <option value="2026-09">Sep, 2026</option>
-                                        <option value="2026-10">Oct, 2026</option>
-                                        <option value="2026-11">Nov, 2026</option>
-                                        <option value="2026-12">Dec, 2026</option>
-                                        <option value="2027-01">Jan, 2027</option>
-                                        <option value="2027-02">Feb, 2027</option>
-                                        <option value="2027-03">Mar, 2027</option>
-                                        <option value="2027-04">Apr, 2027</option>
-                                        <option value="2027-05">May, 2027</option>
-                                        <option value="2027-06">Jun, 2027</option>
-                                        <option value="2027-07">Jul, 2027</option>
-                                        <option value="2027-08">Aug, 2027</option>
-                                        <option value="2027-09">Sep, 2027</option>
-                                        <option value="2027-10">Oct, 2027</option>
-                                        <option value="2027-11">Nov, 2027</option>
-                                    </select>
-                                </form> --}}
-                                <div class="Departures-list bg-white shadow-base py-3">
-                                    <!--  -->
-                                    <ul class="[&amp;&gt;li+li]:border-t [&amp;&gt;li+li]:border-t-border">
-                                        <li>
-                                            <div
-                                                class="item items-center leading-[1.35] p-6 grid grid-cols-2 md:grid-cols-5 gap-3 lg:px-6 rounded-sm text-headings/80 hover:bg-secondary/10 group transition-all duration-200">
-                                                <div class="col">
-                                                    <span class="text-xs   block pb-0.5">Start Date</span>
-                                                    <span class="text-brand-900 font-semibold">1st Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <span class="text-xs block pb-0.5">End Date</span>
-                                                    <span class="text-brand-900 font-semibold">15th Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="availability">
-                                                        <div class="flex items-center gap-x-2">
-                                                            <span
-                                                                class="inline-flex items-center px-2 py-1 rounded-xl bg-green-50 text-green-600 text-xs font-medium border border-green-200">
-                                                                <i class="fa fa-check mr-1"></i> Guaranteed </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col md:text-center">
-                                                    <span class="price text-brand-400 font-bold text-base">US
-                                                        $2800</span>
-                                                    <span class="text-headings text-xs block">Per person</span>
-                                                </div>
-                                                <div class="col lg:ml-auto">
-                                                    <a href="booking.php"
-                                                        class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book
-                                                        Now</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div
-                                                class="item items-center leading-[1.35] p-6 grid grid-cols-2 md:grid-cols-5 gap-3 lg:px-6 rounded-sm text-headings/80 hover:bg-secondary/10 group transition-all duration-200">
-                                                <div class="col">
-                                                    <span class="text-xs block pb-0.5">Start Date</span>
-                                                    <span class="text-brand-900 font-semibold">3rd Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <span class="text-xs block pb-0.5">End Date</span>
-                                                    <span class="text-brand-900 font-semibold">17th Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="availability">
-                                                        <div class="flex items-center gap-x-2">
-                                                            <span
-                                                                class="inline-flex items-center px-2 py-1 rounded-xl bg-green-50 text-green-600 text-xs font-medium border border-green-200">
-                                                                <i class="fa fa-check mr-1"></i> Guaranteed </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col md:text-center">
-                                                    <span class="price text-brand-400 font-bold text-base">US
-                                                        $2800</span>
-                                                    <span class="text-headings text-xs block">Per person</span>
-                                                </div>
-                                                <div class="col lg:ml-auto">
-                                                    <a href="booking.php"
-                                                        class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book
-                                                        Now</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div
-                                                class="item items-center leading-[1.35] p-6 grid grid-cols-2 md:grid-cols-5 gap-3 lg:px-6 rounded-sm text-headings/80 hover:bg-secondary/10 group transition-all duration-200">
-                                                <div class="col">
-                                                    <span class="text-xs block pb-0.5">Start Date</span>
-                                                    <span class="text-brand-900 font-semibold">5th Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <span class="text-xs block pb-0.5">End Date</span>
-                                                    <span class="text-brand-900 font-semibold">19th Mar 2026</span>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="availability">
-                                                        <div class="flex items-center gap-x-2">
-                                                            <span
-                                                                class="inline-flex items-center px-2 py-1 rounded-xl bg-green-50 text-green-600 text-xs font-medium border border-green-200">
-                                                                <i class="fa fa-check mr-1"></i> Guaranteed </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col md:text-center">
-                                                    <span class="price text-brand-400  font-bold text-base">US
-                                                        $2800</span>
-                                                    <span class="text-headings text-xs block">Per person</span>
-                                                </div>
-                                                <div class="col lg:ml-auto">
-                                                    <a href="booking.php"
-                                                        class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book
-                                                        Now</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <!--  -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- end -->
-
-                <!-- video and map -->
-                <section class="py-6" id="RouteMapVideo">
-                    <div class="">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
-                            <!-- Route Map -->
-                            @if($data->trip_map)
-                                <div id="route-map">
-                                    <div class="flex justify-between items-center mb-6">
-                                        <h2 class="text-2xl font-bold text-gray-900">Route Map</h2>
-
-                                        <a href="{{ asset('uploads/original/'.$data->trip_map) }}"
-                                        download class="text-gray-500 border px-4 py-1.5 rounded-md text-xs flex items-center hover:bg-brand-400 hover:text-white hover:border-brand-400">
-                                            <i class="fas fa-download mr-2"></i> Download
-                                        </a>
-                                    </div>
-                                    <div class="rounded-xl overflow-hidden border  aspect-video">
-                                        <a href="{{ asset('uploads/original/'.$data->trip_map) }}" data-fancybox="gallery"
-                                            data-caption="{{$data->trip_title}} Route Map">
-                                            <img src="{{ asset('uploads/original/'.$data->trip_map) }}" alt="{{$data->trip_title}}" loading="lazy"
-                                                class="lazy-image w-full h-auto">
-                                        </a>
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Video Section -->
-                            @if($data->trip_video)
-                                <div id="video">
-                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Trek Video</h2>
-                                    <div class="relative group cursor-pointer rounded-2xl overflow-hidden shadow-2xl aspect-video">
-                                        <img src="https://i.ytimg.com/vi/{{$data->trip_video}}/hqdefault.jpg" alt="{{$data->trip_title}}" loading="lazy" class="lazy-image w-full h-full object-cover">
-                                        <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition group-hover:bg-black/40">
-                                            <a href="https://www.youtube.com/watch?v={{$data->trip_video}}" data-fancybox
-                                                class="w-20 h-20 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/50 group-hover:scale-110 transition duration-300">
-                                                <i class="fas fa-play text-white text-3xl ml-1"></i>
-                                            </a>
+                            @if($cost_excludes->count() > 0)
+                                <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-8">Cost Excludes</h2>
+                                    <div class="space-y-8">
+                                        <div>
+                                            <ul class="space-y-3 text-sm">
+                                                @foreach($cost_excludes as $key => $value)
+                                                    <li class="flex items-start">
+                                                        <i class="far fa-times-circle text-red-500 mt-1 mr-3 shrink-0"></i>
+                                                        <span>{{ $value->title }}</span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -691,17 +514,127 @@
                     </div>
                 </section>
                 <!-- end -->
-                <!-- gears -->
-                <section class="py-6" id="gears">
-                    <div class=" space-y-3">
-                        <div class="mb-8" id="gears">
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6">Gears List</h2>
-                            <p >
-                                {!! $data->trip_highlight !!}
-                            </p>
+                <!-- Dates Table -->
+                @if($schedules->count()>0)
+                    <section class="py-6" id="departures">
+                        <div class="">
+                            <div class="mb-8">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-2xl font-bold text-gray-900">Cost and Date</h2>
+                                </div>
+                                <div
+                                    class="p-4 mb-4 text-sm text-brand-900 rounded-base bg-brand-50 border border-brand-100   ">
+                                    <b> Start dates</b> indicate your arrival in Nepal, and <b>end dates</b> reflect your Departures from Nepal. The scheduled Departuress for the {{ $data->trip_title }} are specifically organized for group joining option. If the listed dates do not fit your availability, please reach out to us, and our team will provide alternative date options.
+                                </div>
+                                <div class="relative overflow-x-auto border rounded-xl shadow-sm">
+                                    <div class="Departures-list bg-white shadow-base py-3">
+                                        <!--  -->
+                                        <ul class="[&amp;&gt;li+li]:border-t [&amp;&gt;li+li]:border-t-border">
+                                            @foreach($schedules as $row)
+                                                <li>
+                                                    <div
+                                                        class="item items-center leading-[1.35] p-6 grid grid-cols-2 md:grid-cols-5 gap-3 lg:px-6 rounded-sm text-headings/80 hover:bg-secondary/10 group transition-all duration-200">
+                                                        <div class="col">
+                                                            <span class="text-xs   block pb-0.5">Start Date</span>
+                                                            <span class="text-brand-900 font-semibold">{{ $row->start_date }}</span>
+                                                        </div>
+                                                        <div class="col">
+                                                            <span class="text-xs block pb-0.5">End Date</span>
+                                                            <span class="text-brand-900 font-semibold">{{ $row->end_date }}</span>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="availability">
+                                                                <div class="flex items-center gap-x-2">
+                                                                    @if($row->availability == 'AVAILABLE')
+                                                                        <span class="inline-flex items-center px-2 py-1 rounded-xl bg-green-50 text-green-600 text-xs font-medium border border-green-200">
+                                                                            <i class="fa fa-check mr-1"></i> Available </span>
+                                                                    @else
+                                                                        <span class="inline-flex items-center px-2 py-1 rounded-xl bg-red-50 text-red-600 text-xs font-medium border border-red-200">
+                                                                            <i class="fa fa-times mr-1"></i> Fully Occupied </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col md:text-center">
+                                                            <span class="price text-brand-400 font-bold text-base">US ${{ $row->price }}</span>
+                                                            <span class="text-headings text-xs block">Per person</span>
+                                                        </div>
+                                                        @if($row->availability == 'AVAILABLE')
+                                                            <div class="col lg:ml-auto">
+                                                                <a href="booking.php" class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book Now</a>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                @endif
+                <!-- end -->
+
+                <!-- video and map -->
+                @if($data->trip_map || $data->trip_video)
+                    <section class="py-6" id="RouteMapVideo">
+                        <div class="">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
+                                <!-- Route Map -->
+                                @if($data->trip_map)
+                                    <div id="route-map">
+                                        <div class="flex justify-between items-center mb-6">
+                                            <h2 class="text-2xl font-bold text-gray-900">Route Map</h2>
+
+                                            <a href="{{ asset('uploads/original/'.$data->trip_map) }}"
+                                            download class="text-gray-500 border px-4 py-1.5 rounded-md text-xs flex items-center hover:bg-brand-400 hover:text-white hover:border-brand-400">
+                                                <i class="fas fa-download mr-2"></i> Download
+                                            </a>
+                                        </div>
+                                        <div class="rounded-xl overflow-hidden border  aspect-video">
+                                            <a href="{{ asset('uploads/original/'.$data->trip_map) }}" data-fancybox="gallery"
+                                                data-caption="{{$data->trip_title}} Route Map">
+                                                <img src="{{ asset('uploads/original/'.$data->trip_map) }}" alt="{{$data->trip_title}}" loading="lazy"
+                                                    class="lazy-image w-full h-auto">
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+                                <!-- Video Section -->
+                                @if($data->trip_video)
+                                    <div id="video">
+                                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Trek Video</h2>
+                                        <div class="relative group cursor-pointer rounded-2xl overflow-hidden shadow-2xl aspect-video">
+                                            <img src="https://i.ytimg.com/vi/{{$data->trip_video}}/hqdefault.jpg" alt="{{$data->trip_title}}" loading="lazy" class="lazy-image w-full h-full object-cover">
+                                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition group-hover:bg-black/40">
+                                                <a href="https://www.youtube.com/watch?v={{$data->trip_video}}" data-fancybox
+                                                    class="w-20 h-20 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/50 group-hover:scale-110 transition duration-300">
+                                                    <i class="fas fa-play text-white text-3xl ml-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </section>
+                @endif
+                <!-- end -->
+                <!-- gears -->
+                @if(!empty($data->trip_highlight))
+                    <section class="py-6" id="gears">
+                        <div class=" space-y-3">
+                            <div class="mb-8" id="gears">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6">Gears List</h2>
+                                <p >
+                                    {!! $data->trip_highlight !!}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                @endif
                 <!-- end -->
 
                 <!-- review -->
@@ -710,83 +643,15 @@
                         <!-- Reviews -->
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 mb-4">Travellers' Reviews</h2>
-                            <p class="text-xs text-gray-500 mb-8">Read our <span class="font-bold text-gray-800">genuine
-                                    feedback</span> from past travelers with <span
-                                    class="font-bold text-gray-800">Summit 8000 Team</span> sourced from <span
-                                    class="font-bold text-gray-800">TripAdvisor, Google, Facebook, and
-                                    Trustpilot.</span>
-                            </p> <?php /*?>
-                            <!-- Video Reviews -->
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-                                <a href="https://www.youtube.com/watch?v=fHh29py_Uoc" data-fancybox
-                                    class="relative rounded-xl overflow-hidden group block cursor-pointer aspect-video">
-                                    <img src="https://i.ytimg.com/vi/fHh29py_Uoc/hqdefault.jpg"
-                                        class="w-full h-full object-cover" alt="Video thumbnail">
-                                    <!-- Gradient overlay -->
-                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center "></div>
-                                    <!-- Text -->
-                                    <div class="absolute bottom-4 left-4 text-white z-10">
-                                        <p class="font-bold text-sm">Luke Korns</p>
-                                        <p class="text-sm">Australia</p>
-                                    </div>
-                                    <!-- PERFECTLY CENTERED Play button -->
-                                    <div class="absolute inset-0 flex items-start justify-start z-10 p-4">
-                                        <div class="w-9 h-9 bg-white/20 backdrop-blur
-                   rounded-full flex items-center justify-center
-                   border border-white/40
-                   group-hover:scale-110 transition-transform duration-300">
-                                            <i class="fas fa-play text-white text-sm"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="https://www.youtube.com/watch?v=hWvVUud3gO0" data-fancybox
-                                    class="relative rounded-xl overflow-hidden group block cursor-pointer aspect-video">
-                                    <img src="https://i.ytimg.com/vi/hWvVUud3gO0/hqdefault.jpg"
-                                        class="w-full h-full object-cover" alt="Video thumbnail">
-                                    <!-- Gradient overlay -->
-                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center "></div>
-                                    <!-- Text -->
-                                    <div class="absolute bottom-4 left-4 text-white z-10">
-                                        <p class="font-bold text-sm">Ramesh Adhikari</p>
-                                        <p class="text-sm">United Arab Emirates</p>
-                                    </div>
-                                    <!-- PERFECTLY CENTERED Play button -->
-                                    <div class="absolute inset-0 flex items-start justify-start z-10 p-4">
-                                        <div class="w-9 h-9 bg-white/20 backdrop-blur
-                   rounded-full flex items-center justify-center
-                   border border-white/40
-                   group-hover:scale-110 transition-transform duration-300">
-                                            <i class="fas fa-play text-white text-sm"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="https://www.youtube.com/watch?v=JgVMFS-N-GM" data-fancybox
-                                    class="relative rounded-xl overflow-hidden group block cursor-pointer aspect-video">
-                                    <img src="https://i.ytimg.com/vi/JgVMFS-N-GM/hqdefault.jpg"
-                                        class="w-full h-full object-cover" alt="Video thumbnail">
-                                    <!-- Gradient overlay -->
-                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center "></div>
-                                    <!-- Text -->
-                                    <div class="absolute bottom-4 left-4 text-white z-10">
-                                        <p class="font-bold text-sm">Ramesh Adhikari</p>
-                                        <p class="text-sm">Nepal</p>
-                                    </div>
-                                    <!-- PERFECTLY CENTERED Play button -->
-                                    <div class="absolute inset-0 flex items-start justify-start z-10 p-4">
-                                        <div class="w-9 h-9 bg-white/20 backdrop-blur
-                   rounded-full flex items-center justify-center
-                   border border-white/40
-                   group-hover:scale-110 transition-transform duration-300">
-                                            <i class="fas fa-play text-white text-sm"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div> <?php */?>
+                            <!-- <p class="text-xs text-gray-500 mb-8">
+                                Read our <span class="font-bold text-gray-800">genuine feedback</span> from past travelers with
+                                <span class="font-bold text-gray-800">Summit 8000 Team</span> sourced from <span class="font-bold text-gray-800">TripAdvisor, Google, Facebook, and Trustpilot.</span>
+                            </p> -->
+
                             <!-- Text Review Card -->
                             <div class="bg-gray-50 p-6 rounded-2xl border mb-8 relative overflow-hidden">
                                 <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                                <h3 class="font-bold text-lg mb-4 pr-14">Everest Base Camp- A wonderful hiking
-                                    experience </h3>
+                                <h3 class="font-bold text-lg mb-4 pr-14">Everest Base Camp- A wonderful hiking experience </h3>
                                 <div class="flex items-center text-yellow-400 text-sm mb-4">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -890,30 +755,21 @@
                         <div class="">
                             <!-- FAQs -->
                             <div class="accordion-wrapper">
-                                <div
-                                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
-                                    <h2 class="text-2xl font-bold text-gray-900">{{ $data->trip_title }} FAQs
-                                    </h2>
-                                    <button
-                                        class="toggle-accordion text-brand-400 border border-brand-400 hover:bg-brand-50 transition-colors font-medium rounded-xl text-sm px-4 py-2.5 transition shadow-sm">Expand
-                                        All</button>
+                                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+                                    <h2 class="text-2xl font-bold text-gray-900">{{ $data->trip_title }}  FAQs </h2>
+                                    <button class="toggle-accordion text-brand-400 border border-brand-400 hover:bg-brand-50 transition-colors font-medium rounded-xl text-sm px-4 py-2.5 transition shadow-sm">Expand All</button>
                                 </div>
                                 <div id="accordion-card" data-accordion="collapse">
                                     <!-- FAQ 1 -->
                                     @foreach($faqs as $key => $value)
                                         <div id="accordion-card-heading-{{ $key+1 }}">
-                                            <button type="button"
-                                                class="text-left flex items-center justify-between w-full p-4 font-medium text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none"
-                                                data-accordion-target="#accordion-card-body-{{ $key+1 }}" aria-expanded="false"
-                                                aria-controls="accordion-card-body-{{ $key+1 }}">
+                                            <button type="button" class="text-left flex items-center justify-between w-full p-4 font-medium text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none" data-accordion-target="#accordion-card-body-{{ $key+1 }}" aria-expanded="false" aria-controls="accordion-card-body-{{ $key+1 }}">
                                                 <span>{{ $value->title }}</span>
                                                 <i data-accordion-icon
                                                     class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400"></i>
                                             </button>
                                         </div>
-                                        <div id="accordion-card-body-{{ $key+1 }}"
-                                            class="hidden border border-t-0 border-default rounded-b-base shadow-xs"
-                                            aria-labelledby="accordion-card-heading-{{ $key+1 }}">
+                                        <div id="accordion-card-body-{{ $key+1 }}" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-{{ $key+1 }}">
                                             <div class="p-4 text-body"> {{ $value->content }} </div>
                                         </div>
                                     @endforeach
@@ -982,9 +838,7 @@
                                                 <p class="text-sm text-slate-400 font-medium">33 days from</p>
                                                 <p class="text-xl font-bold text-slate-900">US$ {{$row->price}}</p>
                                             </div>
-                                            <button
-                                                class="text-white bg-brand-400 hover:bg-brand-500  font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">More
-                                                Info</button>
+                                            <button class="text-white bg-brand-400 hover:bg-brand-500  font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">More Info</button>
                                         </div>
                                     </div>
                                 </a>
@@ -1049,8 +903,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 border-t border-default p-4">
-                    <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500
-               font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Submit </button>
+                    <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Submit </button>
                 </div>
             </form>
         </div>
@@ -1106,8 +959,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 border-t border-default p-4">
-                    <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500
-               font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Submit </button>
+                    <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Submit </button>
                 </div>
             </form>
         </div>

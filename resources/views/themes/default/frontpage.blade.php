@@ -53,7 +53,7 @@
         <!-- Center Static Content -->
         <div class="absolute inset-0 flex flex-col items-center justify-center px-4 z-30 pointer-events-none">
             <h1 class="text-white text-5xl sm:text-4xl md:text-6xl lg:text-[82px] font-extrabold text-center mb-7 max-w-4xl drop-shadow-2xl">
-                Adventure Travel Guided by Experts
+                {{ $homebrief->title }}
             </h1>
 
             <div class="pointer-events-auto w-full">

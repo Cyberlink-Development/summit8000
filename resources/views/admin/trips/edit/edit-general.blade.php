@@ -158,13 +158,12 @@
                     <!--            placeholder="Trip Video" />-->
                     <!--    </div>-->
                     <!--</div>-->
+
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Is Luxury Trip?</label>
-                            <select class="form-control" name="video_status">
-                                <option @if ($data->video_status == 1) selected @endif value="1">Yes</option>
-                                <option @if ($data->video_status == 0) selected @endif value="0">No</option>
-                            </select>
+                            <label>Meals</label>
+                            <input type="text" name="meals" class="form-control"
+                                value="{{ $data->peak_name }}" />
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -179,6 +178,15 @@
                             <label>Start/End</label>
                             <input type="text" name="route" class="form-control"
                                 value="{{ $data->route }}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Is Luxury Trip?</label>
+                            <select class="form-control" name="video_status">
+                                <option @if ($data->video_status == 1) selected @endif value="1">Yes</option>
+                                <option @if ($data->video_status == 0) selected @endif value="0">No</option>
+                            </select>
                         </div>
                     </div>
                 </div>

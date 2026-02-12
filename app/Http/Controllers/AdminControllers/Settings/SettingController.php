@@ -34,10 +34,10 @@ class SettingController extends Controller
         ]);
       $medium_width = 168;
       $medium_height = 57;
-      
+
       $original_width=1366;
       $original_height=216;
-      
+
       $mobile_width=515;
       $mobile_height=297;
 
@@ -45,7 +45,7 @@ class SettingController extends Controller
 
       $file =  $request->file('logo');
       $logo_name = '';
-    
+
 
       if($request->hasFile('logo')) {
         $data = SettingModel::find($id);
@@ -120,7 +120,7 @@ class SettingController extends Controller
              $width = Image::make($file->getRealPath())->width();
              $height = Image::make($file->getRealPath())->height();
 
-         
+
              /*Upload Original Image*/
              $logo_picture->resize($mobile_width, $mobile_height, function($constraint){
                  $constraint->aspectRatio();
@@ -153,7 +153,7 @@ class SettingController extends Controller
              $width = Image::make($file->getRealPath())->width();
              $height = Image::make($file->getRealPath())->height();
 
-         
+
              /*Upload Original Image*/
              $logo_picture->resize($mobile_width, $mobile_height, function($constraint){
                  $constraint->aspectRatio();
@@ -185,7 +185,7 @@ class SettingController extends Controller
              $width = Image::make($file->getRealPath())->width();
              $height = Image::make($file->getRealPath())->height();
 
-         
+
              /*Upload Original Image*/
              $logo_picture->resize($mobile_width, $mobile_height, function($constraint){
                  $constraint->aspectRatio();
@@ -228,6 +228,7 @@ class SettingController extends Controller
 
         $data->site_name = $request->site_name;
         $data->phone = $request->phone;
+        $data->usa_phone = $request->usa_phone;
         $data->fax = $request->fax;
         $data->link1 = $request->link1;
         $data->link2 = $request->link2;
@@ -239,6 +240,7 @@ class SettingController extends Controller
         $data->youtube_link = $request->youtube_link;
         $data->twitter_link = $request->twitter_link;
         $data->instagram_link = $request->instagram_link;
+        $data->tiktok_link = $request->tiktok_link;
         $data->meta_key = $request->meta_key;
         $data->meta_description = $request->meta_description;
         $data->google_map = $request->google_map;
@@ -257,7 +259,7 @@ class SettingController extends Controller
             $image1->move(public_path('uploads'), $imageName1);
             $data->usa_phone = $imageName1;
         }
-    
+
         if ($request->hasFile('usa_address')) {
             if(file_exists('uploads/'.$data->usa_address)){
                 File::delete('uploads/'.$data->usa_address);
@@ -265,7 +267,7 @@ class SettingController extends Controller
             $image2 = $request->file('usa_address');
             $imageName2 = time() . '_address.' . $image2->extension();
             $image2->move(public_path('uploads'), $imageName2);
-            $data->usa_address = $imageName2; 
+            $data->usa_address = $imageName2;
         }
         // $data->usa_phone = $request->usa_phone;
         // $data->usa_address = $request->usa_address;
@@ -344,7 +346,7 @@ class SettingController extends Controller
             if(file_exists(env('PUBLIC_PATH').'uploads/original/' . $data->flight_photo)){
                 unlink(env('PUBLIC_PATH').'uploads/original/' . $data->flight_photo);
             }
-        } 
+        }
         $data->flight_photo = NULL;
         $data->save();
         return response('Delete Successfully.');

@@ -90,9 +90,9 @@ class FrontpageController extends Controller
         $reviews = TripReview::where('status', 1)->get();
         $blog = PostTypeModel::where('id' , 33)->first();
         $blogs = PostModel::where('post_type' , $blog->id)->latest()->take(3)->get();
-
-        // dd($reviews);
-        return view('themes.default.frontpage', compact('banners','allActivities','best_seller','about','luxury_tirps','blog','blogs','reviews'));
+        $homebrief = HomeBriefModel::where('id',1)->first();
+        // dd($homebrief);
+        return view('themes.default.frontpage', compact('banners','allActivities','best_seller','about','luxury_tirps','blog','blogs','reviews','homebrief'));
     }
 
 
@@ -232,14 +232,16 @@ class FrontpageController extends Controller
         else{
             $similar_trips = TripModel::where('uri', '!=', $uri)->orderBy('ordering', 'desc')->take(3)->get();
         }
-        $activity = TripModel::find($data->id)->activities()->get();
+        $activity = TripModel::find($data->id)->activities()->first();
+        $destinations = TripModel::find($data->id)->destinations()->first();
+        // $activity = TripModel::find($data->id)->activities()->get();
 
         $setting = SettingModel::where('id',1)->first();
 
-        // dd($data,$photos,$itinerary);
+        // dd($data,$schedules);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'activity','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri'));
+            'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri'));
     }
 
     //<------------------------------------------Activity Frontend---------------------------------------------->

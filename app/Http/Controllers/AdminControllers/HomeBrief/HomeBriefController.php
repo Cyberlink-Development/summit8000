@@ -17,12 +17,13 @@ class HomeBriefController extends Controller
         return view('admin.homeBrief.add');
     }
     public function store(Request $request){
-        // dd($request->all());    
+        // dd($request->all());
+        return back()->with('Home Brief cannot be added');
         $validate =  $request->validate([
             'title'=> 'required',
         ]);
         $homeBrief = new HomeBriefModel();
-        
+
         $user_name1 = '';
         if($request->hasFile('thumbnail')){
             $user_img_name1 = $request->file('thumbnail');
@@ -31,7 +32,7 @@ class HomeBriefController extends Controller
             $user_img_name1->move($destinationPath, $user_name1);
 
             // $homeBrief->picture1 = $user_name1;
-        } 
+        }
 
         // dd($homeBrief->picture1);
         $user_name2 = '';
@@ -53,14 +54,14 @@ class HomeBriefController extends Controller
 
             // $homeBrief->picture3 = $user_name3;
             // $homeBrief->picture3->save();
-        } 
+        }
         if($request->hasFile('video')) {
             $user_img_name = $request->file('video');
             $user_name = time().'.'.$user_img_name->getClientOriginalExtension();
             $destinationPath = public_path('uploads/original');
             $user_img_name->move($destinationPath, $user_name);
             $req['video'] = $user_name;
-    
+
         }
         // dd($user_name3);
         // dd($homeBrief->picture3);
@@ -82,7 +83,7 @@ class HomeBriefController extends Controller
             $user_name = Str::random(5).'.'.$user_img_name->getClientOriginalExtension();
             $destinationPath = public_path('uploads/original');
             $user_img_name->move($destinationPath, $user_name);
-    
+
             $data->thumbnail = $user_name;
         }
         if($request->hasFile('image')){
@@ -98,7 +99,7 @@ class HomeBriefController extends Controller
             $user_name = Str::random(5).'.'.$user_img_name->getClientOriginalExtension();
             $destinationPath = public_path('uploads/original');
             $user_img_name->move($destinationPath, $user_name);
-    
+
             $data->pic = $user_name;
         }
         // if($request->hasFile('video')) {
@@ -107,7 +108,7 @@ class HomeBriefController extends Controller
         //     $destinationPath = public_path('uploads/original');
         //     $user_img_name->move($destinationPath, $user_name);
         //     $data->video = $user_name;
-    
+
         // }
 
         $data->title = $request->title;
