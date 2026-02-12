@@ -20,6 +20,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('theme-assets/assets/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('theme-assets/assets/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('theme-assets/assets/favicon/site.webmanifest') }}">
+    
+    <!--------------- Toaster starts  -------------------->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        .toast {
+            opacity: .9 !important;
+        }
+    </style>
+    <!--------------- Toaster ends  -------------------->
 
 </head>
 
@@ -47,11 +58,9 @@
         });
     </script> --}}
 
+    @include('themes.default.common.response')
     <!-- Navbar desktop-->
-    <nav id="desktop-navbar"
-        class="sticky top-0 border-b border-gray-100 top-0 w-full  z-40
-            transition-all duration-300 ease-out
-            bg-white">
+    <nav id="desktop-navbar" class="sticky top-0 border-b border-gray-100 top-0 w-full  z-40 transition-all duration-300 ease-out bg-white">
         <div class="container   flex items-center justify-between">
 
             <!-- Logo -->
@@ -219,7 +228,7 @@
                     </ul>
                 </nav>
                 <!-- CTA Button -->
-                <a href="plan-your-trip.php" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm">
+                <a href="{{ route('plan-trip') }}" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm">
                     Plan Your Trip
                 </a>
 
@@ -345,7 +354,7 @@
 
             </ul>
             <div class="block">
-                <a href="plan-your-trip.php" class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
+                <a href="{{ route('plan-trip') }}" class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
                     Plan Your Trip
                 </a>
             </div>

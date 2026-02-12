@@ -53,6 +53,9 @@ Route::get('reviews', 'FrontendControllers\FrontpageController@all_reviews')->na
 Route::get('captcha', 'CaptchaController@refreshCaptcha');
 
 // Trip Pages
+Route::get('plan-trip', 'FrontendControllers\FrontpageController@plan_trip')->name('plan-trip');
+Route::post('custom-trip-submit', 'FrontendControllers\FrontpageController@custom_trip_post')->name('custom-trip-post');
+
 Route::get('book-now', 'FrontendControllers\FrontpageController@book_now')->name('book-now');
 Route::get('/get-trips', 'FrontendControllers\FrontpageController@getTrips')->name('getTripsActivity');
 Route::any('book/{uri}.html', 'FrontendControllers\FrontpageController@showbooking')->name('page.booking');

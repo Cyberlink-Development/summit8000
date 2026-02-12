@@ -1,63 +1,55 @@
 @extends('themes.default.common.master')
-@section('title', $data->post_type)
-@section('meta_keyword', $data->meta_keyword)
-@section('meta_description', $data->meta_description)
-@section('thumbnail', $data->banner)
 @section('content')
 
-<!-- Hero Section -->
-<div class="relative h-[480px] bg-cover bg-center flex items-center">
-    {!! $setting->google_map !!}
-    {{-- <iframe
-        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d47501.31093049091!2d85.39329388471447!3d27.7618358070697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sHouse%2023%2C%20Street%20A%20Kapan%2C%0D%0ABudhanilkantha-11%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1767274015124!5m2!1sen!2snp"
-        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
-</div>
-
-<!--   Section -->
-<section class="py-16 pattern-white relative">
-
+<section class="py-16 relative">
     <div class="container ">
-        <article class="lg:w-9/12 lg:mx-auto">
-
-            <h1 class=" text-3xl font-extrabold leading-tight text-brand-900  mb-4 lg:mb-6 lg:text-4xl ">
-                Contact Us
+        <div class="lg:w-9/12 lg:mx-auto space-y-6">
+            <h1 class=" text-3xl font-extrabold leading-tight text-brand-900    lg:text-4xl ">
+                Plan Your Trip
             </h1>
+            <p class="text-lg text-gray-500">Looking for a private or customized trekking experience? Whether you’re traveling with family, friends, or at your own pace, Summit 8000 creates tailor-made treks across Nepal. Share your travel dates and interests, and we’ll design a personalized itinerary just for you.</p>
 
-            <form action="{{ route('contact') }}"  method="post">
+            <form action="{{ route('custom-trip-post') }}"  method="post">
                 @csrf
                 <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
-
+                <input type="hidden" name="type" value="plan"/>
                 <div class="grid gap-4 grid-cols-2 ">
+                    <div class="col-span-2">
+                        <select name="trip_id" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required>
+                            <option value="" selected disabled>Select a Package*</option>
+                            @foreach($trips as $trip)
+                                <option value="{{ $trip->id }}">{{ $trip->trip_title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <input type="text" name="full_name" id="full_name"
+                        <input type="text" name="name" id="name"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Full Name*" required>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <input type="email" name="email" id="namemaile"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="E-mail Address*" required>
+                            placeholder="E-mail*" required>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <input type="tel" name="number" id="number"
+                        <input type="tel" name="phone" id="phone"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Phone Number*" required min="10">
+                            placeholder="Mobile*" required>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <select name="country" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required>
-                            @include('themes.default.common.country')
-                        </select>
-                    </div>
-                    <div class="col-span-2">
-                        <textarea id="message" rows="4" name="comments"
+                        <input type="number" name="peoples" id="peoples"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Message*"></textarea>
+                            placeholder="No of Travellers*" required>
                     </div>
                     <div class="col-span-2">
-                        <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Send Message </button>
+                        <textarea id="message" name="message" rows="4" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Message"></textarea>
+                    </div>
+                    <div class="col-span-2">
+                        <button type="submit" class="flex items-center  text-white bg-brand-400  hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Send Message </button>
                     </div>
                 </div>
+
             </form>
 
             <div class="space-y-6 mt-8">
@@ -72,10 +64,10 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-bold mb-2 text-brand-900">Contact Info (24/7):</h4>
-                            <p class="text-sm text-brand-900">Landline: {{$setting->phone}}</p>
-                            <p class="text-sm text-brand-900">Mobile: {{$setting->phone}}</p>
-                            <p class="text-sm text-brand-900">WhatsApp: {{$setting->phone}}</p>
+                            <h4 class="font-bold mb-2 text-brand-900">Emergency SOS (24/7):</h4>
+                            <p class="text-sm text-brand-900">Landline: {{ $setting->phone }}</p>
+                            <p class="text-sm text-brand-900">Mobile: {{ $setting->fax }}</p>
+                            <p class="text-sm text-brand-900">WhatsApp: {{ $setting->usa_phone }}</p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +83,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold mb-2 text-brand-900">Email:</h4>
-                            <p class="text-sm text-brand-900">{{$setting->email_primary}} <br> {{$setting->email_secondary}}</p>
+                            <p class="text-sm text-brand-900">{{ $setting->email_primary }} <br> {{ $setting->email_secondary }}</p>
                         </div>
                     </div>
                 </div>
@@ -109,7 +101,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold mb-2 text-brand-900">Address:</h4>
-                            <p class="text-sm text-brand-900 leading-relaxed">{{$setting->address}}</p>
+                            <p class="text-sm text-brand-900 leading-relaxed">{{ $setting->address }}</p>
                         </div>
                     </div>
                 </div>
@@ -156,7 +148,7 @@
                 </div>
             </div>
 
-        </article>
+        </div>
     </div>
 </section>
 
@@ -177,4 +169,5 @@
     });
 
 </script>
-@endsection
+
+@stop
