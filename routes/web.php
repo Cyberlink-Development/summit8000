@@ -114,10 +114,18 @@ Route::middleware(['auth'])->group(function () {
         'trip-inquiry' => 'AdminControllers\Inquiry\TripInquiryController',
         'training-enrollment' => 'AdminControllers\Inquiry\EnrollmentController',
         'contact-us' => 'AdminControllers\Inquiry\TripBookingController',
-        'trip-customize' => 'AdminControllers\Inquiry\TripCustomizeController',
         'admin.faq' => 'AdminControllers\Faqs\FaqController',
 
     ]);
+    Route::get('trip-customize','AdminControllers\Inquiry\TripCustomizeController@index')->name('admin.trip.customize');
+    Route::get('trip-plan','AdminControllers\Inquiry\TripCustomizeController@showplan')->name('admin.trip.plan');
+    Route::get('trip-private','AdminControllers\Inquiry\TripCustomizeController@showprivate')->name('admin.trip.private');
+    Route::get('trip-suggestion','AdminControllers\Inquiry\TripCustomizeController@showsuggestion')->name('admin.trip.suggestion');
+    Route::delete('trip-customize/{id}','AdminControllers\Inquiry\TripCustomizeController@destroy')->name('trip-customize.destroy');
+    Route::delete('trip-suggestion/{id}','AdminControllers\Inquiry\TripCustomizeController@destroySuggestion')->name('trip-suggestion.destroy');
+
+
+
     Route::get('admin/training-list/{training}','AdminControllers\Travels\TripController@index')->name('training.list.index');
     Route::get('admin/training-list/create/{training}', 'AdminControllers\Travels\TripController@create')->name('training.list.create');
     Route::get('admin/training-list/edit/{uri}/{training}', 'AdminControllers\Travels\TripController@edit')->name('training.list.edit');

@@ -14,9 +14,9 @@
                         <span id="header-traveler-count">1</span> People
                     </p>
                 </div>
-                <a href="trip-details.php" class="text-slate-300 hover:text-brand-400 transition-colors">
+                <!-- <a href="" class="text-slate-300 hover:text-brand-400 transition-colors">
                     <i class="fa fa-arrow-left"></i>
-                </a>
+                </a> -->
             </div>
         </div>
 
