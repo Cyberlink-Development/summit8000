@@ -4,24 +4,20 @@
 <section class="py-16 relative">
     <div class="container ">
         <div class="lg:w-9/12 lg:mx-auto space-y-6">
-            <h1 class=" text-3xl font-extrabold leading-tight text-brand-900    lg:text-4xl ">
-                Plan Your Trip
+            <h1 class=" text-3xl font-extrabold leading-tight text-brand-900 lg:text-4xl ">
+                Customize your <em>{{ $trips->trip_title }}</em> Trip
             </h1>
             <p class="text-lg text-gray-500">Looking for a private or customized trekking experience? Whether you’re traveling with family, friends, or at your own pace, Summit 8000 creates tailor-made treks across Nepal. Share your travel dates and interests, and we’ll design a personalized itinerary just for you.</p>
 
             <form action="{{ route('custom-trip-post') }}"  method="post">
                 @csrf
                 <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
-                <input type="hidden" name="type" value="plan"/>
+                <input type="hidden" name="type" value="customize"/>
+                <input type="hidden" name="trip_id" value="{{ $trips->id }}"/>
                 <div class="grid gap-4 grid-cols-2 ">
                     <div class="col-span-2">
                         <label class="block text-sm font-medium text-gray-600 mb-1">Trip Name</label>
-                        <select name="trip_id" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required>
-                            <option value="" selected disabled>Select a Package*</option>
-                            @foreach($trips as $trip)
-                                <option value="{{ $trip->id }}">{{ $trip->trip_title }}</option>
-                            @endforeach
-                        </select>
+                        <input class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" value="{{ $trips->trip_title }}" readonly>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
@@ -42,7 +38,7 @@
                             placeholder="Mobile*" required>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label class="block text-sm font-medium text-gray-600 mb-1">Number Of Travellers</label>
+                        <label class="block text-sm font-medium text-gray-600 mb-1">Number of Travellers</label>
                         <input type="number" name="peoples" id="peoples"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="No of Travellers*" required>

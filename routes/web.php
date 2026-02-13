@@ -54,7 +54,10 @@ Route::get('captcha', 'CaptchaController@refreshCaptcha');
 
 // Trip Pages
 Route::get('plan-trip', 'FrontendControllers\FrontpageController@plan_trip')->name('plan-trip');
+Route::get('customize-trip/{uri}', 'FrontendControllers\FrontpageController@customize_post')->name('customize-trip');
 Route::post('custom-trip-submit', 'FrontendControllers\FrontpageController@custom_trip_post')->name('custom-trip-post');
+Route::post('tell-friend-submit', 'FrontendControllers\FrontpageController@tell_friend_post')->name('tell-friend-post');
+Route::get('book-trip/{uri}', 'FrontendControllers\FrontpageController@book_trip')->name('book-trip');
 
 Route::get('book-now', 'FrontendControllers\FrontpageController@book_now')->name('book-now');
 Route::get('/get-trips', 'FrontendControllers\FrontpageController@getTrips')->name('getTripsActivity');
@@ -67,8 +70,6 @@ Route::get('region/{uri}.html', 'FrontendControllers\FrontpageController@regionl
 Route::any('search-trip', 'FrontendControllers\FrontpageController@show_search_form')->name('search-trip');
 Route::post('store/trip/tailormade', 'FrontendControllers\FrontpageController@store_tailormade')->name('tailormade');
 Route::post('store/trip/filmmaking', 'FrontendControllers\FrontpageController@store_filmmaking')->name('filmmaking');
-// Route::post('trip-booking', 'FrontendControllers\FrontpageController@post_tripbooking')->name('post-trip');
-Route::post('trip-booking', [FrontpageController::class, 'post_tripbooking'])->name('post-trip');
 Route::post('booking-now', 'FrontendControllers\FrontpageController@booking_now')->name('post-booknow');
 Route::post('enroll-now', 'FrontendControllers\FrontpageController@enroll_now')->name('post-enrollment');
 Route::get('inquiry-now/{uri?}', 'FrontendControllers\FrontpageController@inquiry_now')->name('inquiry-now');
@@ -76,7 +77,6 @@ Route::post('inquiry', 'FrontendControllers\FrontpageController@post_inquiry')->
 Route::post('contact', 'FrontendControllers\FrontpageController@contact_us')->name('contact');
 Route::get('page/activities/{uri}', 'FrontendControllers\FrontpageController@activities')->name('page.activities');
 Route::post('page/customize-trip', 'FrontendControllers\FrontpageController@customize_trip')->name('customize-trip.post');
-Route::get('customize-trip/{uri}', 'FrontendControllers\FrontpageController@customize_trip')->name('customize-trip');
 Route::any('search-page', 'FrontendControllers\FrontpageController@search_all')->name('search-all');
 Route::get('activity-list', 'FrontendControllers\FrontpageController@activitylist')->name('page.activitylist');
 Route::get('trekking-list', 'FrontendControllers\FrontpageController@trekkinglist')->name('page.trekkinglist');

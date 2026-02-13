@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="flex flex-col gap-3 w-full">
                                     <!-- Bigger Button -->
-                                    <a href="booking.php"
+                                    <a href="{{ route('book-trip',$data->uri) }}"
                                         class="w-full currsor-pointer text-center text-white bg-brand-400 hover:bg-brand-500 font-medium px-5 py-4 rounded-xl transition hover:bg-brand/90">
                                         Book Now </a>
                                     <div class="flex gap-4">
@@ -184,9 +184,9 @@
                     </div>
                     <!-- Actions Row -->
                     <div class="flex justify-between px-2 text-xs font-bold text-gray-500">
-                        <a href="plan-your-trip.php" class="flex items-center hover:text-brand-400">
+                        <a href="{{ route('plan-trip') }}" class="flex items-center hover:text-brand-400">
                             <i class="fas fa-sliders-h mr-2"></i>Plan Your Trip </a>
-                        <a href="#" class="flex items-center hover:text-brand-400">
+                        <a href="" class="flex items-center hover:text-brand-400">
                             <i class="fas fa-file-pdf mr-2"></i> Download PDF </a>
                     </div>
                 </div>
@@ -459,7 +459,7 @@
                                             <span class="sr-only">Info</span>
                                             <div>
                                                 <h3 class="font-medium">If the above {{ $data->trip_title }} itinerary does not meet your needs, we can design individualized travel plans based on your preferences and specifications.</h3>
-                                                <a href="customized-trip.php" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 mt-2
+                                                <a href="{{ route('customize-trip',$data->uri) }}" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 mt-2
                                                 font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm"> Customized Trip </a>
                                             </div>
                                         </div>
@@ -561,7 +561,7 @@
                                                         </div>
                                                         @if($row->availability == 'AVAILABLE')
                                                             <div class="col lg:ml-auto">
-                                                                <a href="booking.php" class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book Now</a>
+                                                                <a href="{{ route('book-trip',$data->uri) }}" class="cursor-pointer  group-hover:bg-brand-400 group-hover:text-white  text-brand-400 border border-brand-400 transition-colors font-medium rounded-xl text-sm  transition  px-4 py-2.5">Book Now</a>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -859,7 +859,7 @@
         <div class="relative bg-neutral-primary-soft border border-default rounded-xl shadow-sm  ">
             <!-- Modal header -->
             <div class="flex items-center justify-between border-b border-default p-4  ">
-                <h3 class="text-lg font-medium text-heading">Private Trip </h3>
+                <h3 class="text-lg font-medium text-heading">Private Trip of '{{ $data->trip_title }}' </h3>
                 <button type="button"
                     class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
                     data-modal-hide="inquiry">
@@ -872,31 +872,47 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="#">
+            <form action="{{ route('custom-trip-post') }}"  method="post">
+                @csrf
+                <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
+                <input type="hidden" name="type" value="private"/>
+                <input type="hidden" name="trip_id" value="{{ $data->id }}"/>
                 <div class="p-5">
                     <div class="grid gap-4 grid-cols-2 ">
                         <div class="col-span-2">
                             <input type="text" name="name" id="name"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Full Name*" required="">
+                                placeholder="Full Name*" required>
                         </div>
                         <div class="col-span-2">
                             <input type="email" name="email" id="namemaile"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="E-mail*" required="">
+                                placeholder="E-mail*" required>
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <input type="tel" name="phone" id="phone"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Mobile*" required="" min="10">
+                                placeholder="Mobile*" required min="10">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <input type="number" name="travellers" id="travellers"
+                            <input type="number" name="peoples" id="peoples"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="No of Travellers*" required="" min="1">
+                                placeholder="No of Travellers*" required min="1">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Trip Start Date</label>
+                            <input type="date" name="start_date" id="start_date"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Trip Start Date*" required min="{{ date('Y-m-d') }}">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Trip End Date</label>
+                            <input type="date" name="end_date" id="end_date"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Trip End Date*" required min="{{ date('Y-m-d') }}">
                         </div>
                         <div class="col-span-2">
-                            <textarea id="message" rows="4"
+                            <textarea id="message" rows="4" name="message"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Message*"></textarea>
                         </div>
@@ -918,8 +934,7 @@
         <div class="relative bg-neutral-primary-soft border border-default rounded-xl shadow-sm  ">
             <!-- Modal header -->
             <div class="flex items-center justify-between border-b border-default p-4  ">
-                <h3 class="text-lg font-medium text-heading">Tell your Friend About <spane class="text-brand-400">
-                        Everest Base Camp Trek</spane>
+                <h3 class="text-lg font-medium text-heading">Tell your Friend About <spane class="text-brand-400">{{ $data->trip_title }}</spane>
                 </h3>
                 <button type="button"
                     class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
@@ -933,26 +948,29 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="#">
+            <form action="{{ route('tell-friend-post') }}" method="post">
+                @csrf
+                <input type="hidden" id="g_recaptcha_response2" name="g_recaptcha_response"/>
+                <input type="hidden" name="trip_id" value="{{ $data->id }}"/>
                 <div class="p-5">
                     <div class="grid gap-4 grid-cols-2 ">
                         <div class="col-span-2">
                             <input type="text" name="name" id="name"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Full Name*" required="">
+                                placeholder="Full Name*" required>
                         </div>
                         <div class="col-span-2">
                             <input type="email" name="email" id="namemaile"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="E-mail*" required="">
+                                placeholder="Your E-mail*" required>
                         </div>
                         <div class="col-span-2">
                             <input type="femail" name="femail" id="namemaile"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Friend Email*" required="">
+                                placeholder="Friend's Email*" required>
                         </div>
                         <div class="col-span-2">
-                            <textarea id="message" rows="4"
+                            <textarea id="message" rows="4" name="message"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Message*"></textarea>
                         </div>
@@ -966,4 +984,24 @@
     </div>
 </div>
 <script src="{{ asset('theme-assets/js/trip-details.js') }}"></script>
+
+
+<script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
+<script>
+    grecaptcha.ready(function () {
+        function executeRecaptcha() {
+            grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
+                document.getElementById('g_recaptcha_response').value = token;
+                document.getElementById('g_recaptcha_response2').value = token;
+            });
+        }
+
+        // Initial execution of reCAPTCHA
+        executeRecaptcha();
+
+        // Refresh the reCAPTCHA token every 100 seconds (less than 2 minutes)
+        setInterval(executeRecaptcha, 900000);
+    });
+
+</script>
 @stop
