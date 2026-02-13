@@ -7,19 +7,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Settings\SettingModel;
 
-class AdminCustomizeTrip extends Mailable
+class AdminTripSuggestion extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $customize;
+    public $data;
     public $setting;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($customize)
+    public function __construct($data)
     {
-        $this->customize = $customize;
+        $this->data = $data;
         $this->setting = SettingModel::find(1);
     }
 
@@ -28,10 +28,10 @@ class AdminCustomizeTrip extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Customize Trip Request- '.$this->customize->title)
-            ->view('emails.admin-customize')
+        return $this->subject('New Trip Suggestion: {$this->data->title}')
+            ->view('emails.admin-suggestion')
             ->with([
-                'customize' => $this->customize,
+                'data' => $this->data,
                 'setting'   => $this->setting,
             ]);
     }

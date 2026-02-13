@@ -27,6 +27,9 @@ use App\Mail\AdminInquiryMail;
 use App\Models\Team\TeamModel;
 use App\Models\Posts\PostModel;
 use App\Mail\AdminCustomizeTrip;
+use App\Mail\UserCustomizeTrip;
+use App\Mail\AdminTripSuggestion;
+use App\Mail\UserTripSuggestion;
 use App\Mail\AdminTailorMadeMail;
 use App\Models\Travels\TripModel;
 use App\Models\Travels\TripBanner;
@@ -35,6 +38,7 @@ use App\Models\Posts\PostTypeModel;
 use App\Models\Travels\RegionModel;
 use App\Http\Controllers\Controller;
 use App\Models\Inquiry\BookingModel;
+use App\Models\Inquiry\SuggestionModel;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Inquiry\FlightDetails;
 use App\Models\Settings\SettingModel;
@@ -57,6 +61,7 @@ use App\Models\Destinations\DestinationModel;
 use App\Models\Destinations\DestinationBannerModel;
 use App\Models\Destinations\DestinationActivityrelModel;
 use App\Models\Posts\PostImageModel;
+use Illuminate\Support\Facades\Log;
 /******************* Sangam starts *****************/
 use App\Http\Controllers\HBLController;
 use App\Models\Inquiry\EnrollmentModel;
@@ -293,6 +298,11 @@ class FrontpageController extends Controller
 
 
     //  <! ---Booking a Trip Controller--- !>
+    public function book_trip($uri)
+    {
+        
+        return view('themes.default.booking');
+    }
     public function post_tripbooking(Request $request)
     {
         $setting = SettingModel::where('id', 1)->first();
@@ -591,18 +601,33 @@ class FrontpageController extends Controller
 
         return view('themes.default.plantrip',compact('trips'));
     }
+    public function customize_post($uri)
+    {
+        $trips = TripModel::where('uri', $uri)->first();
+        // dd($trips);
+
+        return view('themes.default.custom-trip',compact('trips'));
+    }
     public function custom_trip_post(Request $request)
     {
         $result = $this->getCaptcha($request->input('g_recaptcha_response'));
         if ($result->success == true) {
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'trip_id'  => 'required|exists:cl_trip_details,id',
                 'name'     => 'required|string|max:255',
                 'email'    => 'required|email|max:255',
                 'phone'    => 'required|string|max:20',
                 'peoples'  => 'required|integer|min:1',
                 'message'  => 'nullable|string',
+                'start_date'  => 'nullable|date',
+                'end_date'  => 'nullable|date|after_or_equal:start_date',
             ]);
+            if ($validator->fails()) {
+                return back()->with([
+                    'error' => true,
+                    'message' => $validator->errors()->first()
+                ])->withInput();
+            }
             $trip = TripModel::where('id', $request->trip_id)->first();
             if(!$trip)
             {
@@ -612,8 +637,8 @@ class FrontpageController extends Controller
                 ]);
             }
 
-            // dd($request->all(), $trip );
-            CustomizeModel::create([
+            dd($request->all(), $trip );
+            $customize = CustomizeModel::create([
                 'trip_id'       => $request->trip_id,
                 'title'         => $trip->trip_title,
                 'name'          => $request->name,
@@ -622,7 +647,77 @@ class FrontpageController extends Controller
                 'no_of_people'  => $request->peoples,
                 'comments'      => $request->message,
                 'type'          => $request->type,
+                'trip_start_date'  => $request->start_date,
+                'trip_end_date'    => $request->end_date,
             ]);
+            $setting = SettingModel::where('id', 1)->first();
+            return new AdminCustomizeTrip($customize);
+            // Mail::to($setting->email_primary)->send(new AdminCustomizeTrip($customize));
+
+            try {
+                return new UserCustomizeTrip($customize);
+                // Mail::to($customize->email)->send(new UserCustomizeTrip($customize));
+            } catch (\Exception $e) {
+                Log::warning('User email failed: ' . $e->getMessage());
+            }
+
+            return back()->with([
+                'success' => true,
+                'message' => 'Your request has been submitted successfully.'
+            ]);
+        } else {
+            return back()->with([
+                'error' => true,
+                'message' => 'You are robot.'
+            ]);
+        }
+    }
+    public function tell_friend_post(Request $request)
+    {
+        $result = $this->getCaptcha($request->input('g_recaptcha_response'));
+        if ($result->success == true) {
+            $validator = Validator::make($request->all(), [
+                'trip_id'  => 'required|exists:cl_trip_details,id',
+                'name'     => 'required|string|max:255',
+                'email'    => 'required|email|max:255',
+                'femail'   => 'required|email|max:255',
+                'message'  => 'nullable|string',
+            ]);
+            if ($validator->fails()) {
+                return back()->with([
+                    'error' => true,
+                    'message' => $validator->errors()->first()
+                ])->withInput();
+            }
+            $trip = TripModel::where('id', $request->trip_id)->first();
+            if(!$trip)
+            {
+                return back()->with([
+                    'error' => true,
+                    'message' => 'Trip Not Found.'
+                ]);
+            }
+
+            dd($request->all(), $trip );
+            $data = SuggestionModel::create([
+                'trip_id'       => $request->trip_id,
+                'title'         => $trip->trip_title,
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'femail'        => $request->femail,
+                'phone'         => $request->phone,
+                'comments'      => $request->message,
+            ]);
+            $setting = SettingModel::where('id', 1)->first();
+            // return new AdminTripSuggestion($data);
+            Mail::to($setting->email_primary)->send(new AdminTripSuggestion($data));
+
+            try {
+                return new UserTripSuggestion($data,$trip);
+                // Mail::to($data->femail)->send(new UserTripSuggestion($data,$trip));
+            } catch (\Exception $e) {
+                Log::warning('User email failed: ' . $e->getMessage());
+            }
 
             return back()->with([
                 'success' => true,
