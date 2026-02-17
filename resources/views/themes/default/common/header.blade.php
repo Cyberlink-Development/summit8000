@@ -4,10 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summit8000- Expedition Services</title>
+    <title>@yield('title')</title>
+    <meta name="keywords" content="@yield('meta_keyword')">
+    <meta name="description" content="@yield('meta_description')">
+
+    <meta property="og:title" content="@yield('title')">
+    <meta property="og:description" content="@yield('meta_description')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
     <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Flowbite & Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
@@ -31,6 +38,26 @@
         }
     </style>
     <!--------------- Toaster ends  -------------------->
+
+    {{-- GLOBAL ORGANIZATION SCHEMA --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Summit 8000",
+        "url": "https://summit8000.com",
+        "logo": "{{ asset('theme-assets/logo.svg') }}",
+        "image": "{{ asset('theme-assets/logo.svg') }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kathmandu",
+            "addressCountry": "NP"
+        }
+    }
+    </script>
+
+    {{-- Page Specific Schema --}}
+    @yield('schema')
 
 </head>
 
@@ -74,8 +101,7 @@
                     <ul
                         class="flex  items-center justify-between  space-x-2 text-base font-semibold text-gray-700 w-full">
                         <li>
-                            <a href="{{ url('/') }}"
-                                class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">
+                            <a href="{{ url('/') }}" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">
                                 Home</a>
                         </li>
                         <li>

@@ -1005,3 +1005,19 @@
 
 </script>
 @stop
+
+@section('schema')
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "TouristTrip",
+            "name": "{{ $data->trip_title }}",
+            "description": "{{ strip_tags($data->trip_content) }}",
+            "url": "{{ url()->current() }}",
+            "provider": {
+                "@type": "TravelAgency",
+                "name": "Summit 8000"
+            }
+        }
+    </script>
+@endsection

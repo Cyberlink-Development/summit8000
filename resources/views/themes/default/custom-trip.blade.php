@@ -1,4 +1,7 @@
 @extends('themes.default.common.master')
+@section('title', $trips->trip_title)
+@section('meta_keyword', $trips->meta_key)
+@section('meta_description', $trips->meta_description)
 @section('content')
 
 <section class="py-16 relative">
