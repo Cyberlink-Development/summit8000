@@ -23,7 +23,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                     @foreach($data as $row)
-                        <a href="{{ url('page/' . tripurl($row->uri)) }}" class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
+                        <a href="{{ route('trip.tripdetail',$row->uri) }}" class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                             <div class="relative h-64 overflow-hidden">
                                 <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail)  : asset('theme-assets/assets/trip/1.jpg')}}" alt="{{ $row->trip_title }}" loading="lazy" class="lazy-image w-full h-full object-cover">
                             </div>
@@ -39,7 +39,7 @@
                                 <h3 class="text-xl font-bold text-slate-900 mb-4">{{ $row->trip_title }}</h3>
                                 <div class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                     <span class="flex items-center gap-1 text-xs">
-                                        <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> Nepal
+                                        <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> {{ trip_destination_title($row->id) }}
                                     </span>
                                     <span class="flex items-center gap-1"><img src="{{asset('theme-assets/assets/icons/clock.svg')}}" class="h-4">
                                         {{ $row->duration }}
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="flex justify-between items-end">
                                     <div>
-                                        <p class="text-sm text-slate-400 font-medium">50 days from</p>
+                                        <p class="text-sm text-slate-400 font-medium"></p>
                                         <p class="text-xl font-bold text-slate-900">US$ {{ $row->price }}</p>
                                     </div>
                                     <button class="text-white bg-brand-400 hover:bg-brand-500  font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">

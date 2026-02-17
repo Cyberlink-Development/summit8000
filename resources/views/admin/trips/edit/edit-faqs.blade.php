@@ -28,8 +28,8 @@
                                 placeholder="" />
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="faq_content[]" value="{{ $row->content }}" class="form-control"
-                                placeholder="" />
+                            <!-- <input type="text" name="faq_content[]" value="{{ $row->content }}" class="form-control" placeholder="" /> -->
+                            <textarea name="faq_content[]" class=" form-control my-editor" placeholder="Content Goes Here"> {{ $row->content }} </textarea>
                         </div>
                         <div class="col-md-1"><button class="btn btn-danger delete-faq" faq-rowid="{{ $row->id }}"
                                 faq-data-id="{{ $loop->iteration }}"><i
@@ -46,13 +46,14 @@
                     <input type="hidden" name="faq_id[]" value="" />
                     <div class="col-md-1"><input type="number" name="faq_ordering[]" class="form-control"
                             placeholder="" /></div>
-                    <div class="col-md-3"><input type="text" name="faq_title[]" class="form-control" placeholder="" />
+                    <div class="col-md-3"><input type="text" name="faq_title[]" class="form-control" placeholder="Title" />
                     </div>
-                    <div class="col-md-7"><input type="text" name="faq_content[]" class="form-control" placeholder="" />
+                    <div class="col-md-7"><input type="text" name="faq_content[]" class="form-control" placeholder="Content Goes here" />
                     </div>
                     <div class="col-md-1"><button class="btn btn-danger delete-faq" faq-data-id="0"><i
                                 class="glyphicon glyphicon-trash"></i></button></div>
                 </div>
+                <br>
             </div>
         </div>
 

@@ -20,7 +20,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('theme-assets/assets/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('theme-assets/assets/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('theme-assets/assets/favicon/site.webmanifest') }}">
-    
+
     <!--------------- Toaster starts  -------------------->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
@@ -129,7 +129,7 @@
                                                 <ul class="space-y-5">
                                                     @foreach ($tripList as $item)
                                                         <li>
-                                                            <a href="{{ url('page/' . tripurl($item->uri)) }}"
+                                                            <a href="{{ route('trip.tripdetail',$item->uri) }}"
                                                                 class="text-sm font-medium text-gray-800 hover:text-brand-400 block transition-colors leading-snug">
                                                                 {{ $item->trip_title }}
                                                             </a>

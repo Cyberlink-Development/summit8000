@@ -782,11 +782,11 @@
 
                 <div class="sticky bottom-0 left-0 z-30 w-full h-16 bg-neutral-primary-soft border-t border-default">
                     <div class="grid h-full max-w-xl grid-cols-2 mx-auto font-medium items-center px-4 gap-5">
-                        <div>
-                            <a href="#departures"
-                                class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500  px-5 py-3 rounded-xl text-sm transition hover:bg-brand/90">
-                                Fixed Departures </a>
-                        </div>
+                        @if($schedules->count()>0)
+                            <div>
+                                <a href="#departures" class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500  px-5 py-3 rounded-xl text-sm transition hover:bg-brand/90"> Fixed Departures </a>
+                            </div>
+                        @endif
                         <div>
                             <button data-modal-target="inquiry" data-modal-toggle="inquiry"
                                 class="w-full text-brand-400 border border-brand-400 hover:bg-brand-100   rounded-xl text-sm  px-5 py-3 transition shadow-sm">
@@ -807,7 +807,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!--  -->
                             @foreach($similar_trips as $row)
-                                <a href="{{ url('page/' . tripurl($row->uri)) }}"
+                                <a href="{{ route('trip.tripdetail',$row->uri) }}"
                                     class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                                     <div class="relative h-64 overflow-hidden">
                                         <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/assets/trip/2.jpg')}}" alt="{{$row->trip_title}}" class="w-full h-full object-cover">
@@ -826,7 +826,7 @@
                                         <div
                                             class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                             <span class="flex items-center gap-1 text-xs">
-                                                <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> Nepal
+                                                <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> {{ trip_destination_title($row->id) }}
                                             </span>
                                             <span class="flex items-center gap-1">
                                                 <img src="{{asset('theme-assets/assets/icons/clock.svg')}}" class="h-4"> {{$row->duration}} </span>
@@ -835,7 +835,7 @@
                                         </div>
                                         <div class="flex justify-between items-end">
                                             <div>
-                                                <p class="text-sm text-slate-400 font-medium">33 days from</p>
+                                                <p class="text-sm text-slate-400 font-medium"></p>
                                                 <p class="text-xl font-bold text-slate-900">US$ {{$row->price}}</p>
                                             </div>
                                             <button class="text-white bg-brand-400 hover:bg-brand-500  font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">More Info</button>
