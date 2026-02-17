@@ -300,8 +300,10 @@ class FrontpageController extends Controller
     //  <! ---Booking a Trip Controller--- !>
     public function book_trip($uri)
     {
+        $trip = TripModel::where('uri',$uri)->first();
 
-        return view('themes.default.booking');
+        // dd($trip);
+        return view('themes.default.booking',compact('trip'));
     }
     public function post_tripbooking(Request $request)
     {
@@ -832,6 +834,19 @@ class FrontpageController extends Controller
             } else {
                 return back()->with('error', 'Please enter the number of days.');
             }
+        }
+    }
+    public function show_search_list(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $query = $request->trip_search;
+
+            $data = TripModel::when($query, function ($q) use ($query) {
+                $q->where('trip_title', 'LIKE', "%{$query}%")
+                ->orWhere('sub_title', 'LIKE', "%{$query}%");
+            })->take(6)->get();
+            // dd($data);
+            return view('themes.default.trip-searchlist', compact('data','query'));
         }
     }
 

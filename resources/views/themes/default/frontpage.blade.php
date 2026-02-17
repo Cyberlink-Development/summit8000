@@ -60,7 +60,7 @@
             </h1>
 
             <div class="pointer-events-auto w-full">
-                <form class="max-w-3xl mx-auto w-full px-4 sm:px-0">
+                <form action="{{ route('trip.search') }}" method="get" class="max-w-3xl mx-auto w-full px-4 sm:px-0">
                     <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -69,8 +69,8 @@
                                     d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <input type="search" id="search" class="block w-full h-[68px] p-4 ps-9 bg-white border-2 outline-0 text-heading text-sm rounded-xl focus:ring-blue-300 focus:border-blue-300 shadow-xs placeholder:text-base" placeholder="Search" required />
-                        <button type="button" class="absolute end-2 bottom-2 h-[54px] text-white bg-blue-400 hover:bg-blue-500 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-xl text-base px-4 py-1.5 focus:outline-none">Search</button>
+                        <input type="search" name="trip_search" id="search" class="block w-full h-[68px] p-4 ps-9 bg-white border-2 outline-0 text-heading text-sm rounded-xl focus:ring-blue-300 focus:border-blue-300 shadow-xs placeholder:text-base" placeholder="Search" required />
+                        <button type="submit" class="absolute end-2 bottom-2 h-[54px] text-white bg-blue-400 hover:bg-blue-500 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-xl text-base px-4 py-1.5 focus:outline-none">Search</button>
                     </div>
                 </form>
             </div>
