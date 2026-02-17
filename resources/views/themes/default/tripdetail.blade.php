@@ -154,8 +154,7 @@
                                 </div>
                                 <div>
                                     <!-- All Inclusive Price -->
-                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1"> All
-                                        Inclusive Price </p>
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1"> All Inclusive Price </p>
                                     <div class="flex items-baseline justify-start mb-2">
                                         <span id="price" class="text-4xl font-extrabold text-blue-600">${{$data->price}}</span>
                                         <span class="text-lg font-bold text-gray-500 ml-2">USD</span>

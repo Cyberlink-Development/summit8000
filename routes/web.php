@@ -64,10 +64,11 @@ Route::get('/get-trips', 'FrontendControllers\FrontpageController@getTrips')->na
 Route::any('book/{uri}.html', 'FrontendControllers\FrontpageController@showbooking')->name('page.booking');
 Route::get('booking-success', 'FrontendControllers\FrontpageController@showbookingsuccess')->name('page.bookingsuccess');
 // Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetail')->name('page.tripdetail');
-Route::get('trips/{uri}', 'FrontendControllers\FrontpageController@tripdetail')->name('trip.tripdetail');
+Route::get('trip/{uri}', 'FrontendControllers\FrontpageController@tripdetail')->name('trip.tripdetail');
 Route::get('activity/{uri}.html', 'FrontendControllers\FrontpageController@travellist')->name('page.activitydetail');
 Route::get('region/{uri}.html', 'FrontendControllers\FrontpageController@regionlist')->name('page.regionlist');
 // Route::get('tours', 'FrontendControllers\FrontpageController@destinationlist')->name('page.destinationlist');
+Route::get('/trips/search', 'FrontendControllers\FrontpageController@show_search_list')->name('trip.search');
 Route::any('search-trip', 'FrontendControllers\FrontpageController@show_search_form')->name('search-trip');
 Route::post('store/trip/tailormade', 'FrontendControllers\FrontpageController@store_tailormade')->name('tailormade');
 Route::post('store/trip/filmmaking', 'FrontendControllers\FrontpageController@store_filmmaking')->name('filmmaking');

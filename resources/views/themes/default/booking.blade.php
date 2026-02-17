@@ -11,9 +11,11 @@
         <div class="mb-8">
             <div class="flex justify-between items-start">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">Everest Base Camp Short Trek -
-                        14 days</h1>
-                    <p class="text-brand-400 text-sm font-semibold tracking-wide uppercase">02 Jan to 15 Jan, 2026 |
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">
+                        {{ $trip->trip_title }}
+                    </h1>
+                    <p class="text-brand-400 text-sm font-semibold tracking-wide uppercase">
+                        {{ date('M,Y') }} |
                         <span id="header-traveler-count">1</span> People
                     </p>
                 </div>
@@ -1257,12 +1259,12 @@
                                 <div>
                                     <h3 class="text-sm font-bold text-gray-800">Trip Price</h3>
                                     <p class="text-xs text-gray-600 font-medium">US $ <span
-                                            id="base-price-display">1525</span> x <span
+                                            id="base-price-display">{{ $trip->price }}</span> x <span
                                             id="traveler-count-summary">1</span>
                                     </p>
                                 </div>
                                 <span class="text-sm font-bold text-blue-600">US$ <span
-                                        id="trip-total-display">1525</span></span>
+                                        id="trip-total-display">{{ $trip->price }}</span></span>
                             </div>
 
                             <!-- Deposit Amount Row -->
@@ -1272,7 +1274,7 @@
                                     <p class="text-xs text-gray-600 font-medium">20% of total price</p>
                                 </div>
                                 <span class="text-sm font-bold text-blue-600">US$ <span
-                                        id="deposit-amount">305.00</span></span>
+                                        id="deposit-amount">{{ ($trip->price)* .2 }}</span></span>
                             </div>
 
                             <!-- Bank Charge Row -->
