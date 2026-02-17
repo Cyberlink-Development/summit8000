@@ -63,7 +63,8 @@ Route::get('book-now', 'FrontendControllers\FrontpageController@book_now')->name
 Route::get('/get-trips', 'FrontendControllers\FrontpageController@getTrips')->name('getTripsActivity');
 Route::any('book/{uri}.html', 'FrontendControllers\FrontpageController@showbooking')->name('page.booking');
 Route::get('booking-success', 'FrontendControllers\FrontpageController@showbookingsuccess')->name('page.bookingsuccess');
-Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetail')->name('page.tripdetail');
+// Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetail')->name('page.tripdetail');
+Route::get('trips/{uri}', 'FrontendControllers\FrontpageController@tripdetail')->name('trip.tripdetail');
 Route::get('activity/{uri}.html', 'FrontendControllers\FrontpageController@travellist')->name('page.activitydetail');
 Route::get('region/{uri}.html', 'FrontendControllers\FrontpageController@regionlist')->name('page.regionlist');
 // Route::get('tours', 'FrontendControllers\FrontpageController@destinationlist')->name('page.destinationlist');

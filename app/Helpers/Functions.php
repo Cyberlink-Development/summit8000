@@ -245,7 +245,18 @@ function tripurl($uri)
     }
     return $data->uri . '.html';
 }
+function trip_destination_title($tripId)
+{
+    if (!$tripId) {
+        return null;
+    }
 
+    return TripModel::where('id', $tripId)
+        ->with('destinations')
+        ->first()
+        ?->destinations()
+        ->value('title');
+}
 
 function trip_byactivities($activity_id)
 {

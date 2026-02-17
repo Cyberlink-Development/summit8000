@@ -63,7 +63,7 @@
                     <ul class="space-y-4 text-sm text-gray-300">
                         @foreach($best_sellers as $row)
                             <li>
-                                <a href="{{ url('page/'.tripurl($row->uri)) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
+                                <a href="{{ route('trip.tripdetail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -74,7 +74,7 @@
                     <ul class="space-y-4 text-sm text-gray-300">
                         @foreach($luxury_tirps as $row)
                             <li>
-                                <a href="{{ url('page/'.tripurl($row->uri)) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
+                                <a href="{{ route('trip.tripdetail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
                             </li>
                         @endforeach
                     </ul>
