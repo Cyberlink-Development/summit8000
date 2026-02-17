@@ -1,5 +1,7 @@
 @extends('themes.default.common.master')
-@section('title', 'Expedition List')
+@section('title', $item->title)
+@section('meta_keyword', $item->meta_key)
+@section('meta_description', $item->meta_description)
 @section('content')
 
     <!-- Hero Section -->
@@ -71,3 +73,19 @@
     </section>
 
 @stop
+
+@section('schema')
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "TouristTrip",
+        "name": "{{ $item->title }}",
+        "description": "{{ strip_tags($item->content) }}",
+        "url": "{{ url()->current() }}",
+        "provider": {
+            "@type": "TravelAgency",
+            "name": "Summit 8000"
+        }
+        }
+    </script>
+@endsection

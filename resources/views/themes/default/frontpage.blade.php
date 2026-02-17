@@ -1,4 +1,7 @@
 @extends('themes.default.common.master')
+@section('title', $setting->site_name)
+@section('meta_keyword', $setting->meta_key)
+@section('meta_description', $setting->meta_description)
 @section('content')
 
 <!-- hero section -->
