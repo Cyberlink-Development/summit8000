@@ -245,7 +245,7 @@ class FrontpageController extends Controller
 
         $setting = SettingModel::where('id',1)->first();
 
-        // dd($data,$similar_trips);
+        // dd($data,$activity);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
             'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri'));
