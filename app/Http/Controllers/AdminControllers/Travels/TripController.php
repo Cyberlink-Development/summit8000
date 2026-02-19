@@ -38,21 +38,22 @@ class TripController extends Controller
      */
     public function index($training = null)
     {
-        if ($training) {
-            $category = ActivityModel::where('activity_parent', 'package')->get();
 
-            $data = $category->flatMap(function ($cat) {
-                return $cat->trips; // Ensure that 'trips' is being returned
-            });
-            return view('admin.training-package.index', compact('data'));
-        } else {
-            $category = ActivityModel::where('activity_parent', '!=', 'package')->get();
+        $category = ActivityModel::where('activity_parent', '!=', 'package')->get();
 
-            $data = $category->flatMap(function ($cat) {
-                return $cat->trips; // Ensure that 'trips' is being returned
-            })->sortByDesc('ordering')->values();
-            return view('admin.trips.index', compact('data'));
-        }
+        $data = $category->flatMap(function ($cat) {
+            return $cat->trips; // Ensure that 'trips' is being returned
+        })->sortByDesc('ordering')->values();
+        // dd($data);
+        return view('admin.trips.index', compact('data'));
+
+    }
+    public function alltrips()
+    {
+        $data = TripModel::orderBy('ordering', 'desc')->get();
+        // dd($data);
+        return view('admin.trips.index', compact('data'));
+
     }
 
     /**
@@ -111,6 +112,9 @@ class TripController extends Controller
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title',
+                'trip_type' => 'required',
+                'destination' => 'required|array|min:1',
+                'activity' => 'required|array|min:1',
 
             ]);
             if ($validator->fails()) {
@@ -119,7 +123,6 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
-
 
             $data = $request->all();
 
@@ -500,6 +503,9 @@ class TripController extends Controller
             // dd('test', $request->all());
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
+                'trip_type' => 'required',
+                'destination' => 'required|array|min:1',
+                'activity' => 'required|array|min:1',
 
             ]);
             if ($validator->fails()) {

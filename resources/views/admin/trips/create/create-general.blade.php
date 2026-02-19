@@ -10,7 +10,7 @@
                     <div class="col-lg-12">
                         <div class="bs-component">
                             <input type="text" id="trip_title" name="trip_title" class="form-control"
-                                placeholder="Trip Title" value="{{ old('trip_title') }}" />
+                                placeholder="Trip Title" value="{{ old('trip_title') }}" required/>
                             <input type="hidden" id="uri" name="uri" value="" />
                         </div>
                     </div>
@@ -262,15 +262,40 @@
     <div class="col-md-4">
         <div class="admin-form">
             <!-- // -->
+             <div class="sid_bvijay mb10">
+                <h4> Destinations </h4>
+                <div class="hd_show_con">
+                    <div class="tab-content mb15">
+                        <div id="tab1" class="tab-pane active">
+                            @if ($destinations->count() > 0)
+                                <ul class="ctgor">
+                                    @foreach ($destinations as $row)
+                                        <li>
+                                            <label class="option">
+                                                <input type="radio" name="destination[]"
+                                                    value="{{ $row->id }}"
+                                                    @if (is_array(old('destination')) && in_array($row->id, old('destination'))) checked @endif required />
+                                                <span class="checkbox"></span> {{ $row->title }}
+                                            </label>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="sid_bvijay mb10">
                 <h4> Trip Type </h4>
                 <div class="hd_show_con">
-                    <select class="form-control onchange-select" name="trip_type">
-                        <option value="0"> Select Trip Type </option>
+                    <select class="form-control onchange-select" name="trip_type" required>
+                        <option value="" selected disabled> Select Trip Type </option>
                         @foreach ($trip_type as $row)
-                            @if($row->trip_type != 'Package')
+                            @if($row->id != 3)
                                 <option value="{{ $row->id }}">{{ $row->trip_type }}</option>
+                            @else
+                                <option value="{{ $row->id }}">Tours</option>
                             @endif
                         @endforeach
                     </select>
@@ -326,29 +351,7 @@
             */
             ?>
 
-            <div class="sid_bvijay mb10">
-                <h4> Destinations </h4>
-                <div class="hd_show_con">
-                    <div class="tab-content mb15">
-                        <div id="tab1" class="tab-pane active">
-                            @if ($destinations->count() > 0)
-                                <ul class="ctgor">
-                                    @foreach ($destinations as $row)
-                                        <li>
-                                            <label class="option">
-                                                <input type="radio" name="destination[]"
-                                                    value="{{ $row->id }}"
-                                                    @if (is_array(old('destination')) && in_array($row->id, old('destination'))) checked @endif />
-                                                <span class="checkbox"></span> {{ $row->title }}
-                                            </label>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="onchange 1">
                 <div class="sid_bvijay mb10">
                     <h4> Trekking </h4>
@@ -365,7 +368,7 @@
                                             <li>
                                                 <label class="option">
                                                     <input type="radio" name="activity[]"
-                                                        value="{{ $row->id }}">
+                                                        value="{{ $row->id }}" required>
                                                     <span class="checkbox"></span> {{ $row->title }}
                                                 </label>
                                             </li>
@@ -407,7 +410,7 @@
             </div>
             <div class="onchange 3">
                 <div class="sid_bvijay mb10">
-                    <h4> Experiences </h4>
+                    <h4> Tours </h4>
                     <div class="hd_show_con">
                         <!--<div class=" has-feedback has-search">-->
                         <!--     <input class="category-search1 form-control" type="text" placeholder="Search.."> -->

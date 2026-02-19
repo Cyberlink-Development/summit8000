@@ -121,6 +121,7 @@ Route::middleware(['auth'])->group(function () {
         'admin.faq' => 'AdminControllers\Faqs\FaqController',
 
     ]);
+    Route::get('admin/alltrips','AdminControllers\Travels\TripController@alltrips')->name('admin.trip.all');
     Route::get('trip-customize','AdminControllers\Inquiry\TripCustomizeController@index')->name('admin.trip.customize');
     Route::get('trip-plan','AdminControllers\Inquiry\TripCustomizeController@showplan')->name('admin.trip.plan');
     Route::get('trip-private','AdminControllers\Inquiry\TripCustomizeController@showprivate')->name('admin.trip.private');

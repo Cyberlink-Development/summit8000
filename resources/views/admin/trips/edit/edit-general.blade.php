@@ -10,7 +10,7 @@
                     <div class="col-lg-12">
                         <div class="bs-component">
                             <input type="text" id="trip_title" name="trip_title" class="form-control"
-                                value="{{ $data->trip_title }}" placeholder="Trip Title" />
+                                value="{{ $data->trip_title }}" placeholder="Trip Title" required/>
                             <input type="hidden" id="uri" name="uri" value="{{ $data->uri }}" />
                         </div>
                     </div>
@@ -302,23 +302,6 @@
     <div class="col-md-4">
         <div class="admin-form">
 
-            <div class="sid_bvijay mb10">
-                <h4> Trip Type </h4>
-                <div class="hd_show_con">
-                    <select class="form-control onchange-select" name="trip_type">
-                        <option value="0"> Select Trip Type </option>
-                        @if ($trip_type->count(0 > 0))
-                            @foreach ($trip_type as $row)
-                                @if($row->trip_type != 'Package')
-                                    <option value="{{ $row->id }}" @if ($data->trip_type == $row->id) selected @endif>
-                                        {{ $row->trip_type }}
-                                    </option>
-                                @endif
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
-            </div>
             <?php /*
      <div class="sid_bvijay mb10 ">
         <h4> Regions </h4>
@@ -383,7 +366,7 @@
                                             <label class="option">
                                                 <input type="radio" name="destination[]"
                                                     value="{{ $row->id }}"
-                                                    {{ in_array($row->id, $checked_destinations) ? 'checked' : '' }}>
+                                                    {{ in_array($row->id, $checked_destinations) ? 'checked' : '' }} required>
                                                 <span class="checkbox"></span> {{ $row->title }}
                                             </label>
                                         </li>
@@ -395,6 +378,27 @@
                 </div>
             </div>
 
+            <div class="sid_bvijay mb10">
+                <h4> Trip Type </h4>
+                <div class="hd_show_con">
+                    <select class="form-control onchange-select" name="trip_type" required>
+                        <option value="" disabled> Select Trip Type </option>
+                        @if ($trip_type->count(0 > 0))
+                            @foreach ($trip_type as $row)
+                                @if($row->id != 3)
+                                    <option value="{{ $row->id }}" @if ($data->trip_type == $row->id) selected @endif>
+                                        {{ $row->trip_type }}
+                                    </option>
+                                @else
+                                    <option value="{{ $row->id }}" @if ($data->trip_type == $row->id) selected @endif>
+                                        Tours
+                                    </option>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
             <div class="sid_bvijay mb10 onchange 1">
                 <h4> Trekking </h4>
                 <div class="hd_show_con">
@@ -410,7 +414,7 @@
                                         <li>
                                             <label class="option">
                                                 <input type="radio" name="activity[]" value="{{ $row->id }}"
-                                                    {{ in_array($row->id, $checked_activities) ? 'checked' : '' }}>
+                                                    {{ in_array($row->id, $checked_activities) ? 'checked' : '' }} required>
                                                 <span class="checkbox"></span> {{ $row->title }}
                                             </label>
                                         </li>
@@ -448,7 +452,7 @@
                 </div>
             </div>
             <div class="sid_bvijay mb10 onchange 3">
-                <h4> Experiences </h4>
+                <h4> Tours </h4>
                 <div class="hd_show_con">
                     <!--<div class=" has-feedback has-search">-->
                     <!--     <input class="category-search1 form-control" type="text" placeholder="Search.."> -->
