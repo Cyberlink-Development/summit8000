@@ -185,7 +185,7 @@
                     <div class="flex justify-between px-2 text-xs font-bold text-gray-500">
                         <a href="{{ route('plan-trip') }}" class="flex items-center hover:text-brand-400">
                             <i class="fas fa-sliders-h mr-2"></i>Plan Your Trip </a>
-                        <a href="" class="flex items-center hover:text-brand-400">
+                        <a href="{{ route('trip.download', $data->uri) }}" class="flex items-center hover:text-brand-400" target="_blank">
                             <i class="fas fa-file-pdf mr-2"></i> Download PDF </a>
                     </div>
                 </div>
@@ -589,7 +589,7 @@
 
                                             <a href="{{ asset('uploads/original/'.$data->trip_map) }}"
                                             download class="text-gray-500 border px-4 py-1.5 rounded-md text-xs flex items-center hover:bg-brand-400 hover:text-white hover:border-brand-400">
-                                                <i class="fas fa-download mr-2"></i> Download
+                                                <i class="fas fa-download mr-2"></i> Download Route Map
                                             </a>
                                         </div>
                                         <div class="rounded-xl overflow-hidden border  aspect-video">

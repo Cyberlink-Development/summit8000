@@ -27,17 +27,21 @@
                         <p class="text-sm">Get our latest articles and promotions straight to your inbox</p>
                     </div>
                     <!-- Input + Button -->
-                    <div class="flex w-full sm:w-auto">
-                        <input type="email" placeholder="Enter your email" required class="w-full sm:w-64 rounded-l-xl bg-white/90 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400" />
+                    <form action="{{ route('subscribe') }}"  method="post">
+                        <div class="flex w-full sm:w-auto">
+                            @csrf
+                            <input type="hidden" id="g_recaptcha_response3" name="g_recaptcha_response3"/>
+                            <input type="email" name="email" placeholder="Enter your email*" required class="w-full sm:w-64 rounded-l-xl bg-white/90 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400" />
 
-                        <button class="flex items-center gap-2 rounded-r-xl bg-brand-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 hover:shadow-lg hover:shadow-brand-400/30 focus:outline-none focus:ring-2 focus:ring-brand-400">
-                            Subscribe
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </button>
-                    </div>
+                            <button type="submit" class="flex items-center gap-2 rounded-r-xl bg-brand-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 hover:shadow-lg hover:shadow-brand-400/30 focus:outline-none focus:ring-2 focus:ring-brand-400">
+                                Subscribe
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -233,6 +237,24 @@
             </p>
         </div>
     </div>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
+<script>
+    grecaptcha.ready(function () {
+        function executeRecaptcha() {
+            grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
+                document.getElementById('g_recaptcha_response3').value = token;
+            });
+        }
+
+        // Initial execution of reCAPTCHA
+        executeRecaptcha();
+
+        // Refresh the reCAPTCHA token every 100 seconds (less than 2 minutes)
+        setInterval(executeRecaptcha, 900000);
+    });
+
+</script>
 </footer>
 
 </body>

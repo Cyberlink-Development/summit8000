@@ -62,6 +62,7 @@ use App\Models\Destinations\DestinationBannerModel;
 use App\Models\Destinations\DestinationActivityrelModel;
 use App\Models\Posts\PostImageModel;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 /******************* Sangam starts *****************/
 use App\Http\Controllers\HBLController;
 use App\Models\Inquiry\EnrollmentModel;
@@ -488,7 +489,47 @@ class FrontpageController extends Controller
         }
     }
 
+    public function downloadPdf($uri)
+    {
+        $trip = TripModel::where('uri', $uri)->firstOrFail();
+        $photos = TripGearModel::where('trip_detail_id', $trip->id)->where('thumbnail', '!=', 'NULL')->orderBy('ordering', 'desc')->take('4')->get();
+        $itinerary = $trip->itineraries()->orderBy('ordering', 'asc')->get();
+        $cost_includes = CostIncludesModel::where('trip_detail_id', $trip->id)->orderBy('ordering', 'asc')->get();
+        $cost_excludes = CostExcludesModel::where('trip_detail_id', $trip->id)->orderBy('ordering', 'asc')->get();
+
+        $pdf = Pdf::loadView('themes.default.trip-pdf', compact('trip','photos','itinerary','cost_includes','cost_excludes'));
+
+        return $pdf->stream($trip->uri . '.pdf');
+    }
+
     public function subscribe(Request $request)
+    {
+        $g_recaptcha_response = $request->input('g_recaptcha_response3');
+        $result = $this->getCaptcha($g_recaptcha_response);
+        if ($result->success == true) {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+
+            if ($request->isMethod('post')) {
+                // dd($request->all());
+                Subscriber::create([
+                    'email' => $request->email
+                ]);
+
+                return back()->with([
+                    'success' => true,
+                    'message' => 'Subscribed Successfully!'
+                ]);
+            }
+        } else {
+            return back()->with([
+                'error' => true,
+                'message' => 'Something went wrong. Please Try Again!'
+            ]);
+        }
+    }
+    public function subscribe_old(Request $request)
     {
         // $g_recaptcha_response = $request->input('g_recaptcha_response');
         // $result = $this->getCaptcha($g_recaptcha_response);
