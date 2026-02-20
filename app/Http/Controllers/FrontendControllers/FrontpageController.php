@@ -94,11 +94,11 @@ class FrontpageController extends Controller
         $best_seller = TripModel::where(['trip_of_the_month' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
         $about = PostTypeModel::where('id' , 22)->first();
         $luxury_tirps = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
-        $reviews = TripReview::where('status', 1)->get();
+        $reviews = TripReview::where('status', 1)->latest()->take(3)->get();
         $blog = PostTypeModel::where('id' , 33)->first();
         $blogs = PostModel::where('post_type' , $blog->id)->latest()->take(3)->get();
         $homebrief = HomeBriefModel::where('id',1)->first();
-        // dd($homebrief);
+        // dd($reviews);
         return view('themes.default.frontpage', compact('banners','allActivities','best_seller','about','luxury_tirps','blog','blogs','reviews','homebrief'));
     }
 
@@ -241,14 +241,13 @@ class FrontpageController extends Controller
         }
         $activity = TripModel::find($data->id)->activities()->first();
         $destinations = TripModel::find($data->id)->destinations()->first();
-        // $activity = TripModel::find($data->id)->activities()->get();
-
         $setting = SettingModel::where('id',1)->first();
+        $reviews = TripReview::where('status', 1)->where('trip_id',$data->id)->get();
 
-        // dd($data,$activity);
+        // dd($data,$reviews);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri'));
+            'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri','reviews'));
     }
 
     //<------------------------------------------Activity Frontend---------------------------------------------->
@@ -765,6 +764,55 @@ class FrontpageController extends Controller
             return back()->with([
                 'success' => true,
                 'message' => 'Your request has been submitted successfully.'
+            ]);
+        } else {
+            return back()->with([
+                'error' => true,
+                'message' => 'You are robot.'
+            ]);
+        }
+    }
+    public function review_post(Request $request)
+    {
+        $result = $this->getCaptcha($request->input('g_recaptcha_response3'));
+        if ($result->success == true) {
+            $validator = Validator::make($request->all(), [
+                'trip_id'  => 'required|exists:cl_trip_details,id',
+                'name'     => 'required|string|max:255',
+                'review_title' => 'required|string',
+                'email'    => 'required|email|max:255',
+                'rating'   => 'required|integer',
+                'review_message'  => 'nullable|string',
+            ]);
+            if ($validator->fails()) {
+                return back()->with([
+                    'error' => true,
+                    'message' => $validator->errors()->first()
+                ])->withInput();
+            }
+            $trip = TripModel::where('id', $request->trip_id)->first();
+            if(!$trip)
+            {
+                return back()->with([
+                    'error' => true,
+                    'message' => 'Trip Not Found.'
+                ]);
+            }
+
+            // dd($request->all(), $trip );
+            TripReview::create([
+                'trip_id'       => $request->trip_id,
+                'trip_title'    => $trip->trip_title,
+                'title'         => $request->review_title,
+                'full_name'     => $request->name,
+                'rating'        => $request->rating,
+                'email'         => $request->email,
+                'message'       => $request->review_message,
+            ]);
+
+            return back()->with([
+                'success' => true,
+                'message' => 'Review submitted successfully.'
             ]);
         } else {
             return back()->with([
