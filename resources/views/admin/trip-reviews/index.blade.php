@@ -12,12 +12,12 @@
         		 <div class="table-responsive mhn20 mvn15">
         		<table class="table admin-form table-striped dataTable" id="datatable3">
         			<thead>
-        				<tr class="bg-light">  
+        				<tr class="bg-light">
         					<th class="">SN</th>
         					<th class="">Trip</th>
-        					<th class="">Details</th>						
-        					<th class="">Review</th> 
-        					<th class="">Status <br><small>Green will be shown</small></th>  
+        					<th class="">Details</th>
+        					<th class="">Review</th>
+        					<th class="">Status <br><small>Green will be shown</small></th>
         					<th class="text-left">Action</th>
         				</tr>
         			</thead>
@@ -28,11 +28,12 @@
                             <td class="">{{$key+=1}}</td>
         					<td class="">{{$row->trips ? $row->trips->trip_title : 'No Trip Selected'}}</td>
         					<td class="">
-                    {{ ucfirst($row->full_name)}} - {{ $row->country }} <br>
-                    @if($row->image)<img src="{{asset('uploads/reviews/'.$row->image)}}" width="100px">@endif  </td>						
-        					
+                                {{ ucfirst($row->full_name)}} - {{ $row->country }} <br>
+                                <!-- @if($row->image)<img src="{{asset('uploads/reviews/'.$row->image)}}" width="100px">@endif -->
+                            </td>
+
         					<td class="">{!! \Illuminate\Support\Str::limit($row->message,50,'...') !!}</td>
-        					
+
         					<td class="">
                                 <form method="post" action="{{route('review-status')}}">
                                     <input type="hidden" name="status" value="{{$row->id}}">
@@ -56,7 +57,7 @@
         						<a href="{{route('delete-trip-review',$row->id)}}" onclick="return confirm('Confirm Delete?')" class="btn-btn-danger"> Delete</a></span>
         					</td>
                           </tr>
-                            
+
                         @endforeach
         				@endif
         			</tbody>
@@ -93,11 +94,11 @@ jQuery(document).ready(function() {
     $.ajax({
       type:'DELETE',
       url:"{{url('admin/teams') . '/'}}" + id,
-      data:{_token:csrf},    
-      success:function(data){ 
+      data:{_token:csrf},
+      success:function(data){
         $('tbody tr.id' + id ).remove();
       },
-      error:function(data){       
+      error:function(data){
        alert('Error occurred!');
      }
    });

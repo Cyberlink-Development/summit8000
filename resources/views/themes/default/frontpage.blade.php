@@ -253,7 +253,7 @@
                                     <i class="fa fa-star text-yellow-400 text-xs"></i>
                                     <i class="fa fa-star text-yellow-400 text-xs"></i>
                                     <i class="fa fa-star-half text-yellow-400 text-xs"></i>
-                                    <span class="text-slate-400 text-xs ml-1">1547 reviews</span>
+                                    <span class="text-slate-400 text-xs ml-1"></span>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-900 mb-4">{{ $row->trip_title }}</h3>
                                 <div
@@ -322,134 +322,72 @@
 @endif
 
 <!-- section -->
-<section class="bg-brand-800 pattern-dark relative pt-16 pb-32 px-4 md:px-8">
-    <div class="container">
-        <div class=" flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-8">
-            <div>
-                <h3 class="text-brand-400 text-sm font-semibold flex items-center gap-2 mb-4">Testimonials
-                    <span class="w-8 h-[2px] bg-brand-400"></span>
-                </h3>
-                <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight"> Stories from Happy Travellers</h1>
-            </div>
-            <!-- Actions -->
-            <div>
-                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                    <a href="{{ route('reviews') }}" class="text-center bg-brand-400 hover:bg-brand-500 text-white font-medium rounded-xl px-5 py-2.5 shadow-sm transition">
-                        All Stories
-                    </a>
-
-                    <!-- <select class="w-full sm:w-auto px-5 py-2.5 pr-8 block text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-400 outline-none">
-                        <option>Select Month, Year</option>
-                        <option>Dec, 2025</option>
-                        <option>Jan, 2026</option>
-                        <option>Feb, 2026</option>
-                    </select> -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Table -->
-        <div class="relative bg-transparent  rounded-2xl shadow-none   overflow-hidden overflow-hidden -mb-96">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-50 p-6 rounded-2xl border  relative overflow-hidden">
-                    <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                    <h3 class="font-bold text-xl mb-4 pr-5 text-brand-900">Everest Base Camp – An Unforgettable Himalayan Journey</h3>
-                    <div class="flex items-center text-yellow-400 text-sm mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                    </div>
-                    <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                        <p>My husband (52 years old) and I (50 years old) completed the Everest Base Camp Trek from
-                            April 6 to April 18. The weather was mostly clear, though we experienced some light snow
-                            around Dingboche. Despite the challenges, the views of Everest, Nuptse, and Ama Dablam were
-                            breathtaking and made every step worthwhile.</p>
-                        <p>Our guide, <b>Pemba Sherpa</b>, played a vital role in our success. He was extremely caring,
-                            knowledgeable, and always attentive to our pace and well-being. His encouragement and
-                            positive attitude kept our spirits high throughout the trek. </p>
-                    </div>
-                    <div class="mt-8 flex items-center">
-                        <div
-                            class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                            S</div>
-                        <div class="ml-4">
-                            <p class="text-sm font-bold">Mrs. Susan Miller</p>
-                            <p class="text-xs text-gray-400 uppercase">20th April 2025</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-2xl border  relative overflow-hidden">
-                    <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                    <h3 class="font-bold text-xl mb-4 pr-5 text-brand-900">Everest Base Camp – A Truly Rewarding Trek
+@if($reviews->count() > 0)
+    <section class="bg-brand-800 pattern-dark relative pt-16 pb-32 px-4 md:px-8">
+        <div class="container">
+            <div class=" flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-8">
+                <div>
+                    <h3 class="text-brand-400 text-sm font-semibold flex items-center gap-2 mb-4">Testimonials
+                        <span class="w-8 h-[2px] bg-brand-400"></span>
                     </h3>
-                    <div class="flex items-center text-yellow-400 text-sm mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                    </div>
-                    <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                        <p>I (45 years old) joined the Everest Base Camp Trek from March 22 to April 3 as a solo
-                            traveler. While the trail was busy in some sections, the overall experience was incredibly
-                            rewarding. The gradual ascent allowed proper acclimatization, and the mountain scenery was
-                            beyond my expectations.</p>
-                        <p>I am especially grateful to our guide, <b>Lakpa Tamang</b>, whose professionalism and calm
-                            demeanor made the trek smooth and enjoyable. He was always ready to help and share insights
-                            about local culture and the region. </p>
-                    </div>
-                    <div class="mt-8 flex items-center">
-                        <div
-                            class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                            D</div>
-                        <div class="ml-4">
-                            <p class="text-sm font-bold">Mr. David Thompson</p>
-                            <p class="text-xs text-gray-400 uppercase">30th October 2025</p>
-                        </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight"> Stories from Happy Travellers</h1>
+                </div>
+                <!-- Actions -->
+                <div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                        <a href="{{ route('reviews') }}" class="text-center bg-brand-400 hover:bg-brand-500 text-white font-medium rounded-xl px-5 py-2.5 shadow-sm transition">
+                            All Stories
+                        </a>
+
+                        <!-- <select class="w-full sm:w-auto px-5 py-2.5 pr-8 block text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-400 outline-none">
+                            <option>Select Month, Year</option>
+                            <option>Dec, 2025</option>
+                            <option>Jan, 2026</option>
+                            <option>Feb, 2026</option>
+                        </select> -->
                     </div>
                 </div>
-
-                <div class="bg-gray-50 p-6 rounded-2xl border relative overflow-hidden">
-                    <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                    <h3 class="font-bold text-xl mb-4 pr-5 text-brand-900">Everest Base Camp – An Unforgettable
-                        Himalayan Journey</h3>
-                    <div class="flex items-center text-yellow-400 text-sm mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                    </div>
-                    <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                        <p>My husband (52 years old) and I (50 years old) completed the Everest Base Camp Trek from
-                            April 6 to April 18. The weather was mostly clear, though we experienced some light snow
-                            around Dingboche. Despite the challenges, the views of Everest, Nuptse, and Ama Dablam were
-                            breathtaking and made every step worthwhile.</p>
-                        <p>Our guide, <b>Pemba Sherpa</b>, played a vital role in our success. He was extremely caring,
-                            knowledgeable, and always attentive to our pace and well-being. His encouragement and
-                            positive attitude kept our spirits high throughout the trek. </p>
-                    </div>
-                    <div class="mt-8 flex items-center">
-                        <div
-                            class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                            S</div>
-                        <div class="ml-4">
-                            <p class="text-sm font-bold">Mrs. Susan Miller</p>
-                            <p class="text-xs text-gray-400 uppercase">20th April 2025</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
 
-    </div>
-</section>
+            <!-- Table -->
+            <div class="relative bg-transparent  rounded-2xl shadow-none   overflow-hidden overflow-hidden -mb-96">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($reviews as $review)
+                        <div class="bg-gray-50 p-6 rounded-2xl border  relative overflow-hidden">
+                            <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
+                            <h3 class="font-bold text-xl mb-4 pr-5 text-brand-900">
+                            @if($review->trip_title)
+                                {{ $review->trip_title }} -
+                            @endif
+                            {{ $review->title }}</h3>
+                            <div class="flex items-center text-yellow-400 text-sm mb-4">
+                                @for($i=0 ; $i<$review->rating ; $i++)
+                                    <i class="fas fa-star"></i>
+                                @endfor
+                                <span class="ml-2 text-gray-400 font-normal"></span>
+                            </div>
+                            <div class="text-sm text-gray-600 leading-relaxed space-y-4">
+                                <p>
+                                    {!! $review->message !!}
+                                </p>
+                            </div>
+                            <div class="mt-8 flex items-center">
+                                <div
+                                    class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
+                                    {{ strtoupper(substr($review->full_name, 0, 1)) }}</div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-bold">{{ $review->full_name }}</p>
+                                    <p class="text-xs text-gray-400 uppercase">{{ $review->created_at->format('M j, Y') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+        </div>
+    </section>
+@endif
 <!-- end section -->
 
 <!-- section -->
@@ -496,7 +434,7 @@
                                         <i class="fa fa-star text-yellow-400 text-xs"></i>
                                         <i class="fa fa-star text-yellow-400 text-xs"></i>
                                         <i class="fa fa-star-half text-yellow-400 text-xs"></i>
-                                        <span class="text-slate-400 text-xs ml-1">1547 reviews</span>
+                                        <span class="text-slate-400 text-xs ml-1"></span>
                                     </div>
                                     <h3 class="text-xl font-bold text-slate-900 mb-4">{{ $row->trip_title }}</h3>
                                     <div

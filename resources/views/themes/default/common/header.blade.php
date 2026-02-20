@@ -253,6 +253,16 @@
                         </li>
                     </ul>
                 </nav>
+
+                <!-- Search Button -->
+                <button type="button" data-modal-target="searchModal" data-modal-toggle="searchModal" class=" inline-flex items-center justify-center w-10 h-10
+  rounded-xl border border-gray-200 hover:bg-gray-100 transition">
+                    <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.4a7.5 7.5 0 11-15 0
+      7.5 7.5 0 0115 0z" />
+                    </svg>
+                </button>
                 <!-- CTA Button -->
                 <a href="{{ route('plan-trip') }}" class="hidden sm:inline-flex text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-2.5 transition shadow-sm">
                     Plan Your Trip
@@ -387,7 +397,43 @@
 
         </div>
     </div>
-
+    <!-- Search Modal -->
+    <div id="searchModal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed backdrop-blur-sm top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-2xl shadow-lg">
+                <button type="button" data-modal-hide="searchModal" class="absolute -top-12 right-0 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full w-10 h-10 flex items-center justify-center transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <!-- Search Input -->
+                    <form action="{{ route('trip.search') }}" method="GET">
+                        <div class="relative">
+                            <input type="text" name="trip_search" placeholder="Search..." class="w-full pr-28 pl-5 py-4 text-base border border-gray-200 rounded-xl focus:ring-1 focus:ring-brand-400 focus:border-brand-400 outline-none" required />
+                            <button type="submit" class="absolute right-2 top-2 bottom-2 bg-brand-400 hover:bg-brand-500 text-white px-5 rounded-lg text-sm transition"> Search </button>
+                        </div>
+                        <p class="text-sm font-medium text-gray-500 mb-3">Search Expeditions, Treks or Tours </p>
+                    </form>
+                    <!-- Popular Searches -->
+                    <!-- <div>
+                        <p class="text-sm font-medium text-gray-500 mb-3">Popular Searches</p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="trip-list.php" class="px-4 py-2 bg-gray-100 hover:bg-brand-100
+              text-sm rounded-full transition"> Everest Expedition </a>
+                            <a href="trip-list.php" class="px-4 py-2 bg-gray-100 hover:bg-brand-100
+              text-sm rounded-full transition"> Annapurna Trek </a>
+                            <a href="trip-list.php" class="px-4 py-2 bg-gray-100 hover:bg-brand-100
+              text-sm rounded-full transition"> Mera Peak </a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Sticky Right Contact Button -->
     <div class="fixed right-0 bottom-20 z-40 w-auto">
         <a href="https://wa.me/9779851015875" target="_blank" class="flex items-center border-l border-gray-200 pl-3 pr-4 py-2 bg-white rounded-l-full shadow-lg hover:shadow-xl transition-all max-w-[90vw] sm:max-w-[300px]">

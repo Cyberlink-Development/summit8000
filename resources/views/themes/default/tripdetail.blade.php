@@ -5,7 +5,7 @@
 @section('thumbnail', $data->thumbnail)
 @section('content')
 <!-- hero section -->
-<section class="relative ">
+<section class="relative " id="trip-details">
     <div class="container">
         <!-- Breadcrumbs -->
         <nav aria-label="Breadcrumb" class="mx-auto px-4 my-6 text-xs sm:text-sm text-gray-500">
@@ -641,108 +641,52 @@
                     <div class="">
                         <!-- Reviews -->
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Travellers' Reviews</h2>
-                            <!-- <p class="text-xs text-gray-500 mb-8">
-                                Read our <span class="font-bold text-gray-800">genuine feedback</span> from past travelers with
-                                <span class="font-bold text-gray-800">Summit 8000 Team</span> sourced from <span class="font-bold text-gray-800">TripAdvisor, Google, Facebook, and Trustpilot.</span>
-                            </p> -->
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Travellers' Reviews</h2>
+                                    <!-- <p class="text-xs text-gray-500 mb-4">Read our <span
+                                            class="font-bold text-gray-800">genuine
+                                            feedback</span> from past travelers with <span
+                                            class="font-bold text-gray-800">Summit 8000 Team</span> sourced from <span
+                                            class="font-bold text-gray-800">TripAdvisor, Google, Facebook, and
+                                            Trustpilot.</span>
+                                    </p> -->
+                                </div>
+
+                                <div>
+                                    <button data-modal-target="WriteReview" data-modal-toggle="WriteReview"
+                                        class="w-full text-brand-400 border border-brand-400 hover:bg-brand-100  font-medium rounded-xl text-sm  px-5 py-2.5 transition shadow-sm">
+                                        Write a Review </button>
+                                </div>
+                            </div>
 
                             <!-- Text Review Card -->
-                            <div class="bg-gray-50 p-6 rounded-2xl border mb-8 relative overflow-hidden">
-                                <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                                <h3 class="font-bold text-lg mb-4 pr-14">Everest Base Camp- A wonderful hiking experience </h3>
-                                <div class="flex items-center text-yellow-400 text-sm mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                                </div>
-                                <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                                    <p>My wife (57y old) and I (63y) did the Everest Base Camp Trek between Oct 28- Nov
-                                        8, which was expected to be a dry season. Unfortunately, we suffered many rains
-                                        in the first 4 days and could only see the Himalayas mountains when we reached
-                                        Deboche. Luckily, the rest days were clear, which allowed us to enjoy the
-                                        stunning mountain views.</p>
-                                    <p>A huge part of our successful journey goes to our guide, Vishnu Bhatta. He was a
-                                        genuinely kind and thoughtful person. His steady encouragement, patience, and
-                                        support were instrumental in helping us complete the trek comfortably and
-                                        confidently.</p>
-                                </div>
-                                <div class="mt-8 flex items-center">
-                                    <div
-                                        class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                                        H</div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold">Mr. Hao Ding</p>
-                                        <p class="text-xs text-gray-400 uppercase">12th Nov 2025</p>
+                            @foreach($reviews as $review)
+                                <div class="bg-gray-50 p-6 rounded-2xl border mb-8 relative overflow-hidden">
+                                    <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
+                                    <h3 class="font-bold text-lg mb-4 pr-14">{{ $review->title }}</h3>
+                                    <div class="flex items-center text-yellow-400 text-sm mb-4">
+                                        @for($i=0 ; $i<$review->rating ; $i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+                                        <span class="ml-2 text-gray-400 font-normal"></span>
+                                    </div>
+                                    <div class="text-sm text-gray-600 leading-relaxed space-y-4">
+                                        <p>
+                                            {!! $review->message !!}
+                                        </p>
+                                    </div>
+                                    <div class="mt-8 flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">{{ strtoupper(substr($review->full_name, 0, 1)) }}
+                                            </div>
+                                        <div class="ml-4">
+                                            <p class="text-sm font-bold">{{ $review->full_name }}</p>
+                                            <p class="text-xs text-gray-400 uppercase">{{ $review->created_at->format('M j, Y') }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="bg-gray-50 p-6 rounded-2xl border mb-8 relative overflow-hidden">
-                                <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                                <h3 class="font-bold text-lg mb-4 pr-14">Everest Base Camp – An Unforgettable Himalayan
-                                    Journey </h3>
-                                <div class="flex items-center text-yellow-400 text-sm mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                                </div>
-                                <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                                    <p>My husband (52 years old) and I (50 years old) completed the Everest Base Camp
-                                        Trek from April 6 to April 18. The weather was mostly clear, though we
-                                        experienced some light snow around Dingboche. Despite the challenges, the views
-                                        of Everest, Nuptse, and Ama Dablam were breathtaking and made every step
-                                        worthwhile.</p>
-                                    <p>Our guide, <b>Pemba Sherpa</b>, played a vital role in our success. He was
-                                        extremely caring, knowledgeable, and always attentive to our pace and
-                                        well-being. His encouragement and positive attitude kept our spirits high
-                                        throughout the trek. </p>
-                                </div>
-                                <div class="mt-8 flex items-center">
-                                    <div
-                                        class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                                        S</div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold">Mrs. Susan Miller</p>
-                                        <p class="text-xs text-gray-400 uppercase">20th April 2025</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-6 rounded-2xl border mb-6 relative overflow-hidden">
-                                <i class="fas fa-quote-right absolute top-4 right-4 text-6xl text-gray-200"></i>
-                                <h3 class="font-bold text-lg mb-4 pr-14">Everest Base Camp – A Truly Rewarding Trek</h3>
-                                <div class="flex items-center text-yellow-400 text-sm mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ml-2 text-gray-400 font-normal">Excellent</span>
-                                </div>
-                                <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                                    <p>I (45 years old) joined the Everest Base Camp Trek from March 22 to April 3 as a
-                                        solo traveler. While the trail was busy in some sections, the overall experience
-                                        was incredibly rewarding. The gradual ascent allowed proper acclimatization, and
-                                        the mountain scenery was beyond my expectations.</p>
-                                    <p>I am especially grateful to our guide, <b>Lakpa Tamang</b>, whose professionalism
-                                        and calm demeanor made the trek smooth and enjoyable. He was always ready to
-                                        help and share insights about local culture and the region. </p>
-                                </div>
-                                <div class="mt-8 flex items-center">
-                                    <div
-                                        class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">
-                                        D</div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold">Mr. David Thompson</p>
-                                        <p class="text-xs text-gray-400 uppercase">30th October 2025</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </section>
@@ -780,7 +724,21 @@
                 <!-- end faq -->
 
                 <div class="sticky bottom-0 left-0 z-30 w-full h-16 bg-neutral-primary-soft border-t border-default">
-                    <div class="grid h-full max-w-xl grid-cols-2 mx-auto font-medium items-center px-4 gap-5">
+                    <div class="grid h-full max-w-xl grid-cols-2 mx-auto font-medium items-center text-center px-4 gap-5">
+
+                        <a href="#trip-details"
+                            class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500 px-5 py-3 rounded-xl text-sm transition">
+                            Book Now
+                        </a>
+
+                        @if($schedules->count()>0)
+                            <a href="#departures" class="w-full text-brand-400 border border-brand-400 hover:bg-brand-100 rounded-xl text-sm px-5 py-3 transition shadow-sm">
+                                Fixed Departures
+                            </a>
+                        @endif
+
+                    </div>
+                    <!-- <div class="grid h-full max-w-xl grid-cols-2 mx-auto font-medium items-center px-4 gap-5">
                         @if($schedules->count()>0)
                             <div>
                                 <a href="#departures" class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500  px-5 py-3 rounded-xl text-sm transition hover:bg-brand/90"> Fixed Departures </a>
@@ -791,7 +749,7 @@
                                 class="w-full text-brand-400 border border-brand-400 hover:bg-brand-100   rounded-xl text-sm  px-5 py-3 transition shadow-sm">
                                 Private Departures </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Section: Related -->
@@ -982,8 +940,134 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('theme-assets/js/trip-details.js') }}"></script>
 
+ <!-- Write Review modal -->
+<div id="WriteReview" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed backdrop-blur-sm top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-lg max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-neutral-primary-soft border border-default rounded-xl shadow-sm  ">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between border-b border-default p-4  ">
+                <h3 class="text-lg font-medium text-heading">Write a Review </h3>
+                <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="WriteReview">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form action="{{ route('review.post') }}" method="Post">
+                @csrf
+                <input type="hidden" id="g_recaptcha_response3" name="g_recaptcha_response3"/>
+                <input type="hidden" name="trip_id" value={{ $data->id }} >
+                <div class="p-5">
+                    <div class="grid gap-6 grid-cols-1">
+                        <!-- Full Name -->
+                        <div>
+                            <input type="text" name="name" id="name"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Full Name*" required>
+                        </div>
+                        <!-- Email -->
+                        <div>
+                            <input type="email" name="email" id="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="E-mail*" required>
+                        </div>
+                        <!-- Rating -->
+                        <fieldset class="space-y-3">
+                            <legend class="text-sm font-medium text-gray-500">Rate your experience</legend>
+                            <div class="flex flex-col sm:flex-row items-center gap-2 w-full">
+                                <div>
+                                    <div class="flex flex-row-reverse justify-end gap-1 sm:gap-2">
+                                        <!-- Star 5 -->
+                                        <input type="radio" id="star5" name="rating" value="5" class="peer sr-only" required>
+                                        <label for="star5"
+                                            class="cursor-pointer text-gray-300 text-2xl sm:text-3xl transition-all duration-200 peer-checked:text-amber-500 hover:text-amber-500 hover:scale-110">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
+                                                <path
+                                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        </label>
+
+                                        <!-- Star 4 -->
+                                        <input type="radio" id="star4" name="rating" value="4" class="peer sr-only">
+                                        <label for="star4"
+                                            class="cursor-pointer text-gray-300 text-2xl sm:text-3xl transition-all duration-200 peer-checked:text-amber-500 hover:text-amber-500 hover:scale-110">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
+                                                <path
+                                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        </label>
+
+                                        <!-- Star 3 -->
+                                        <input type="radio" id="star3" name="rating" value="3" class="peer sr-only">
+                                        <label for="star3"
+                                            class="cursor-pointer text-gray-300 text-2xl sm:text-3xl transition-all duration-200 peer-checked:text-amber-500 hover:text-amber-500 hover:scale-110">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
+                                                <path
+                                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        </label>
+
+                                        <!-- Star 2 -->
+                                        <input type="radio" id="star2" name="rating" value="2" class="peer sr-only">
+                                        <label for="star2"
+                                            class="cursor-pointer text-gray-300 text-2xl sm:text-3xl transition-all duration-200 peer-checked:text-amber-500 hover:text-amber-500 hover:scale-110">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
+                                                <path
+                                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        </label>
+
+                                        <!-- Star 1 -->
+                                        <input type="radio" id="star1" name="rating" value="1" class="peer sr-only">
+                                        <label for="star1"
+                                            class="cursor-pointer text-gray-300 text-2xl sm:text-3xl transition-all duration-200 peer-checked:text-amber-500 hover:text-amber-500 hover:scale-110">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
+                                                <path
+                                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Rating Text -->
+                            <div id="rating-text" class="mt-2 sm:mt-0 sm:ml-2 text-gray-600 font-normal text-sm sm:text-base text-center sm:text-left">
+                            </div>
+                        </div>
+
+                        </fieldset>
+
+                        <!-- Review Title -->
+                        <div>
+                            <input type="text" name="review_title" id="review_title"
+                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Review Title*" required>
+                        </div>
+                        <!-- Review Message -->
+                        <div>
+                            <textarea name="review_message" id="review_message" rows="4"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Write your review here... *" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="flex items-center space-x-4 border-t border-default p-4">
+                    <button type="submit" class="flex items-center text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm">
+                        Submit Review </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ <!-- End Write Review modal -->
+
+<script src="{{ asset('theme-assets/js/trip-details.js') }}"></script>
 
 <script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
 <script>
@@ -992,6 +1076,7 @@
             grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
                 document.getElementById('g_recaptcha_response').value = token;
                 document.getElementById('g_recaptcha_response2').value = token;
+                document.getElementById('g_recaptcha_response3').value = token;
             });
         }
 
