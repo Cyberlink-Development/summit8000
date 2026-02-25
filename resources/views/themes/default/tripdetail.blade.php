@@ -783,7 +783,7 @@
                                         <div
                                             class="flex justify-between items-center text-xs text-slate-500 mb-6 pb-6 border-b border-slate-100">
                                             <span class="flex items-center gap-1 text-xs">
-                                                <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> {{ trip_destination_title($row->id) }}
+                                                <img src="{{asset('theme-assets/assets/icons/map-point.svg')}}" class="h-4"> {{ optional($row->destinations->first())->title }}
                                             </span>
                                             <span class="flex items-center gap-1">
                                                 <img src="{{asset('theme-assets/assets/icons/clock.svg')}}" class="h-4"> {{$row->duration}} </span>

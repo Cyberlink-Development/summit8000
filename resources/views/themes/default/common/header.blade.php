@@ -24,14 +24,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('theme-assets/assets/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('theme-assets/assets/favicon/site.webmanifest') }}">
 
-    <!--------------- Toaster starts  -------------------->
-    <style>
-        .toast {
-            opacity: .9 !important;
-        }
-    </style>
-    <!--------------- Toaster ends  -------------------->
-
     {{-- GLOBAL ORGANIZATION SCHEMA --}}
     <script type="application/ld+json">
     {

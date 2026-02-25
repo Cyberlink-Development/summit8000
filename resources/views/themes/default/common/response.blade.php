@@ -1,47 +1,25 @@
 @php
-    $notificationTypes = ['success', 'error', 'info', 'warning'];
+    $types = ['success', 'error', 'info', 'warning'];
 @endphp
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+@if(session()->has('message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            @foreach($types as $type)
+
+                {{-- OLD FORMAT: success => true + message --}}
+                @if(session($type) === true && session()->has('message'))
+                    toastr.{{ $type }}(@json(session('message')));
+                @endif
+
+                {{-- NEW FORMAT: success => "message" --}}
+                @if(session()->has($type) && session($type) !== true)
+                    toastr.{{ $type }}(@json(session($type)));
+                @endif
+
             @endforeach
-        </ul>
-    </div>
-@endif
 
-@foreach($notificationTypes as $type)
-    @if(Session($type) === true)
-        @if(is_array(Session::get('message')))
-            @foreach(Session::get('message') as $item)
-                <script>
-                    toastr.{{ $type }}("{{ $item }}");
-                </script>
-            @endforeach
-        @else
-            <script>
-                toastr.{{ $type }}("{{ Session('message') }}");
-            </script>
-        @endif
-    @endif
-@endforeach
-
-<script>
-    function ajax_response(response) {
-        const notificationTypes = ['success', 'error', 'info', 'warning'];
-
-        notificationTypes.forEach(function(type) {
-            if (response[type]) {
-                if (Array.isArray(response.message)) {
-                    response.message.forEach(function(msg) {
-                        toastr[type](msg);
-                    });
-                } else {
-                    toastr[type](response.message);
-                }
-            }
         });
-    }
-</script>
+    </script>
+@endif
