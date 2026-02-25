@@ -234,10 +234,10 @@ class FrontpageController extends Controller
         $tripUri = $uri;
         $similar_tripsId= $tripId->relatedtrips()->pluck('related_trip_id');
         if ($similar_tripsId->isNotEmpty()) {
-            $similar_trips = TripModel::whereIn('id', $similar_tripsId)->take(3)->get();
+            $similar_trips = TripModel::with('destinations')->whereIn('id', $similar_tripsId)->take(3)->get();
         }
         else{
-            $similar_trips = TripModel::where('uri', '!=', $uri)->orderBy('ordering', 'desc')->take(3)->get();
+            $similar_trips = TripModel::with('destinations')->where('uri', '!=', $uri)->orderBy('ordering', 'desc')->take(3)->get();
         }
         $activity = TripModel::find($data->id)->activities()->first();
         $destinations = TripModel::find($data->id)->destinations()->first();
@@ -1168,8 +1168,8 @@ class FrontpageController extends Controller
 
     public function trip_lists(Request $request)
     {
-        $item= ActivityModel::where('uri',$request->uri)->first();
-        $data = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc')->paginate(6);
+        $item= ActivityModel::where('uri', $request->uri)->firstOrFail();
+        $data = $item->trips()->with('destinations')->where('status', 1)->orderBy('ordering', 'asc')->paginate(6);
 
         // dd($item,$data);
         return view('themes.default.trip-list', compact('data','item'));
