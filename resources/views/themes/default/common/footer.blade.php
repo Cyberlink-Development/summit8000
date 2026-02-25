@@ -263,62 +263,12 @@
  <script src="{{ asset('theme-assets/js/swiper-bundle.min.js') }}"></script>
  <script src="{{ asset('theme-assets/js/fancybox.umd.js') }}"></script>
  <script src="{{ asset('theme-assets/js/app.js') }}"></script>
- <script src="https://cdn.tailwindcss.com"></script>
  <script src="https://kit.fontawesome.com/564ea3e674.js" crossorigin="anonymous"></script>
 
 <script>
     Fancybox.bind("[data-fancybox]", {
         // Your custom options
     });
-
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand: {
-                        50: '#f0faff',
-                        100: '#e0f5ff',
-                        200: '#baeaff',
-                        300: '#7cd8ff',
-                        400: '#2EB0E4', // Exact blue from design
-                        500: '#1d9fd6',
-                        600: '#1381b8',
-                        700: '#116896',
-                        800: '#12587b',
-                        900: '#154a67',
-                    },
-                    blue: {
-                        50: '#f0faff',
-                        100: '#e0f5ff',
-                        200: '#baeaff',
-                        300: '#7cd8ff',
-                        400: '#2EB0E4', // Exact blue from design
-                        500: '#1d9fd6',
-                        600: '#1381b8',
-                        700: '#116896',
-                        800: '#12587b',
-                        900: '#154a67',
-                    }
-                },
-                fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                },
-                keyframes: {
-                    'slide-down': {
-                        '0%': {
-                            transform: 'translateY(-100%)'
-                        },
-                        '100%': {
-                            transform: 'translateY(0)'
-                        },
-                    },
-                },
-                animation: {
-                    'slide-down': 'slide-down 0.35s ease-out',
-                },
-            }
-        }
-    }
 </script>
 
 </html>
