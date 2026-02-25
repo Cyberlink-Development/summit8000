@@ -258,10 +258,13 @@
 </footer>
 
 </body>
-<!-- Include Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
-<script src="{{ asset('theme-assets/js/app.js') }}"></script>
+ <!-- Include Swiper JS -->
+ <script src="{{ asset('theme-assets/js/flowbite.min.js') }}"></script>
+ <script src="{{ asset('theme-assets/js/swiper-bundle.min.js') }}"></script>
+ <script src="{{ asset('theme-assets/js/fancybox.umd.js') }}"></script>
+ <script src="{{ asset('theme-assets/js/app.js') }}"></script>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://kit.fontawesome.com/564ea3e674.js" crossorigin="anonymous"></script>
 
 <script>
     Fancybox.bind("[data-fancybox]", {
