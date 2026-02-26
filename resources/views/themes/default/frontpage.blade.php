@@ -13,7 +13,7 @@
                 <!-- Slide 1 -->
                 @foreach($banners as $row)
                     <div class="swiper-slide relative h-full w-full">
-                        <img src="{{ $row->picture ? asset('uploads/banners/'.$row->picture) : asset('theme-assets/assets/hero/1.jpg') }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover object-center" alt="{{ $row->title }}">
+                        <img src="{{ $row->picture ? asset('uploads/banners/'.$row->picture) : asset('theme-assets/assets/hero/1.jpg') }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover object-center" alt="{{ $row->picture_alt }}">
                         <div class="absolute inset-0 bg-black/40"></div>
 
                         <!-- Bottom Caption -->
@@ -87,7 +87,7 @@
                 <!-- Large Card: 8000m -->
                 @if($loop->first)
                     <a href="{{ $row->route_url }}" class="group relative overflow-hidden rounded-2xl h-[400px] lg:col-span-2 cursor-pointer transition-all duration-500">
-                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/8000.jpg') }}" alt="{{ $row->title }}" loading="lazy"
+                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/8000.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy"
                             class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -116,7 +116,7 @@
                 @elseif($loop->iteration == 2)
                     <!-- Card: 7000m -->
                     <a href="{{ $row->route_url }}" class="group relative overflow-hidden rounded-2xl h-[400px] cursor-pointer">
-                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/7000.jpg') }}" alt="{{ $row->title }}" loading="lazy"
+                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/7000.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy"
                             class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -142,7 +142,7 @@
                 @else
                     <!-- Small Card: 6000m -->
                     <a href="{{ $row->route_url }}" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                        <img src="{{$row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/6000.jpg') }}" alt="{{ $row->title }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="{{$row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/6000.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <div class="flex items-end justify-between">
@@ -171,7 +171,7 @@
                 <!-- Small Card:  Treks in Nepal -->
                 @foreach($allActivities->slice(5) as $row)
                     <a href="{{ $row->route_url }}" class="group relative overflow-hidden rounded-2xl h-[300px] cursor-pointer">
-                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/treks-in-nepal.jpg') }}" alt="{{ $row->title }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/assets/trip/treks-in-nepal.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy" class="lazy-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500">
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -244,7 +244,7 @@
                     <div class="swiper-slide">
                         <a href="{{ route('trip.tripdetail',$row->uri) }}" class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                             <div class="relative h-64 overflow-hidden">
-                                <img src="{{$row->thumbnail ? asset('uploads/original/'.$row->thumbnail)  : asset('theme-assets/assets/trip/1.jpg') }}" alt="{{ $row->trip_title }}" loading="lazy" class="lazy-image w-full h-full object-cover">
+                                <img src="{{$row->thumbnail ? asset('uploads/original/'.$row->thumbnail)  : asset('theme-assets/assets/trip/1.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy" class="lazy-image w-full h-full object-cover">
                             </div>
                             <div class="p-5">
                                 <div class="flex items-center gap-1 mb-2">
@@ -425,7 +425,7 @@
                         <div class="swiper-slide">
                             <a href="{{ route('trip.tripdetail',$row->uri) }}" class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                                 <div class="relative h-64 overflow-hidden">
-                                    <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/assets/trip/1.jpg') }}" alt="{{ $row->trip_title }}" loading="lazy" class="lazy-image w-full h-full object-cover">
+                                    <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/assets/trip/1.jpg') }}" alt="{{ $row->thumbnail_alt }}" loading="lazy" class="lazy-image w-full h-full object-cover">
                                 </div>
                                 <div class="p-5">
                                     <div class="flex items-center gap-1 mb-2">

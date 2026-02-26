@@ -27,7 +27,7 @@
                     @foreach($data as $row)
                         <a href="{{ route('trip.tripdetail',$row->uri) }}" class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                             <div class="relative h-64 overflow-hidden">
-                                <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail)  : asset('theme-assets/assets/trip/1.jpg')}}" alt="{{ $row->trip_title }}" loading="lazy" class="lazy-image w-full h-full object-cover">
+                                <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail)  : asset('theme-assets/assets/trip/1.jpg')}}" alt="{{ $row->thumbnail_alt }}" loading="lazy" class="lazy-image w-full h-full object-cover">
                             </div>
                             <div class="p-5">
                                 <div class="flex items-center gap-1 mb-2">
