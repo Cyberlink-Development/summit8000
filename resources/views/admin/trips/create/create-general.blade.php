@@ -498,6 +498,14 @@
                     </div>
                     <small> (Width: 1500px Height: 1500px) </small>
                 </div>
+                <h4>Thumbnail Alt Text</h4>
+                <div class="hd_show_con">
+                    <div id="xedit" class="bs-component">
+                        <label class="field text">
+                            <input type="text" name="thumbnail_alt" class="form-control" placeholder="" />
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div class="sid_bvijay mb10">
@@ -516,6 +524,14 @@
                         </label>
                     </div>
                     <small> (Width: 1500px Height: 1500px) </small>
+                </div>
+                <h4>Trip Map Alt Text</h4>
+                <div class="hd_show_con">
+                    <div id="xedit" class="bs-component">
+                        <label class="field text">
+                            <input type="text" name="tripmap_alt" class="form-control" placeholder="" />
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -555,6 +571,14 @@
                         </label>
                     </div>
                     <small> (Width: 1600px Height: 550px) </small>
+                </div>
+                <h4>Banner Alt Text</h4>
+                <div class="hd_show_con">
+                    <div id="xedit" class="bs-component">
+                        <label class="field text">
+                            <input type="text" name="banner_alt" class="form-control" placeholder="" />
+                        </label>
+                    </div>
                 </div>
             </div>
 

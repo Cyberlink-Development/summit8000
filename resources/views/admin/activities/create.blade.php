@@ -184,6 +184,14 @@
                             ( Width: 1500px, Height:971px )
                         </div>
                     </div>
+                    <h4>Thumbnail Alt Text</h4>
+                    <div class="hd_show_con">
+                        <div id="xedit" class="bs-component">
+                            <label class="field text">
+                                <input type="text" name="thumbnail_alt" class="form-control" placeholder="" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="sid_bvijay mb10">
@@ -191,6 +199,14 @@
                     <div class="hd_show_con">
                         <div id="xedit-demo">
                             <input type="file" name="banner[]" />
+                        </div>
+                    </div>
+                    <h4>Banner Alt Text</h4>
+                    <div class="hd_show_con">
+                        <div id="xedit" class="bs-component">
+                            <label class="field text">
+                                <input type="text" name="banner_alt" class="form-control" placeholder="" />
+                            </label>
                         </div>
                     </div>
                 </div>

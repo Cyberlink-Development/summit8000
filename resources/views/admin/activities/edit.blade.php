@@ -232,6 +232,14 @@
                             ( Width: 1500px, Height:971px )
                         </div>
                     </div>
+                    <h4>Thumbnail Alt Text</h4>
+                    <div class="hd_show_con">
+                        <div id="xedit" class="bs-component">
+                            <label class="field text">
+                                <input type="text" name="thumbnail_alt" class="form-control" placeholder="" value="{{ $data->thumbnail_alt }}" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="sid_bvijay mb10">
@@ -247,6 +255,14 @@
                         @endif
                         <div id="xedit-demo">
                             <input type="file" name="banner[]" />
+                        </div>
+                    </div>
+                    <h4>Banner Alt Text</h4>
+                    <div class="hd_show_con">
+                        <div id="xedit" class="bs-component">
+                            <label class="field text">
+                                <input type="text" name="banner_alt" class="form-control" placeholder=""  value="{{ $data->banner_alt }}"/>
+                            </label>
                         </div>
                     </div>
                 </div>

@@ -9,24 +9,24 @@
         <div class="panel-body" id="row_testimonial_body">
 
             <div class="row">
-                <div class="col-md-1"><label>Ordering</label></div>
-                <div class="col-md-10"><label>Title</label></div>
-                
+                <div class="col-md-2"><label>Ordering</label></div>
+                <div class="col-md-9"><label>Title</label></div>
+
             </div>
 
             @if ($costincludes->count() > 0)
                 @foreach ($costincludes as $row)
                     <div class="row" id="testimonial-rec-{{ $loop->iteration }}">
                         <input type="hidden" name="testimonial_id[]" value="{{ $row->id }}" />
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <input type="number" min="1" max="2000" name="testimonial_ordering[]"
                                 value="{{ $row->ordering }}" class="form-control" placeholder="" />
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <input type="text" name="testimonial_title[]" value="{{ $row->title }}"
                                 class="form-control" placeholder="" />
                         </div>
-                     
+
                         <button class="btn btn-danger delete-testimonial" testimonial-rowid="{{ $row->id }}"
                             testimonial-data-id="{{ $loop->iteration }}"><i
                                 class="glyphicon glyphicon-trash"></i></button>
@@ -40,11 +40,11 @@
             <div id="row_testimonial_additional">
                 <div class="row">
                     <input type="hidden" name="testimonial_id[]" value="" />
-                    <div class="col-md-1"><input type="number" min="1" max="2000" name="testimonial_ordering[]"
+                    <div class="col-md-2"><input type="number" min="1" max="2000" name="testimonial_ordering[]"
                             class="form-control" placeholder="" /></div>
-                    <div class="col-md-10"><input type="text" name="testimonial_title[]" class="form-control"
+                    <div class="col-md-9"><input type="text" name="testimonial_title[]" class="form-control"
                             placeholder="" /></div>
-                  
+
                     <div class="col-md-1"><button class="btn btn-danger delete-testimonial" testimonial-data-id="0"><i class="glyphicon glyphicon-trash"></i></button></div>
                 </div>
             </div>

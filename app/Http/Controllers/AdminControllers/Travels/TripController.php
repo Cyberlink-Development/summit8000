@@ -315,7 +315,7 @@ class TripController extends Controller
                     $gearData->ordering = $request->gear_ordering[$key];
                     $gearData->title = $request->gear_title[$key];
                     // $gearData->content = $request->gear_content[$key];
-                    $gearData->video = $request->gear_video[$key];
+                    // $gearData->video = $request->gear_video[$key];
                     $gearData->save();
                     $sn_gear++;
                 }
@@ -668,6 +668,9 @@ class TripController extends Controller
             $data->start_date = $request->start_date;
             $data->price = $request->price;
             $data->discount = $request->discount;
+            $data->banner_alt = $request->banner_alt;
+            $data->thumbnail_alt = $request->thumbnail_alt;
+            $data->tripmap_alt = $request->tripmap_alt;
 
             $_data = TripModel::find($id);
             $_data->destinations()->detach();
@@ -810,7 +813,7 @@ class TripController extends Controller
                         $gearData->ordering = $request->gear_ordering[$key];
                         $gearData->title = $request->gear_title[$key];
                         // $gearData->content = $request->gear_content[$key];
-                        $gearData->video = $request->gear_video[$key];
+                        // $gearData->video = $request->gear_video[$key];
                         $gearData->save();
                     } else if ($request->gear_id[$value] !== null && $request->gear_id[$value] !== "") {
                         $gear_id = $request->gear_id[$value];
@@ -833,7 +836,7 @@ class TripController extends Controller
                         $gearData->ordering = $request->gear_ordering[$key];
                         $gearData->title = $request->gear_title[$key];
                         // $gearData->content = $request->gear_content[$key];
-                        $gearData->video = $request->gear_video[$key];
+                        // $gearData->video = $request->gear_video[$key];
                         $gearData->save();
                     }
 
