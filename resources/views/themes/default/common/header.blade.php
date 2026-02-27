@@ -16,6 +16,7 @@
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Flowbite & Tailwind CDN -->
+    <link rel="canonical" href="{{ url()->current() }}" />
     <link href="{{ asset('theme-assets/css/app.css') }}" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
