@@ -33,7 +33,7 @@
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
                             <p class="text-sm font-medium mb-2 opacity-90">{{ $featuredPost->sub_title }}</p>
-                            <h1 class="text-3xl font-bold leading-tight">{{ $featuredPost->post_title }}</h1>
+                            <h2 class="text-3xl font-bold leading-tight">{{ $featuredPost->post_title }}</h2>
                         </div>
                     </a>
 
@@ -85,4 +85,20 @@
 
     </section>
 
+@endsection
+
+@section('schema')
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "TouristTrip",
+        "name": "{{ $data->post_type }}",
+        "description": "{{ strip_tags($data->content) }}",
+        "url": "{{ url()->current() }}",
+        "provider": {
+            "@type": "TravelAgency",
+            "name": "Summit 8000"
+        }
+        }
+    </script>
 @endsection

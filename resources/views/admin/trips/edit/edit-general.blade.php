@@ -18,8 +18,7 @@
                 <div class="form-group">
                     <div class="col-lg-12">
                         <div class="bs-component">
-                            <input type="text" id="sub_title" name="sub_title" class="form-control"
-                                value="{{ $data->sub_title }}" placeholder="Sub Title" />
+                            <textarea type="text" id="sub_title" name="sub_title" class="form-control" placeholder="Sub Title" >{{ $data->sub_title }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -195,21 +194,6 @@
 
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">Trip Excerpt</span>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <div class="bs-component">
-                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3" placeholder="Trip Excerpt">{{ $data->trip_excerpt }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-heading">
                 <span class="panel-title">Trip Content</span>
             </div>
             <div class="panel-body">
@@ -238,6 +222,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Extra Information</span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3" placeholder="Trip Excerpt">{{ $data->trip_excerpt }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="panel">
             <div class="panel-heading">
                 <span class="panel-title">Related Trips</span>
