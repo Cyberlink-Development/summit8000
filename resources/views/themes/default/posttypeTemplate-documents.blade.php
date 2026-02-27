@@ -52,3 +52,19 @@
     </section>
 
 @endsection
+
+@section('schema')
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "TouristTrip",
+        "name": "{{ $data->post_type }}",
+        "description": "{{ strip_tags($data->content) }}",
+        "url": "{{ url()->current() }}",
+        "provider": {
+            "@type": "TravelAgency",
+            "name": "Summit 8000"
+        }
+        }
+    </script>
+@endsection

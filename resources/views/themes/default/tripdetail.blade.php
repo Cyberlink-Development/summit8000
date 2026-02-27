@@ -100,7 +100,7 @@
                     <div class="bg-white overflow-hidden">
                         <div class=" ">
                             <div class=" ">
-                                <div class="flex items-center mb-2">
+                                <!-- <div class="flex items-center mb-2">
                                     <div class="flex text-yellow-400 text-xs">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -109,7 +109,7 @@
                                         <i class="fas fa-star-half-alt"></i>
                                     </div>
                                     <a class="ml-2 text-xs text-gray-500" href="#reviews">4.5 (1500 reviews)</a>
-                                </div>
+                                </div> -->
                                 <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                                     {{ $data->trip_title }}
                                 </h1>
@@ -149,7 +149,7 @@
                                         class="block w-full mb-4 px-4 py-3 bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 shadow-sm transition">
                                         <option value="5star" data-price="1525">5 Star Hotel Accommodation</option>
                                         <option value="4star" data-price="1025">4 Star Hotel Accommodation</option>
-                                        <option value="3star" data-price="725">3 Star Hotel Accommodation</option>
+                                        <!-- <option value="3star" data-price="725">3 Star Hotel Accommodation</option> -->
                                     </select>
                                 </div>
                                 <div>
@@ -229,6 +229,9 @@
                 @if($faqs && count($faqs) > 0)
                     <option value="#faqs">FAQs</option>
                 @endif
+                @if($data->trip_excerpt)
+                    <option value="#extrainfo">Extra Information</option>
+                @endif
                 <option value="#SimilarTrips">Similar Trips</option>
             </select>
         </div>
@@ -266,6 +269,10 @@
                     @if($faqs && count($faqs) > 0)
                         <a href="#faqs" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
                             <i class="far fa-question-circle w-5"></i> FAQs </a>
+                    @endif
+                    @if($data->trip_excerpt)
+                        <a href="#extrainfo" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
+                            <i class="fas fa-info-circle w-5"></i> Extra Information </a>
                     @endif
                     <a href="#SimilarTrips" class="trip-link flex items-center gap-3 px-3 py-2 rounded-xl text-gray-900 hover:bg-brand-soft hover:text-brand-light">
                         <i class="fa-solid fa-mountain w-5"></i> Similar Trips </a>
@@ -401,9 +408,9 @@
                                             <button type="button"
                                                 class="flex items-center justify-between w-full p-5 font-semibold  rtl:text-right text-base rounded-t-base border border-t-0 border-x-0 border-b-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 text-left"
                                                 data-accordion-target="#body-{{ $key+1 }}" aria-expanded="true" aria-controls="body-{{$key+1}}">
-                                                <span class="text-brand-900">
+                                                <h3 class="text-brand-900">
                                                     <span class="text-brand-400 mr-1">Day {{ $value->days }}:</span>
-                                                    {{ $value->title }}</span>
+                                                    {{ $value->title }}</h3>
                                                 <i data-accordion-icon
                                                     class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400 text-sm text-brand-400"></i>
                                             </button>
@@ -537,10 +544,12 @@
                                                             <span class="text-xs   block pb-0.5">Start Date</span>
                                                             <span class="text-brand-900 font-semibold">{{ $row->start_date }}</span>
                                                         </div>
+                                                        @if($row->end_date)
                                                         <div class="col">
                                                             <span class="text-xs block pb-0.5">End Date</span>
                                                             <span class="text-brand-900 font-semibold">{{ $row->end_date }}</span>
                                                         </div>
+                                                        @endif
                                                         <div class="col">
                                                             <div class="availability">
                                                                 <div class="flex items-center gap-x-2">
@@ -707,13 +716,13 @@
                                     @foreach($faqs as $key => $value)
                                         <div id="accordion-card-heading-{{ $key+1 }}">
                                             <button type="button" class="text-left flex items-center justify-between w-full p-4 font-medium text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none" data-accordion-target="#accordion-card-body-{{ $key+1 }}" aria-expanded="false" aria-controls="accordion-card-body-{{ $key+1 }}">
-                                                <span>{{ $value->title }}</span>
+                                                <h3>{{ $value->title }}</h3>
                                                 <i data-accordion-icon
                                                     class=" fa fa-chevron-down transition-transform duration-300 rotate-90 text-sm text-brand-400"></i>
                                             </button>
                                         </div>
                                         <div id="accordion-card-body-{{ $key+1 }}" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-{{ $key+1 }}">
-                                            <div class="p-4 text-body"> {{ $value->content }} </div>
+                                            <div class="p-4 text-body"> {!! $value->content  !!} </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -722,6 +731,21 @@
                     </section>
                 @endif
                 <!-- end faq -->
+
+                <!-- extra info -->
+                @if(!empty($data->trip_excerpt))
+                    <section class="py-6" id="extrainfo">
+                        <div class=" space-y-3">
+                            <div class="mb-8" id="extrainfo">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6">Extra Information</h2>
+                                <p >
+                                    {!! $data->trip_excerpt !!}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                @endif
+                <!-- end -->
 
                 <div class="sticky bottom-0 left-0 z-30 w-full h-16 bg-neutral-primary-soft border-t border-default">
                     <div class="grid h-full max-w-xl grid-cols-2 mx-auto font-medium items-center text-center px-4 gap-5">

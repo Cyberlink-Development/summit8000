@@ -2,88 +2,96 @@
 @section('title', Request::segment(2))
 
 @section('breadcrumb')
-    {{-- <button type="button" class="btn btn-default btn-sm backlink"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
+    {{-- <button type="button" class="btn btn-default btn-sm backlink"><i class="fa fa-angle-double-left"
+            aria-hidden="true"></i>
         Back </button> --}}
-    <a href="{{ url('admin/trip') }}" class="btn btn-default btn-sm backlink"><i class="fa fa-list"
-            aria-hidden="true"></i> Show List </a>
+    <a href="{{ url('admin/trip') }}" class="btn btn-default btn-sm backlink"><i class="fa fa-list" aria-hidden="true"></i>
+        Show List </a>
 @endsection
 
 @section('content')
-<form class="form-horizontal" role="form" id="tripData" method="post" enctype="multipart/form-data">
-@csrf
-<section class="content">
-<div class="container-fluid">
+    <form class="form-horizontal" role="form" id="tripData" method="post" enctype="multipart/form-data">
+        @csrf
+        <section class="content">
+            <div class="container-fluid">
 
-    <footer>
-        <div id="publishing-action">
-            <button type="submit" name="submit" class="btn btn-success" value="publish"> Publish</button>
-        </div>
-        <div class="clearfix"></div>
-    </footer>
-
-    <div class="row">
-        <div class="col-12">
-            <!-- Custom Tabs -->
-            <div class="card">
-                <div class="card-header d-flex p-0">
-                    <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
-                    <ul class="nav nav-pills ml-auto p4 mb10 mt10 nav-custom">
-                    <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">GENERAL</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">ITINERARY</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> COST INCLUDES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST EXCLUDES</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
-                    <!--<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> BANNER </a></li>   -->
-                    </ul>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">                           
-                            @include('admin.trips.create.create-general')                           
-                        </div>                      
-                        <div class="tab-pane" id="tab_2">
-                            @include('admin.trips.create.create-itinerary')
-                        </div>
-                       <div class="tab-pane" id="tab_3">
-                            @include('admin.trips.create.create-cost-includes')
-                        </div>
-                         <div class="tab-pane" id="tab_4">
-                            @include('admin.trips.create.create-cost-excludes')
-                        </div>                          
-                        <div class="tab-pane" id="tab_5">
-                            @include('admin.trips.create.create-gear')
-                        </div> 
-                        <div class="tab-pane" id="tab_6">
-                            @include('admin.trips.create.create-banner')
-                        </div>  
-                         <div class="tab-pane" id="tab_7">
-                           @include('admin.trips.create.create-trip-schedule') 
-                        </div>  
-                        <div class="tab-pane" id="tab_8">
-                           @include('admin.trips.create.create-faqs')
-                        </div>                    
+                <footer>
+                    <div id="publishing-action">
+                        <button type="submit" name="submit" class="btn btn-success" value="publish"> Publish</button>
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
-            </div>
-            <!-- ./card -->
-        </div>
-        <!-- /.col -->
-    </div>
-</div>
-</section>
+                    <div class="clearfix"></div>
+                </footer>
 
-</form>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Custom Tabs -->
+                        <div class="card">
+                            <div class="card-header d-flex p-0">
+                                <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
+                                <ul class="nav nav-pills ml-auto p4 mb10 mt10 nav-custom">
+                                    <li class="nav-item active"><a class="nav-link active" href="#tab_1"
+                                            data-toggle="tab">GENERAL</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">ITINERARY</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> COST
+                                            INCLUDES</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST
+                                            EXCLUDES</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS </a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES </a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a>
+                                    </li>
+                                    <!--<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> BANNER </a></li>   -->
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1">
+                                        @include('admin.trips.create.create-general')
+                                    </div>
+                                    <div class="tab-pane" id="tab_2">
+                                        @include('admin.trips.create.create-itinerary')
+                                    </div>
+                                    <div class="tab-pane" id="tab_3">
+                                        @include('admin.trips.create.create-cost-includes')
+                                    </div>
+                                    <div class="tab-pane" id="tab_4">
+                                        @include('admin.trips.create.create-cost-excludes')
+                                    </div>
+                                    <div class="tab-pane" id="tab_5">
+                                        @include('admin.trips.create.create-gear')
+                                    </div>
+                                    <div class="tab-pane" id="tab_6">
+                                        @include('admin.trips.create.create-banner')
+                                    </div>
+                                    <div class="tab-pane" id="tab_7">
+                                        @include('admin.trips.create.create-trip-schedule')
+                                    </div>
+                                    <div class="tab-pane" id="tab_8">
+                                        @include('admin.trips.create.create-faqs')
+                                    </div>
+                                </div>
+                                <!-- /.tab-content -->
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- ./card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+        </section>
+
+    </form>
 
 
 @endsection
 @section('scripts')
     <script type="text/javascript">
-   
+
         /******** For Itinerary *******/
-        jQuery(document).delegate('a.add-itinerary', 'click', function(e) {
+        jQuery(document).delegate('a.add-itinerary', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_additional .row'),
                 size = jQuery('#row_body >.row').length + 1,
@@ -96,7 +104,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-itinerary', 'click', function(e) {
+        jQuery(document).delegate('button.delete-itinerary', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -109,8 +117,8 @@
             }
         });
         /******** End For Itinerary *******/
-          /******** For Schedule *******/
-        jQuery(document).delegate('a.add-schedule', 'click', function(e) {
+        /******** For Schedule *******/
+        jQuery(document).delegate('a.add-schedule', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_schedule_additional .row'),
                 size = jQuery('#row_schedule_body >.row').length + 1,
@@ -122,7 +130,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-schedule', 'click', function(e) {
+        jQuery(document).delegate('button.delete-schedule', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -135,9 +143,9 @@
             }
         });
         /******** End For Schedule *******/
-       
+
         /******** For Gear *******/
-        jQuery(document).delegate('a.add-gear', 'click', function(e) {
+        jQuery(document).delegate('a.add-gear', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_gear_additional .row'),
                 size = jQuery('#row_gear_body >.row').length + 1,
@@ -149,7 +157,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-gear', 'click', function(e) {
+        jQuery(document).delegate('button.delete-gear', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -162,8 +170,8 @@
             }
         });
         /******** End For Gear *******/
-                /******** For FAQs *******/
-        jQuery(document).delegate('a.add-faq', 'click', function(e) {
+        /******** For FAQs *******/
+        jQuery(document).delegate('a.add-faq', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_faq_additional .row'),
                 size = jQuery('#row_faq_body >.row').length + 1,
@@ -175,7 +183,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-faq', 'click', function(e) {
+        jQuery(document).delegate('button.delete-faq', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -183,7 +191,7 @@
                 var targetDiv = jQuery(this).attr('targetDiv');
                 jQuery('#faq-rec-' + id).remove();
                 //regnerate index number on table
-                $('#row_body .row').each(function(index) {
+                $('#row_body .row').each(function (index) {
                     $(this).find('span.sn').html(index + 1);
                 });
                 return true;
@@ -192,9 +200,9 @@
             }
         });
         /******** End For FAQs *******/
-        
+
         /******** For Testimonial ***********/
-        jQuery(document).delegate('a.add-testimonial', 'click', function(e) {
+        jQuery(document).delegate('a.add-testimonial', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_testimonial_additional .row'),
                 size = jQuery('#row_testimonial_body >.row').length + 1,
@@ -206,7 +214,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-testimonial', 'click', function(e) {
+        jQuery(document).delegate('button.delete-testimonial', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -214,7 +222,7 @@
                 var targetDiv = jQuery(this).attr('targetDiv');
                 jQuery('#testimonial-rec-' + id).remove();
                 //regnerate index number on table
-                $('#row_testimonial_body .row').each(function(index) {
+                $('#row_testimonial_body .row').each(function (index) {
                     $(this).find('span.sn').html(index + 1);
                 });
                 return true;
@@ -224,7 +232,7 @@
         });
         /******** End For Testimonial *********/
         /******** For Info ***********/
-        jQuery(document).delegate('a.add-info', 'click', function(e) {
+        jQuery(document).delegate('a.add-info', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_info_additional .row'),
                 size = jQuery('#row_info_body >.row').length + 1,
@@ -236,7 +244,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-info', 'click', function(e) {
+        jQuery(document).delegate('button.delete-info', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -244,7 +252,7 @@
                 var targetDiv = jQuery(this).attr('targetDiv');
                 jQuery('#info-rec-' + id).remove();
                 //regnerate index number on table
-                $('#row_info_body .row').each(function(index) {
+                $('#row_info_body .row').each(function (index) {
                     $(this).find('span.sn').html(index + 1);
                 });
                 return true;
@@ -255,7 +263,7 @@
         /******** End For Info *********/
 
         /* start of banner*/
-        jQuery(document).delegate('a.add-banner', 'click', function(e) {
+        jQuery(document).delegate('a.add-banner', 'click', function (e) {
             e.preventDefault();
             var content = jQuery('#row_banner_additional .row'),
                 size = jQuery('#row_banner_body >.row').length + 1,
@@ -267,7 +275,7 @@
             element.find('.sn').html(size);
         });
 
-        jQuery(document).delegate('button.delete-banner', 'click', function(e) {
+        jQuery(document).delegate('button.delete-banner', 'click', function (e) {
             e.preventDefault();
             var makeConfirm = confirm("Are you sure You want to delete");
             if (makeConfirm == true) {
@@ -275,7 +283,7 @@
                 var targetDiv = jQuery(this).attr('targetDiv');
                 jQuery('#banner-rec-' + id).remove();
                 //regnerate index number on table
-                $('#row_banner_body .row').each(function(index) {
+                $('#row_banner_body .row').each(function (index) {
                     $(this).find('span.sn').html(index + 1);
                 });
                 return true;
@@ -284,13 +292,13 @@
             }
         });
 
-        $(function() {
+        $(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $("#tripData").on('submit', function(e) {
+            $("#tripData").on('submit', function (e) {
                 tinymce.triggerSave();
                 e.preventDefault();
                 let url = "{{ route('trip.store') }}";
@@ -303,27 +311,27 @@
                     cache: false,
                     processData: false,
                     contentType: false,
-                    beforeSend: function() {},
-                     success: function(data) {
+                    beforeSend: function () { },
+                    success: function (data) {
                         if (data.status == 'success') {
-                            document.getElementById("tripData"). reset();
+                            document.getElementById("tripData").reset();
                             toastr.success(data.message);
-                            setTimeout(function(){
-                        location.reload(); 
-                    }, 1000); 
-                  // alert("here");
-               }
-                  
-               jQuery.each(data.errors, function (key, value) {
-                   toastr.error(value);
-               });
-             
-           },
-           error: function (xhr, status, error) {
-           var err = JSON.parse(xhr.responseText);
-  alert(err.Message);
-              
-           }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 1000);
+                            // alert("here");
+                        }
+
+                        jQuery.each(data.errors, function (key, value) {
+                            toastr.error(value);
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        var err = JSON.parse(xhr.responseText);
+                        alert(err.Message);
+
+                    }
                 });
             });
 
@@ -331,8 +339,8 @@
         });
 
         // ## //
-        $(document).ready(function() {
-            $('#trip_title').on('change', function() {
+        $(document).ready(function () {
+            $('#trip_title').on('change', function () {
                 var trip_title;
                 trip_title = $('#trip_title').val();
                 trip_title = trip_title.replace(/[^a-zA-Z0-9 ]+/g, "");
@@ -342,7 +350,7 @@
         });
 
         // Go back link
-        $('.backlink').click(function() {
+        $('.backlink').click(function () {
             var url = '<?= url()->previous() ?>';
             window.location = url;
         });
