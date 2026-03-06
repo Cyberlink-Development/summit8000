@@ -178,6 +178,12 @@
                                             Tell a Friend </button>
                                     </div>
                                 </div>
+                                <div class="flex flex-col gap-3 w-full">
+                                    <!-- Bigger Button -->
+                                    <a data-modal-target="inquiry_now" data-modal-toggle="inquiry_now"
+                                        class="w-full text-center text-white bg-brand-400 hover:bg-brand-500 font-medium px-5 py-4 rounded-xl">
+                                        Inquiry Now </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -752,7 +758,7 @@
 
                         <a href="#trip-details"
                             class="w-full block text-center text-white bg-brand-400 hover:bg-brand-500 px-5 py-3 rounded-xl text-sm transition">
-                            Book Now
+                            Inquiry Now
                         </a>
 
                         @if($schedules->count()>0)
@@ -907,6 +913,70 @@
     </div>
 </div>
 <!-- End Inquiry modal -->
+
+<!-- Inquiry now modal -->
+<div id="inquiry_now" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed backdrop-blur-sm top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-lg max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-neutral-primary-soft border border-default rounded-xl shadow-sm  ">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between border-b border-default p-4  ">
+                <h3 class="text-lg font-medium text-heading"> Trip Inquiry of '{{ $data->trip_title }}' </h3>
+                <button type="button"
+                    class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
+                    data-modal-hide="inquiry_now">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18 17.94 6M18 18 6.06 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form action="{{ route('post-inquiry') }}"  method="post">
+                @csrf
+                <input type="hidden" id="g_recaptcha_response4" name="g_recaptcha_response4"/>
+                <input type="hidden" name="trip_id" value="{{ $data->id }}"/>
+                <div class="p-5">
+                    <div class="grid gap-4 grid-cols-2 ">
+                        <div class="col-span-2">
+                            <input type="text" name="name" id="name"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Full Name*" required>
+                        </div>
+                        <div class="col-span-2">
+                            <input type="email" name="email" id="namemaile"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="E-mail*" required>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <input type="tel" name="phone" id="phone"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Mobile*" required min="10">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <input type="number" name="peoples" id="peoples"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="No of Travellers*" required min="1">
+                        </div>
+
+                        <div class="col-span-2">
+                            <textarea id="message" rows="4" name="message"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Message*"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 border-t border-default p-4">
+                    <button type="submit" class="flex items-center  text-white bg-brand-400 hover:bg-brand-500 font-medium rounded-xl text-sm px-5 py-3 transition shadow-sm"> Submit </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Inquiry now modal -->
 <!-- Tell a Friend modal -->
 <div id="TellAFriend" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed backdrop-blur-sm top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -1101,6 +1171,7 @@
                 document.getElementById('g_recaptcha_response').value = token;
                 document.getElementById('g_recaptcha_response2').value = token;
                 document.getElementById('g_recaptcha_response3').value = token;
+                document.getElementById('g_recaptcha_response4').value = token;
             });
         }
 
