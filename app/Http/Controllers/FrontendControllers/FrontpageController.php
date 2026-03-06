@@ -445,46 +445,54 @@ class FrontpageController extends Controller
         }
         return view('themes.default.inquiry',compact('trips','activity','data','sidebar','uri'));
     }
+
     public function post_inquiry(Request $request)
     {
-        // dd('test',$request->all());
-        $setting = SettingModel::where('id', 1)->first();
-        $g_recaptcha_response = $request->input('g_recaptcha_response');
+        $g_recaptcha_response = $request->input('g_recaptcha_response4');
         $result = $this->getCaptcha($g_recaptcha_response);
-        if ($result->success == true && $result->score > 0.6) {
+        if ($result->success == true) {
             if ($request->isMethod('post')) {
                 $validator = Validator::make($request->all(),[
+                    'trip_id' => 'required|exists:cl_trip_details,id',
                     'name' => 'required|string|max:255',
                     'email' => 'required|email|max:255',
-                    'contact' => 'required|string|max:20',
-                    'country' => 'required|string|max:100',
-                    'activity_type' => 'nullable',
-                    'trip' => 'required|exists:cl_trip_details,id',
+                    'phone' => 'required|string|max:20',
+                    'peoples' => 'required|integer|min:1',
                     'message' => 'nullable|string'
                 ]);
                 if ($validator->fails()) {
-                    return back()->withErrors($validator)->withInput();
+                    return back()->with([
+                        'error' => true,
+                        'message' => $validator->errors()->first()
+                    ])->withInput();
                 }
-                // dd('test');
-                $post = new TripInquiryModel();
-                $post->trip_id = $request->trip;
-                $post->title = $request->activity_type;
-                $post->name = $request->name;
-                $post->email = $request->email;
-                $post->number = $request->contact;
-                $post->country = $request->country;
-                $post->message= $request->message;
-                if ($post->save()) {
-                    return new AdminBookingMail();
-                    // Mail::send(new AdminInquiryMail());
-                    // $name = $request->name;
-                    // $message = "<p>Thanks for your enquiry. One of our team will be in touch soon to discuss your interests and how we can help with your plans.</p>";
+                $trip = TripModel::where('id', $request->trip_id)->first();
 
-                    // return view('themes.default.booking-success', compact('name', 'message'));
-                }
+                // dd($trip,$request->all());
+                $data = new TripInquiryModel();
+                $data->trip_id = $request->trip_id;
+                $data->title = $trip->trip_title;
+                $data->name = $request->name;
+                $data->email = $request->email;
+                $data->number = $request->phone;
+                $data->no_of_people = $request->peoples;
+                $data->message = $request->message;
+                $data->save();
+
+                $setting = SettingModel::where('id', 1)->first();
+                return new AdminInquiryMail($data);
+                // Mail::to($setting->email_primary)->send(new AdminInquiryMail($data));
+
+                return back()->with([
+                    'success' => true,
+                    'message' => 'Inquiry Sent successfully.'
+                ]);
             }
         } else {
-            return back()->with('error', 'You are a robot');
+            return back()->with([
+                'error' => true,
+                'message' => 'You are robot.'
+            ]);
         }
     }
 
