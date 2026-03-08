@@ -38,23 +38,19 @@
         <div class="flex flex-col lg:flex-row gap-9">
             <div class="w-full lg:w-2/3 ">
                 <div class="grid grid-cols-1 gap-4">
-                    @foreach ($photos as $key => $photo)
-                        @if ($key === 0)
-                            <div>
-                                <a href="{{$photo->thumbnail ? asset('/uploads/original/'.$photo->thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}" data-fancybox="trip-gallery" data-caption="{{ $photo->title }}">
-                                    <div class="relative rounded-2xl overflow-hidden group cursor-pointer h-full md:h-[480px]">
-                                        <img src="{{$photo->thumbnail ? asset('/uploads/original/'.$photo->thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}" alt="{{ $photo->title }}" loading="lazy"
-                                            class="lazy-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors">
-                                        </div>
-                                    </div>
-                                </a>
+                    <div>
+                        <a href="{{$data->banner ? asset('/uploads/banners/'.$data->banner) : asset('theme-assets/assets/trip/8000.jpg')}}" data-fancybox="trip-gallery" data-caption="{{ $data->banner_alt }}">
+                            <div class="relative rounded-2xl overflow-hidden group cursor-pointer h-full md:h-[480px]">
+                                <img src="{{$data->banner ? asset('/uploads/banners/'.$data->banner) : asset('theme-assets/assets/trip/8000.jpg')}}" alt="{{ $data->banner_alt }}" loading="lazy"
+                                    class="lazy-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors">
+                                </div>
                             </div>
-                        @endif
-                    @endforeach
+                        </a>
+                    </div>
                     <div class="grid grid-cols-3 gap-4">
                         @foreach ($photos as $key => $photo)
-                            @if ($key > 0 && $key <= 3)
+                            @if ( $key <= 2)
                                 <div class="relative">
                                     <a href="{{ $photo->thumbnail ? asset('/uploads/original/' . $photo->thumbnail) : asset('theme-assets/assets/trip/8000.jpg') }}"
                                     data-fancybox="trip-gallery"
@@ -68,7 +64,7 @@
 
                                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
 
-                                            @if ($key === 3 && count($photos) > 4)
+                                            @if ($key === 2 && count($photos) > 3)
                                                 <div class="absolute inset-0 flex items-end justify-end p-4">
                                                     <span
                                                         class="bg-white/95 text-sm text-blue-500 px-4 py-2 rounded-full hover:shadow-xl transition-all">
@@ -84,7 +80,7 @@
                     </div>
                 </div>
                 @foreach ($photos as $key => $photo)
-                    @if ($key > 3)
+                    @if ($key > 2)
                         <a href="{{ asset('/uploads/original/' . $photo->thumbnail) }}"
                         data-fancybox="trip-gallery"
                         data-caption="{{ $photo->title }}"
@@ -177,12 +173,11 @@
                                             class="w-full text-brand-400 border border-brand-400 hover:bg-brand-100  font-medium rounded-xl text-sm  px-5 py-2.5 transition shadow-sm">
                                             Tell a Friend </button>
                                     </div>
-                                </div>
-                                <div class="flex flex-col gap-3 w-full">
-                                    <!-- Bigger Button -->
-                                    <a data-modal-target="inquiry_now" data-modal-toggle="inquiry_now"
-                                        class="w-full text-center text-white bg-brand-400 hover:bg-brand-500 font-medium px-5 py-4 rounded-xl">
-                                        Inquiry Now </a>
+
+                                    <!-- Inquiry Now -->
+                                    <a data-modal-target="inquiry_now" data-modal-toggle="inquiry_now" class="w-full text-center text-white bg-brand-400 hover:bg-brand-500 font-medium px-5 py-4 rounded-xl">
+                                        Inquiry Now
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -1191,8 +1186,10 @@
             "@context": "https://schema.org",
             "@type": "TouristTrip",
             "name": "{{ $data->trip_title }}",
-            "description": "{{ strip_tags($data->trip_content) }}",
+            "description": "{{ strip_tags($data->sub_title) }}",
             "url": "{{ url()->current() }}",
+            "offers": "{{ $data->price }}",
+            "image": "{{ asset('/uploads/banners/'.$data->banner) }}",
             "provider": {
                 "@type": "TravelAgency",
                 "name": "Summit 8000"

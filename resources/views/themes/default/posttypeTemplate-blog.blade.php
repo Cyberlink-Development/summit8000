@@ -95,7 +95,7 @@
         "@context": "https://schema.org",
         "@type": "TouristTrip",
         "name": "{{ $data->post_type }}",
-        "description": "{{ strip_tags($data->content) }}",
+        "description": "{{ strip_tags($data->associated_title) }}",
         "url": "{{ url()->current() }}",
         "provider": {
             "@type": "TravelAgency",
