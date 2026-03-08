@@ -11,7 +11,11 @@
                         <div class="bs-component">
                             <input type="text" id="trip_title" name="trip_title" class="form-control"
                                 placeholder="Trip Title" value="{{ old('trip_title') }}" required/>
-                            <input type="hidden" id="uri" name="uri" value="" />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <input type="text" id="uri" name="uri" class="form-control" placeholder="Slug"/>
                         </div>
                     </div>
                 </div>

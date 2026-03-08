@@ -112,6 +112,7 @@ class TripController extends Controller
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title',
+                'uri' => 'required|unique:cl_trip_details,uri',
                 'trip_type' => 'required',
                 'destination' => 'required|array|min:1',
                 'activity' => 'required|array|min:1',
@@ -123,6 +124,7 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
+            // dd( $request->all() ,Str::slug($request->uri));
 
             $data = $request->all();
 
@@ -503,6 +505,7 @@ class TripController extends Controller
             // dd('test', $request->all());
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
+                'uri' => 'required|unique:cl_trip_details,uri,' . $id,
                 'trip_type' => 'required',
                 'destination' => 'required|array|min:1',
                 'activity' => 'required|array|min:1',
