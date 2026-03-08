@@ -11,7 +11,12 @@
                         <div class="bs-component">
                             <input type="text" id="trip_title" name="trip_title" class="form-control"
                                 value="{{ $data->trip_title }}" placeholder="Trip Title" required/>
-                            <input type="hidden" id="uri" name="uri" value="{{ $data->uri }}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <input type="text" id="" name="uri" class="form-control"
+                                value="{{ $data->uri }}" placeholder="Trip Uri" required/>
                         </div>
                     </div>
                 </div>

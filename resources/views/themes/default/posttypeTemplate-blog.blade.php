@@ -9,7 +9,7 @@
         <div class="container">
             <!-- Blog Grid -->
             <h1 class="text-3xl font-extrabold leading-tight text-brand-900 lg:text-4xl mb-2">
-                {{$data->post_type}}
+                {{ $data->post_type }}
             </h1>
             <p>
                 {!! $data->content !!}
@@ -21,6 +21,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                     <!-- Large Featured Card (Left) -->
+                    @if($featuredPost)
                     <a href="{{ route('page.pagedetail', $featuredPost->uri) }}"
                         class="lg:col-span-7 relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg ">
                         <img src="{{$featuredPost->page_thumbnail ? asset('uploads/medium/' . $featuredPost->page_thumbnail) : asset('theme-assets/assets/trip/1.jpg')}}"
@@ -36,6 +37,7 @@
                             <h2 class="text-3xl font-bold leading-tight">{{ $featuredPost->post_title }}</h2>
                         </div>
                     </a>
+                    @endif
 
                     <!-- Smaller Cards (Right) -->
                     <div class="lg:col-span-5 flex flex-col justify-between gap-8">
