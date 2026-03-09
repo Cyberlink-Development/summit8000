@@ -370,6 +370,17 @@
                            {!!$data->trip_content!!}
                         </div>
                         <!-- Text Content Sections -->
+
+                        <!-- Altitude Graph -->
+                        @if($itinerary->count()>0)
+                            <div class=" max-w-none text-gray-700 space-y-6 ">
+                                <p class="text-2xl font-bold text-gray-900">Altitude Graph</p>
+                                <div style="border:1px solid #e5e7eb; padding:20px; border-radius:8px; height:400px;">
+                                    <canvas id="altitudeChart"></canvas>
+                                </div>
+                            </div>
+                        @endif
+                        <!-- Altitude Graph -->
                     </div>
                 </section>
                 <!-- end -->
@@ -390,7 +401,7 @@
                 <!-- end WhyWithSummit8000 -->
 
                 <!-- Itinerary -->
-                @if($itinerary)
+                @if($itinerary->count()>0)
                     <section class="py-6" id="itinerary">
                         <div class=" space-y-3">
                             <div class="accordion-wrapper" id="">
@@ -431,17 +442,17 @@
                                                         </p>
                                                     </div>
                                                 @endif
-                                                @if($value->max_altitude || $value->duration)
+                                                @if($value->distance || $value->duration)
                                                     <div
                                                         class="flex flex-wrap gap-4 mt-4 text-sm text-fg-brand-strong rounded-full bg-brand-100 p-1">
-                                                        @if($value->max_altitude || $value->duration)
+                                                        @if($value->distance || $value->duration)
                                                             <div class="flex items-center">
                                                                 <span
                                                                     class="  text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Accommodation:</span>
-                                                                <span class="font-semibold">{{ $value->max_altitude }}</span>
+                                                                <span class="font-semibold">{{ $value->distance }}</span>
                                                             </div>
                                                         @endif
-                                                        @if($value->max_altitude || $value->duration)
+                                                        @if($value->distance || $value->duration)
                                                             <div class="flex items-center">
                                                                 <span class="text-gray-900 px-2 py-0.5 rounded mr-2 text-sm">Meals:</span>
                                                                 <span class="font-semibold">{{ $value->duration }}</span>
@@ -1154,7 +1165,85 @@
         </div>
     </div>
 </div>
- <!-- End Write Review modal -->
+<!-- End Write Review modal -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+let altitudeData = @json($chartData);
+let days = altitudeData.map(item => item.day);
+let altitude = altitudeData.map(item => item.altitude);
+let titles = altitudeData.map(item => item.title);
+
+const ctx = document.getElementById('altitudeChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: days,
+        datasets: [{
+            label: 'Altitude (m)',
+            data: altitude,
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59,130,246,0.2)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins:{
+            legend:{
+                display:false
+            },
+            tooltip:{
+                callbacks:{
+                    title:function(context){
+                        let index = context[0].dataIndex;
+                        return titles[index]; // itinerary title
+                    },
+                    label:function(context){
+                        return "Altitude: " + context.parsed.y + " m";
+                    }
+                }
+            }
+        },
+        scales:{
+            x:{
+                title:{
+                    display:true,
+                    text:'Days',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                grid: {
+                    display: false   // removes vertical crossed lines
+                },
+                ticks: {
+                    autoSkip: false
+                }
+            },
+            y:{
+                title:{
+                    display:true,
+                    text:'Altitude (m)',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                grid: {
+                    color: "#e5e7eb"
+                }
+            }
+        }
+    }
+});
+
+</script>
 
 <script src="{{ asset('theme-assets/js/trip-details.js') }}"></script>
 
