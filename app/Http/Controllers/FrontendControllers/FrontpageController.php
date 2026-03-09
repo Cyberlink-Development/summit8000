@@ -217,6 +217,19 @@ class FrontpageController extends Controller
         $local = PostTypeModel::whereIn('id', ['20', '19'])->get();
         if ($data->id) {
             $itinerary = $data->itineraries()->orderBy('ordering', 'asc')->get();
+
+            // For the altitude chart
+            $chartData = [];
+            foreach ($itinerary as $item)
+            {
+                $chartData[] = [
+                    'day' => $item->days,
+                    'altitude' => (int)$item->max_altitude,
+                    'title' => $item->title
+                ];
+            }
+            // Till here
+
             $schedules = $data->schedules()->orderBy('ordering', 'asc')->get();
             $faqs = $data->faqs()->orderBy('ordering', 'asc')->get();
             $cost_includes = CostIncludesModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
@@ -244,10 +257,10 @@ class FrontpageController extends Controller
         $setting = SettingModel::where('id',1)->first();
         $reviews = TripReview::where('status', 1)->where('trip_id',$data->id)->get();
 
-        // dd($data,$reviews);
+        // dd($data,$itinerary,$chartData);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri','reviews'));
+            'photo_videos', 'activity','destinations','similar_trips','photos','videos','local','banner','setting','schedules','faqs','tripId', 'tripUri','reviews','chartData'));
     }
 
     //<------------------------------------------Activity Frontend---------------------------------------------->
