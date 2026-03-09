@@ -165,7 +165,7 @@
                             </div>
                         </li>
                         <li>
-                            <button id="mega-menu-button" data-dropdown-toggle="Trekkings" data-dropdown-delay="1"
+                            <button id="" data-dropdown-toggle="Trekkings" data-dropdown-delay="1"
                                 data-dropdown-trigger="hover" data-dropdown-placement="bottom"
                                 data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0"
                                 class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl "> Trekkings
@@ -191,7 +191,7 @@
                             </div>
                         </li>
                         <li class="relative group">
-                            <button id="mega-menu-button" data-dropdown-toggle="NepalTours" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">Tours<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <button id="" data-dropdown-toggle="NepalTours" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl ">Tours<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                                 </svg>
                             </button>
@@ -210,7 +210,7 @@
                             </div>
                         </li>
                         <li class="relative group">
-                            <button id="mega-menu-button" data-dropdown-toggle="AboutUs" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl "> About Us<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <button id="" data-dropdown-toggle="AboutUs" data-dropdown-delay="1" data-dropdown-trigger="hover" data-dropdown-placement="bottom" data-dropdown-offset-distance="0" data-dropdown-offset-skidding="0" class="flex items-center hover:text-brand-400 py-8 px-2 rounded-xl "> About Us<svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                                 </svg>
                             </button>
