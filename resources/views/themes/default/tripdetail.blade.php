@@ -373,9 +373,9 @@
 
                         <!-- Altitude Graph -->
                         @if($itinerary->count()>0)
-                            <div class=" max-w-none text-gray-700 space-y-6 ">
+                            <div class=" max-w-none text-gray-700 space-y-6 altitude-chart-wrapper">
                                 <p class="text-2xl font-bold text-gray-900">Altitude Graph</p>
-                                <div style="border:1px solid #e5e7eb; padding:20px; border-radius:8px; height:400px;">
+                                <div style="border:1px solid #e5e7eb; padding:20px; border-radius:8px; height:400px;" >
                                     <canvas id="altitudeChart"></canvas>
                                 </div>
                             </div>

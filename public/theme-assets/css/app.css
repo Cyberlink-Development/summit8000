@@ -1204,6 +1204,14 @@
             align-items: center
         }
     }
+    @media (max-width: 767px) {
+        .altitude-chart-wrapper {
+            display: none;
+        }
+    }
+    .grecaptcha-badge {
+        visibility: hidden !important;
+    }
 
     .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type,.datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type {
         position: relative
