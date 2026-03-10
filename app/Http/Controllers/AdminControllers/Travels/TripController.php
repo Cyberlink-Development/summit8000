@@ -118,37 +118,37 @@ class TripController extends Controller
                 'activity' => 'required|array|min:1',
 
                 // Thumbnail
-                'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1500,height=1500',
+                'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1500,max_height=1500',
                 // Trip Map
-                'trip_map' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1500,height=1500',
+                'trip_map' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1500,max_height=1500',
                 // Banner
-                'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1600,height=1500',
+                'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1600,max_height=1500',
                 // gear images (array)
                 'gear_thumbnail' => 'nullable|array',
                 // validate each image
-                'gear_thumbnail.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1600,height=1200',
+                'gear_thumbnail.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1600,max_height=1200',
             ],
             [
                 // Thumbnail messages
                 'thumbnail.image' => 'Thumbnail must be an image.',
                 'thumbnail.mimes' => 'Thumbnail must be JPG, JPEG, PNG or WEBP.',
                 'thumbnail.max' => 'Thumbnail size must not exceed 2MB.',
-                'thumbnail.dimensions' => 'Thumbnail must be 1500x1500 pixels.',
+                'thumbnail.dimensions' => 'Thumbnail must be less than 1500x1500 pixels.',
 
                 // Trip Map messages
                 'trip_map.image' => 'Trip map must be an image.',
                 'trip_map.mimes' => 'Trip map must be JPG, JPEG, PNG or WEBP.',
                 'trip_map.max' => 'Trip map size must not exceed 2MB.',
-                'trip_map.dimensions' => 'Trip map must be  1500x1500 pixels.',
+                'trip_map.dimensions' => 'Trip map must be less than  1500x1500 pixels.',
 
                 // Banner messages
                 'banner.image' => 'Banner must be an image.',
                 'banner.mimes' => 'Banner must be JPG, JPEG, PNG or WEBP.',
                 'banner.max' => 'Banner size must not exceed 2MB.',
-                'banner.dimensions' => 'Banner must be 1600x1500 pixels.',
+                'banner.dimensions' => 'Banner must be less than 1600x1500 pixels.',
 
                 // custom messages
-                'gear_thumbnail.*.dimensions' => 'Each Photos must be  1600x1200 pixels.',
+                'gear_thumbnail.*.dimensions' => 'Each Photos must be less than 1600x1200 pixels.',
                 'gear_thumbnail.*.image' => 'Photos must be valid images.',
                 'gear_thumbnail.*.mimes' => 'Photos must be JPG, JPEG, PNG, or WEBP.',
                 'gear_thumbnail.*.max' => 'Each Photos must be less than 2MB.',
@@ -547,37 +547,37 @@ class TripController extends Controller
                 'activity' => 'required|array|min:1',
 
                 // Thumbnail
-                'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1500,height=1500',
+                'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1500,max_height=1500',
                 // Trip Map
-                'trip_map' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=1500,height=1500',
+                'trip_map' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1500,max_height=1500',
                 // Banner
-                'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2096|dimensions:width=1600,height=550',
+                'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1600,max_height=1500',
                 // gear images (array)
                 'gear_thumbnail' => 'nullable|array',
                 // validate each image
-                'gear_thumbnail.*' => 'image|mimes:jpg,jpeg,png,webp|max:2096|dimensions:width=1600,height=1200',
+                'gear_thumbnail.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048|dimensions::max_width=1600,max_height=1200',
             ],
             [
                 // Thumbnail messages
                 'thumbnail.image' => 'Thumbnail must be an image.',
                 'thumbnail.mimes' => 'Thumbnail must be JPG, JPEG, PNG or WEBP.',
                 'thumbnail.max' => 'Thumbnail size must not exceed 2MB.',
-                'thumbnail.dimensions' => 'Thumbnail must be 1500x1500 pixels.',
+                'thumbnail.dimensions' => 'Thumbnail must be less than 1500x1500 pixels.',
 
                 // Trip Map messages
                 'trip_map.image' => 'Trip map must be an image.',
                 'trip_map.mimes' => 'Trip map must be JPG, JPEG, PNG or WEBP.',
                 'trip_map.max' => 'Trip map size must not exceed 2MB.',
-                'trip_map.dimensions' => 'Trip map must be  1500x1500 pixels.',
+                'trip_map.dimensions' => 'Trip map must be less than 1500x1500 pixels.',
 
                 // Banner messages
                 'banner.image' => 'Banner must be an image.',
                 'banner.mimes' => 'Banner must be JPG, JPEG, PNG or WEBP.',
                 'banner.max' => 'Banner size must not exceed 2MB.',
-                'banner.dimensions' => 'Banner must be 1600x1500 pixels.',
+                'banner.dimensions' => 'Banner must be less than 1600x1500 pixels.',
 
                 // custom messages
-                'gear_thumbnail.*.dimensions' => 'Each Photos must be  1600x1200 pixels.',
+                'gear_thumbnail.*.dimensions' => 'Each Photos must be less than 1600x1200 pixels.',
                 'gear_thumbnail.*.image' => 'Photos must be valid images.',
                 'gear_thumbnail.*.mimes' => 'Photos must be JPG, JPEG, PNG, or WEBP.',
                 'gear_thumbnail.*.max' => 'Each Photos must be less than 2MB.',
