@@ -1,6 +1,6 @@
 @extends('themes.default.common.master')
 @section('title', $data->meta_title ? $data->meta_title : $data->trip_title)
-@section('meta_keyword', $data->meta_keyword)
+@section('meta_keyword', $data->meta_key)
 @section('meta_description', $data->meta_description)
 @section('thumbnail', $data->thumbnail)
 @section('content')

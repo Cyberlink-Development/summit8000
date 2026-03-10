@@ -160,7 +160,7 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
-            dd( $request->all() ,Str::slug($request->uri));
+            // dd( $request->all() ,Str::slug($request->uri));
 
             $data = $request->all();
 

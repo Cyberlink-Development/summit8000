@@ -85,6 +85,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="">Meta Keywords</label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <input type="text" class="form-control" name="meta_keyword"
+                                    value="{{ old('meta_keyword', $data->meta_keyword) }}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="">Meta Description</label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <textarea class="form-control" name="meta_description" rows="3">{{ old('meta_description',$data->meta_description) }}</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

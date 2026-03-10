@@ -80,6 +80,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="">Meta Keywords </label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <input class="form-control " name="meta_keyword"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="">Meta Description </label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <textarea class="form-control" name="meta_description" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
