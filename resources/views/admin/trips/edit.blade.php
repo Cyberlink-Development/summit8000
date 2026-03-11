@@ -16,7 +16,7 @@
 
                 <footer>
                     <div id="publishing-action">
-                        <button type="submit" name="submit" class="btn btn-success" value="publish"> Publish </button>
+                        <button type="submit" name="submit" class="btn btn-success" value="publish" id="publishBtn"> Publish </button>
                     </div>
                     <div class="clearfix"></div>
                 </footer>
@@ -81,7 +81,13 @@
             </div>
         </section>
     </form>
-
+<script>
+document.getElementById("tripData").addEventListener("submit", function () {
+    let btn = document.getElementById("publishBtn");
+    btn.disabled = true;
+    btn.innerHTML = "Publishing...";
+});
+</script>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
