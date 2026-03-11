@@ -63,6 +63,8 @@ use App\Models\Destinations\DestinationActivityrelModel;
 use App\Models\Posts\PostImageModel;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 /******************* Sangam starts *****************/
 use App\Http\Controllers\HBLController;
 use App\Models\Inquiry\EnrollmentModel;
@@ -1300,5 +1302,39 @@ class FrontpageController extends Controller
         ->where('category', optional($data)->category)
         ->get();
         return view('themes.default.team-single', compact('data',  'certificates','related'));
+    }
+
+    public function sitemap()
+    {
+        $sitemap = Sitemap::create();
+
+        $sitemap->add(Url::create(url('/'))
+                ->setPriority(1.0)
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+            );
+        $sitemap->add(Url::create(url('/reviews'))->setPriority(0.8));
+
+        $trips = TripModel::where('status',1)->get();
+
+        foreach ($trips as $trip) {
+
+            $sitemap->add(
+                Url::create("/trip/{$trip->uri}")
+                    ->setLastModificationDate($trip->updated_at)
+                    ->setPriority(0.9)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+            );
+
+        }
+        $posts = PostModel::where('status',1)->get();
+
+        foreach ($posts as $post) {
+            $sitemap->add(
+                Url::create("/blog/{$post->uri}")
+                ->setLastModificationDate($post->updated_at)
+                ->setPriority(0.8)
+            );
+        }
+
+        return $sitemap->toResponse(request());
     }
 }
