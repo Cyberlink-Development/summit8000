@@ -27,15 +27,15 @@
                 <h2 class=" text-3xl font-extrabold leading-tight text-brand-900    lg:text-4xl no-format ">
                     {{$data->associated_title}}
                 </h2>
-                <p>
+                <div class="prose max-w-none">
                     {!! $data->content !!}
-                </p>
+                </div>
 
                 @foreach($posts as $post)
                     <h3>{{ $loop->iteration }}. {{ $post->post_title }} </h3>
-                    <p>
+                    <div class="prose max-w-none">
                         {!! $post->post_content !!}
-                    </p>
+                    </div>
                     <figure><img
                             src="{{$post->page_thumbnail ? asset('uploads/medium/' . $post->page_thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}"
                             alt="{{ $post->post_title }}" class="rounded-2xl">

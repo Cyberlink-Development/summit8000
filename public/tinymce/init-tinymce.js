@@ -7,7 +7,7 @@ var editor_config = {
   toolbar_mode: 'sliding',
   force_br_newlines: false,
   force_p_newlines: false,
-  forced_root_block: '',
+  forced_root_block: 'p',
   cleanup: true,
   remove_linebreaks: true,
   convert_newlines_to_brs: false,
@@ -16,6 +16,8 @@ var editor_config = {
   paste_auto_cleanup_on_paste: true,
   entities: '160,nbsp,38,amp,60,lt,62,gt',
 
+  valid_elements: '*[*]',
+  invalid_attributes: 'class',
   file_picker_callback: function (callback, value, meta) {
     var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName(
       'body')[0].clientWidth;

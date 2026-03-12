@@ -300,9 +300,9 @@
             </h2>
 
             <div class="space-y-6 text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                <p>
+                <div class="prose max-w-none">
                     {!! $about->content !!}
-                </p>
+                </div>
             </div>
 
             <div class="mt-10 mb-20">
@@ -367,9 +367,9 @@
                                 <span class="ml-2 text-gray-400 font-normal"></span>
                             </div>
                             <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                                <p>
+                                <div class="prose max-w-none">
                                     {!! $review->message !!}
-                                </p>
+                                </div>
                             </div>
                             <div class="mt-8 flex items-center">
                                 <div

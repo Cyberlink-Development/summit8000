@@ -11,9 +11,9 @@
             <h1 class="text-3xl font-extrabold leading-tight text-brand-900 lg:text-4xl mb-2">
                 {{ $data->post_type }}
             </h1>
-            <p>
+            <div class="prose max-w-none">
                 {!! $data->content !!}
-            </p>
+            </div>
             @php
                 $featuredPost = $posts->first();
             @endphp
