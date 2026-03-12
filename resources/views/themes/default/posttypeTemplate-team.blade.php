@@ -28,9 +28,9 @@
                 <h2 class=" text-3xl font-extrabold leading-tight text-brand-900    lg:text-4xl no-format ">
                     {{$data->associated_title}}
                 </h2>
-                <p>
+                <div class="prose max-w-none">
                     {!! $data->content !!}
-                </p>
+                </div>
             </article>
             <div class="lg:w-10/12 lg:mx-auto space-y-8">
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">

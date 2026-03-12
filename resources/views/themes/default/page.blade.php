@@ -22,9 +22,9 @@
     <div class="flex justify-between">
         <article class="mx-auto w-full format format-sm sm:format-base lg:format-lg format-blue dark:format-invert container ">
             <!-- Content -->
-            <p>
+            <div class="prose max-w-none">
                 {!! $data->content !!}
-            </p>
+            </div>
         </article>
     </div>
 </main>

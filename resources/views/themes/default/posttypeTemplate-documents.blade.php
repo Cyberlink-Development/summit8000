@@ -25,9 +25,9 @@
                     {{$data->associated_title}}
 
                 </h1>
-                <p class="text-lg text-gray-500">
+                <div class="prose max-w-none">
                     {!! $data->content !!}
-                </p>
+                </div>
 
 
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">

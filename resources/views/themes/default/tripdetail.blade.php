@@ -367,20 +367,12 @@
                         <div class=" max-w-none text-gray-700 space-y-6 ">
                             <h2 class="text-2xl  font-bold text-gray-900 text-gray-900">
                                 {{ $data->trip_title }} Overview</h2>
-                           {!!$data->trip_content!!}
+                                <div class="prose max-w-none">
+                                    {!! $data->trip_content !!}
+                                </div>
                         </div>
                         <!-- Text Content Sections -->
 
-                        <!-- Altitude Graph -->
-                        @if($itinerary->count()>0)
-                            <div class=" max-w-none text-gray-700 space-y-6 altitude-chart-wrapper">
-                                <p class="text-2xl font-bold text-gray-900">Altitude Graph</p>
-                                <div style="border:1px solid #e5e7eb; padding:20px; border-radius:8px; height:400px;" >
-                                    <canvas id="altitudeChart"></canvas>
-                                </div>
-                            </div>
-                        @endif
-                        <!-- Altitude Graph -->
                     </div>
                 </section>
                 <!-- end -->
@@ -430,9 +422,9 @@
                                         <div id="body-{{ $key+1}}" class="hidden border border-s-0 border-e-0 border-t-0 border-b-default" aria-labelledby="heading-{{ $key+1 }}">
                                             <div
                                                 class="space-y-3 py-5 text-base font-normal text-gray-700 p-4 md:p-5 p-4 md:p-5">
-                                                <p>
+                                                <div class="prose max-w-none">
                                                     {!! $value->content !!}
-                                                </p>
+                                                </div>
                                                 @if($value->extra_info)
                                                     <div class="flex items-start   p-4 mb-4 text-sm text-fg-brand-strong rounded-base bg-brand-50"
                                                         role="alert">
@@ -532,6 +524,18 @@
                     </div>
                 </section>
                 <!-- end -->
+
+                <!-- Altitude Graph -->
+                    @if($itinerary->count()>0)
+                        <div class=" max-w-none text-gray-700 space-y-6 altitude-chart-wrapper">
+                            <p class="text-2xl font-bold text-gray-900">Altitude Graph</p>
+                            <div style="border:1px solid #e5e7eb; padding:20px; border-radius:8px; height:400px;" >
+                                <canvas id="altitudeChart"></canvas>
+                            </div>
+                        </div>
+                    @endif
+                <!-- Altitude Graph -->
+                 
                 <!-- Dates Table -->
                 @if($schedules->count()>0)
                     <section class="py-6" id="departures">
@@ -648,9 +652,11 @@
                         <div class=" space-y-3">
                             <div class="mb-8" id="gears">
                                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Gears List</h2>
-                                <p >
+
+                                <div class="prose max-w-none">
                                     {!! $data->trip_highlight !!}
-                                </p>
+                                </div>
+
                             </div>
                         </div>
                     </section>
@@ -693,9 +699,9 @@
                                         <span class="ml-2 text-gray-400 font-normal"></span>
                                     </div>
                                     <div class="text-sm text-gray-600 leading-relaxed space-y-4">
-                                        <p>
+                                        <div class="prose max-w-none">
                                             {!! $review->message !!}
-                                        </p>
+                                        </div>
                                     </div>
                                     <div class="mt-8 flex items-center">
                                         <div
@@ -734,7 +740,7 @@
                                             </button>
                                         </div>
                                         <div id="accordion-card-body-{{ $key+1 }}" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-{{ $key+1 }}">
-                                            <div class="p-4 text-body"> {!! $value->content  !!} </div>
+                                            <div class="p-4 text-body prose max-w-none"> {!! $value->content  !!} </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -750,9 +756,9 @@
                         <div class=" space-y-3">
                             <div class="mb-8" id="extrainfo">
                                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Extra Information</h2>
-                                <p >
+                                <div class="prose max-w-none">
                                     {!! $data->trip_excerpt !!}
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </section>

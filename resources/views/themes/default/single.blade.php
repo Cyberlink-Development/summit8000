@@ -32,9 +32,9 @@
                 <!-- <figcaption>Trek Packing List</figcaption> -->
             </figure>
 
-            <p>
+            <div class="prose max-w-none">
                 {!! $data->post_content !!}
-            </p>
+            </div>
 
             @if($data->post_excerpt)
                 <blockquote>

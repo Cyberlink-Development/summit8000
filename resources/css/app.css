@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.prose a {
+    @apply text-brand-400 underline;
+}
+
+.prose a:hover {
+    @apply text-brand-600;
+}
