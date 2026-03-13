@@ -167,7 +167,7 @@
                         <img src="{{ public_path('uploads/banners/' . $trip->banner) }}">
                     @endif
                     @if($trip->thumbnail)
-                        <img src="{{ public_path('uploads/original/' . $trip->thumbnail) }}">
+                        <img src="{{ public_path('uploads/thumbnails/' . $trip->thumbnail) }}">
                     @endif
                 </div>
 

@@ -167,7 +167,7 @@
                         <div class="bs-component">
                             <label>Meals</label>
                             <input type="text" name="meals" class="form-control"
-                                value="{{ $data->peak_name }}" />
+                                value="{{ $data->meals }}" />
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -547,7 +547,7 @@
                     </div>
                     @if ($data->thumbnail)
                         <div class="delete-fe-image thumb_id{{ $data->id }}">
-                            <img src="{{ asset(env('PUBLIC_PATH') . 'uploads/original/' . $data->thumbnail) }}"
+                            <img src="{{ asset(env('PUBLIC_PATH') . 'uploads/thumbnails/' . $data->thumbnail) }}"
                                 width="200px" />
                             <a href="#{{ $data->id }}" class="thumbdelete">X</a>
                         </div>
@@ -631,7 +631,7 @@
                 <div class="hd_show_con">
                     <div class="bs-component">
                         <label class="field prepend-icon append-button file mb20">
-                            <span class="button btn btn-primary">{{ $data->thumbnail ? 'banner' : 'Choose File' }}</span>
+                            <span class="button btn btn-primary">{{ $data->banner ? 'Change' : 'Choose File' }}</span>
                             <input type="file" class="gui-file" name="banner" id="file3"
                                 onChange="document.getElementById('banner').value = this.value;">
                             <input type="text" class="gui-input" id="banner"

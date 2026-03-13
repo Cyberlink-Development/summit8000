@@ -81,13 +81,6 @@
             </div>
         </section>
     </form>
-<script>
-document.getElementById("tripData").addEventListener("submit", function () {
-    let btn = document.getElementById("publishBtn");
-    btn.disabled = true;
-    btn.innerHTML = "Publishing...";
-});
-</script>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -524,6 +517,11 @@ document.getElementById("tripData").addEventListener("submit", function () {
                 e.preventDefault();
                 tinymce.triggerSave();
 
+                // Disable button on submit
+                let btn = document.getElementById("publishBtn");
+                btn.disabled = true;
+                btn.innerHTML = "Publishing...";
+
                 let trip = '{{ $data->id }}';
                 let url = '{{ route('trip.update', ['trip' => ':trip']) }}';
                 url = url.replace(':trip', trip);
@@ -546,16 +544,20 @@ document.getElementById("tripData").addEventListener("submit", function () {
                             toastr.success(data.message);
                             location.reload();
                         }
-                        jQuery.each(data.errors, function (key, value) {
-                            toastr.error(value);
-                            // hideLoading();
 
-                        });
-
+                        // Re-enable if validation errors returned
+                        if (data.errors) {
+                            jQuery.each(data.errors, function (key, value) {
+                                toastr.error(value);
+                            });
+                            btn.disabled = false;
+                            btn.innerHTML = "Publish";
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-
-
+                        // Re-enable on HTTP error
+                        btn.disabled = false;
+                        btn.innerHTML = "Publish";
                     }
                 });
             });

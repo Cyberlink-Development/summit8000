@@ -84,13 +84,6 @@
         </section>
 
     </form>
-<script>
-document.getElementById("tripData").addEventListener("submit", function () {
-    let btn = document.getElementById("publishBtn");
-    btn.disabled = true;
-    btn.innerHTML = "Publishing...";
-});
-</script>
 
 @endsection
 @section('scripts')
@@ -307,6 +300,12 @@ document.getElementById("tripData").addEventListener("submit", function () {
             $("#tripData").on('submit', function (e) {
                 tinymce.triggerSave();
                 e.preventDefault();
+
+                // Disable button on submit
+                let btn = document.getElementById("publishBtn");
+                btn.disabled = true;
+                btn.innerHTML = "Publishing...";
+
                 let url = "{{ route('trip.store') }}";
                 let tripData = document.getElementById('tripData');
                 let data = new FormData(tripData);
@@ -328,12 +327,19 @@ document.getElementById("tripData").addEventListener("submit", function () {
                             // alert("here");
                         }
 
-                        jQuery.each(data.errors, function (key, value) {
-                            toastr.error(value);
-                        });
-
+                        // Re-enable if validation errors returned
+                        if (data.errors) {
+                            jQuery.each(data.errors, function (key, value) {
+                                toastr.error(value);
+                            });
+                            btn.disabled = false;
+                            btn.innerHTML = "Publish";
+                        }
                     },
                     error: function (xhr, status, error) {
+                        // Re-enable on HTTP error
+                        btn.disabled = false;
+                        btn.innerHTML = "Publish";
                         var err = JSON.parse(xhr.responseText);
                         alert(err.Message);
 

@@ -160,37 +160,49 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
-            // dd( $request->all() ,Str::slug($request->uri));
+            dd( $request->all() ,Str::slug($request->uri));
 
             $data = $request->all();
 
             /*************Banner Upload************/
             $file = $request->file('banner');
             $banner_name = '';
-            if ($request->hasFile('banner')) {
-                $file = $request->file('banner');
-                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $banner_name = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+            if ($request->hasfile('banner')) {
+                $banner = $request->file('banner')->getClientOriginalName();
+                $extension = $request->file('banner')->getClientOriginalExtension();
+                $banner = explode('.', $banner);
+                $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
+
                 $destinationPath = public_path('uploads/banners');
-                Image::make($file->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $banner_name);
+
+                $banner_picture = Image::make($file->getRealPath());
+                $banner_picture->save($destinationPath . '/' . $banner_name);
             }
 
             /******Upload Thumbnail******/
+            $thumb_file = $request->file('thumbnail');
             $thumbnail_name = '';
-            if ($request->hasFile('thumbnail')) {
-                $thumb_file = $request->file('thumbnail');
-                $originalName = pathinfo($thumb_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $thumbnail_name = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
-                $destinationPath = public_path('uploads/thumbnails');
-                Image::make($thumb_file->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $thumbnail_name);
-            }
+            if ($request->hasfile('thumbnail')) {
+                $thumbnail = $request->file('thumbnail')->getClientOriginalName();
+                $extension = $request->file('thumbnail')->getClientOriginalExtension();
+                $thumbnail = explode('.', $thumbnail);
+                $thumbnail_name = Str::slug($thumbnail[0]) . '-' . Str::random(5) . '.' . $extension;
 
+                $destinationPath = public_path('uploads/original');
+
+                $thumbnail_picture = Image::make($thumb_file->getRealPath());
+                $width = Image::make($thumb_file->getRealPath())->width();
+                $height = Image::make($thumb_file->getRealPath())->height();
+                $thumbnail_picture->save($destinationPath . '/' . $thumbnail_name);
+            }
             /*************PDF****************/
+            $pdf_file = $request->file('upload_pdf');
             $pdf_name = '';
-            if ($request->hasFile('upload_pdf')) {
-                $pdf_file = $request->file('upload_pdf');
-                $originalName = pathinfo($pdf_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $pdf_name = Str::slug($originalName) . '-' . Str::random(5) . '.pdf';
+            if ($request->hasfile('upload_pdf')) {
+                $pdf = $request->file('upload_pdf')->getClientOriginalName();
+                $extension = $request->file('upload_pdf')->getClientOriginalExtension();
+                $pdf = explode('.', $pdf);
+                $pdf_name = Str::slug($pdf[0]) . '-' . Str::random(5) . '.' . $extension;
                 $destinationPath = public_path('uploads/pdf');
                 $pdf_file->move($destinationPath, $pdf_name);
             }
@@ -198,13 +210,20 @@ class TripController extends Controller
             $data['trip_pdf'] = $pdf_name;
 
             /******Upload Trip Map******/
+            $map_file = $request->file('trip_map');
             $map_file_name = '';
-            if ($request->hasFile('trip_map')) {
-                $map_file = $request->file('trip_map');
-                $originalName = pathinfo($map_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $map_file_name = time() . '_' . Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+            if ($request->hasfile('trip_map')) {
+                $map_thumbnail = $request->file('trip_map')->getClientOriginalName();
+                $map_extension = $request->file('trip_map')->getClientOriginalExtension();
+                $map_thumbnail = explode('.', $map_thumbnail);
+                $map_file_name = time() . '_' . Str::slug($map_thumbnail[0]) . '-' . Str::random(5) . '.' . $map_extension;
+
                 $map_destinationPath = public_path('uploads/original');
-                Image::make($map_file->getRealPath())->encode('webp', 90)->save($map_destinationPath . '/' . $map_file_name);
+
+                $map_thumbnail_picture = Image::make($map_file->getRealPath());
+                $map_width = Image::make($map_file->getRealPath())->width();
+                $map_height = Image::make($map_file->getRealPath())->height();
+                $map_thumbnail_picture->save($map_destinationPath . '/' . $map_file_name);
             }
             /*****************************/
 
@@ -324,15 +343,17 @@ class TripController extends Controller
                     $gearData = new TripGearModel();
                     $gearData->trip_detail_id = $last_id;
                     $thumb_file = $request->file('gear_thumbnail');
+                    // dd($thumb_file);
                     if (isset($thumb_file[$value])) {
-                        $originalName = pathinfo($thumb_file[$value]->getClientOriginalName(), PATHINFO_FILENAME);
-                        $thumb = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+                        $thumb = time() . '-' . Str::random(5) . $thumb_file[$value]->getClientOriginalName();
                         $destinationPath = public_path('uploads/original');
-                        Image::make($thumb_file[$value]->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $thumb);
+                        $thumb_file[$value]->move($destinationPath, $thumb);
                         $gearData->thumbnail = $thumb;
                     }
                     $gearData->ordering = $request->gear_ordering[$key];
                     $gearData->title = $request->gear_title[$key];
+                    // $gearData->content = $request->gear_content[$key];
+                    // $gearData->video = $request->gear_video[$key];
                     $gearData->save();
                     $sn_gear++;
                 }
@@ -517,7 +538,7 @@ class TripController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->ajax()) {
-            // dd('test', $request->all());
+            dd('test', $request->all());
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
                 'uri' => 'required|unique:cl_trip_details,uri,' . $id,
@@ -586,26 +607,31 @@ class TripController extends Controller
             $banner_name = '';
             $thumbnail_name = '';
             $trip_map_name = '';
-
-            if ($request->hasFile('banner')) {
+            if ($request->hasfile('banner')) {
+                // dd($request->banner);
+                $data = TripModel::find($id);
                 if ($data->banner) {
-                    $oldPath = env('PUBLIC_PATH') . 'uploads/banners/' . $data->banner;
-                    if (file_exists($oldPath)) {
-                        unlink($oldPath);
+                    if (file_exists(env('PUBLIC_PATH') . 'uploads/banners/' . $data->banner)) {
+                        unlink(env('PUBLIC_PATH') . 'uploads/banners/' . $data->banner);
                     }
                 }
-                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $banner_name = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+                $banner = $request->file('banner')->getClientOriginalName();
+                $extension = $request->file('banner')->getClientOriginalExtension();
+                $banner = explode('.', $banner);
+                $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
                 $destinationPath = public_path('uploads/banners');
-                Image::make($file->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $banner_name);
+                $banner_picture = Image::make($file->getRealPath());
+                $width = Image::make($file->getRealPath())->width();
+                $height = Image::make($file->getRealPath())->height();
+
+                $banner_picture->save($destinationPath . '/' . $banner_name);
                 $data->banner = $banner_name;
                 $data->save();
             }
-
             /******PDF*********/
             $pdf_file = $request->file('upload_pdf');
             $pdf_name = '';
-            if ($request->hasFile('upload_pdf')) {
+            if ($request->hasfile('upload_pdf')) {
                 $data = TripModel::find($id);
                 if ($data->upload_pdf) {
                     if (file_exists(env('PUBLIC_PATH') . 'uploads/pdf/' . $data->upload_pdf)) {
@@ -623,33 +649,47 @@ class TripController extends Controller
             }
 
             /*****Thumbnail*****/
-            if ($request->hasFile('thumbnail')) {
+            if ($request->hasfile('thumbnail')) {
                 $data = TripModel::find($id);
                 if ($data->thumbnail) {
-                    if (file_exists(env('PUBLIC_PATH') . 'uploads/thumbnails/' . $data->thumbnail)) {
-                        unlink(env('PUBLIC_PATH') . 'uploads/thumbnails/' . $data->thumbnail);
+                    if (file_exists(env('PUBLIC_PATH') . 'uploads/original/' . $data->thumbnail)) {
+                        unlink(env('PUBLIC_PATH') . 'uploads/original/' . $data->thumbnail);
                     }
                 }
-                $originalName = pathinfo($thumbnail_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $thumbnail_name = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
-                $destinationPath = public_path('uploads/thumbnails');
-                Image::make($thumbnail_file->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $thumbnail_name);
+                $thumbnail = $request->file('thumbnail')->getClientOriginalName();
+                $extension = $request->file('thumbnail')->getClientOriginalExtension();
+                $thumbnail = explode('.', $thumbnail);
+                $thumbnail_name = time() . '_' . Str::slug($thumbnail[0]) . '-' . Str::random(5) . '.' . $extension;
+                $destinationPath = public_path('uploads/original');
+                $thumbnail_picture = Image::make($thumbnail_file->getRealPath());
+                $width = Image::make($thumbnail_file->getRealPath())->width();
+                $height = Image::make($thumbnail_file->getRealPath())->height();
+
+                $thumbnail_picture->save($destinationPath . '/' . $thumbnail_name);
                 $data->thumbnail = $thumbnail_name;
                 $data->save();
             }
 
             /************Trip Map*************/
-            if ($request->hasFile('trip_map')) {
+            if ($request->hasfile('trip_map')) {
                 $data = TripModel::find($id);
                 if ($data->trip_map) {
                     if (file_exists(env('PUBLIC_PATH') . 'uploads/original/' . $data->trip_map)) {
                         unlink(env('PUBLIC_PATH') . 'uploads/original/' . $data->trip_map);
                     }
                 }
-                $originalName = pathinfo($tripmap_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $trip_map_name = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+                $trip_map = $request->file('trip_map')->getClientOriginalName();
+                $extension = $request->file('trip_map')->getClientOriginalExtension();
+                $trip_map = explode('.', $trip_map);
+                $trip_map_name = Str::slug($trip_map[0]) . '-' . Str::random(5) . '.' . $extension;
                 $destinationPath = public_path('uploads/original');
-                Image::make($tripmap_file->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $trip_map_name);
+                $trip_map_picture = Image::make($tripmap_file->getRealPath());
+                $width = Image::make($tripmap_file->getRealPath())->width();
+                $height = Image::make($tripmap_file->getRealPath())->height();
+
+                $trip_map_picture->resize($width, $height, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $trip_map_name);
                 $data->trip_map = $trip_map_name;
                 $data->save();
             }
@@ -826,6 +866,7 @@ class TripController extends Controller
             }
 
             // Update Photos Videos
+
             if (isset($request->gear_id)) {
                 $gear_keys = array_keys($request->gear_id);
                 $sn_gear = 1;
@@ -840,14 +881,15 @@ class TripController extends Controller
                         $gearData->trip_detail_id = $data->id;
                         $thumb_file = $request->file('gear_thumbnail');
                         if (isset($thumb_file[$value])) {
-                            $originalName = pathinfo($thumb_file[$value]->getClientOriginalName(), PATHINFO_FILENAME);
-                            $thumb = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+                            $thumb = time() . '-' . Str::random(5) . $thumb_file[$value]->getClientOriginalName();
                             $destinationPath = public_path('uploads/original');
-                            Image::make($thumb_file[$value]->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $thumb);
+                            $thumb_file[$value]->move($destinationPath, $thumb);
                             $gearData->thumbnail = $thumb;
                         }
                         $gearData->ordering = $request->gear_ordering[$key];
                         $gearData->title = $request->gear_title[$key];
+                        // $gearData->content = $request->gear_content[$key];
+                        // $gearData->video = $request->gear_video[$key];
                         $gearData->save();
                     } else if ($request->gear_id[$value] !== null && $request->gear_id[$value] !== "") {
                         $gear_id = $request->gear_id[$value];
@@ -855,20 +897,22 @@ class TripController extends Controller
 
                         $thumb_file = $request->file('gear_thumbnail');
                         if (isset($thumb_file[$key])) {
+
                             if ($gearData->thumbnail) {
                                 if (file_exists(env('PUBLIC_PATH') . 'uploads/original/' . $gearData->thumbnail)) {
                                     unlink(env('PUBLIC_PATH') . 'uploads/original/' . $gearData->thumbnail);
                                 }
                             }
-                            $originalName = pathinfo($thumb_file[$key]->getClientOriginalName(), PATHINFO_FILENAME);
-                            $thumb = Str::slug($originalName) . '-' . Str::random(5) . '.webp';
+                            $thumb = time() . '-' . Str::random(5) . $thumb_file[$key]->getClientOriginalName();
                             $destinationPath = public_path('uploads/original');
-                            Image::make($thumb_file[$key]->getRealPath())->encode('webp', 90)->save($destinationPath . '/' . $thumb);
+                            $thumb_file[$key]->move($destinationPath, $thumb);
                             $gearData->thumbnail = $thumb;
                         }
                         $gearData->trip_detail_id = $data->id;
                         $gearData->ordering = $request->gear_ordering[$key];
                         $gearData->title = $request->gear_title[$key];
+                        // $gearData->content = $request->gear_content[$key];
+                        // $gearData->video = $request->gear_video[$key];
                         $gearData->save();
                     }
 

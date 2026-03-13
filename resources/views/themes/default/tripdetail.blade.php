@@ -535,7 +535,7 @@
                         </div>
                     @endif
                 <!-- Altitude Graph -->
-                 
+
                 <!-- Dates Table -->
                 @if($schedules->count()>0)
                     <section class="py-6" id="departures">
@@ -809,7 +809,7 @@
                                 <a href="{{ route('trip.tripdetail',$row->uri) }}"
                                     class="block bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-transform hover:-translate-y-1">
                                     <div class="relative h-64 overflow-hidden">
-                                        <img src="{{ $row->thumbnail ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/assets/trip/2.jpg')}}" alt="{{$row->thumbnail_alt}}" class="w-full h-full object-cover">
+                                        <img src="{{ $row->thumbnail ? asset('uploads/thumbnails/'.$row->thumbnail) : asset('theme-assets/assets/trip/2.jpg')}}" alt="{{$row->thumbnail_alt}}" class="w-full h-full object-cover">
                                     </div>
                                     <div class="p-5">
                                         <div class="flex items-center gap-1 mb-2">
