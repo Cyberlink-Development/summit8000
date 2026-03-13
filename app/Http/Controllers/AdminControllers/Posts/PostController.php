@@ -131,7 +131,7 @@ class PostController extends Controller
         $page_thumbnail = "";
         $page_banner = "";
 
-       
+
         if($request->hasFile('page_banner')){
             $user_img_name = $request->file('page_banner');
             $user_name = time().'.'.$user_img_name->getClientOriginalExtension();
@@ -152,7 +152,7 @@ class PostController extends Controller
             $product_picture = Image::make($file->getRealPath());
             $width = Image::make($file->getRealPath())->width();
             $height = Image::make($file->getRealPath())->height();
-            
+
              /*Upload Original Image*/
             $product_picture->save($destinationOriginal . '/' . $page_thumbnail);
 
@@ -296,7 +296,7 @@ class PostController extends Controller
             $product_picture = Image::make($file->getRealPath());
             $width = Image::make($file->getRealPath())->width();
             $height = Image::make($file->getRealPath())->height();
-            
+
              /*Upload Original Image*/
             $product_picture->save($destinationOriginal . '/' . $product_name);
             $data->page_thumbnail = $product_name;
@@ -308,6 +308,7 @@ class PostController extends Controller
 
         $posttypeId = $this->getPostTypeId($request->post_type);
         $data->post_date = $request->post_date;
+        $data->post_author = $request->post_author;
         $data->template = $request->template;
         $data->template_child = $request->template_child;
         $data->post_title = $request->post_title;
@@ -421,7 +422,7 @@ class PostController extends Controller
 
     public function delete_post_banner(PostModel $postModel, $id)
     {
-        $data = PostModel::find($id);       
+        $data = PostModel::find($id);
         if ($data->page_banner) {
             if (file_exists(env('PUBLIC_PATH') . 'uploads/banners/' . $data->page_banner)) {
                 unlink(env('PUBLIC_PATH') . 'uploads/banners/' . $data->page_banner);

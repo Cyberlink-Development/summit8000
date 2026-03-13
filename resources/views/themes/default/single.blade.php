@@ -9,22 +9,21 @@
     <div class="container ">
         <article class="max-w-5xl mx-auto format format-sm sm:format-base lg:format-sm format-blue  ">
             <header>
-                <h1>
-                    {{$data->post_title}}
-                </h1>
-                <address class="flex items-center mb-6 not-italic">
-                    <!-- <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        <img loading="lazy" class="lazy-image mr-4 m-0 w-8 h-8 rounded-full" src="{{$data->page_banner ? asset('uploads/banners/'.$data->page_banner) : asset('theme-assets/assets/trip/2.jpg')}}" alt="{{ $data->post_title }}" alt="Jese Leos">
-                        <div rel="author" class="text-base font-bold text-gray-700 dark:text-black">
-                            {{ $data->sub_title }}
-                        </div>
-                    </div> -->
-                    <div class="text-base text-gray-500 ">
+                <h1>{{ $data->post_title }}</h1>
+
+                <div class="mt-3 space-y-1">
+                    <div class="text-base text-gray-500 leading-none">
                         <time pubdate datetime="2022-02-08" title="February 8th, 2022">
                             {{ $data->sub_title }}
                         </time>
                     </div>
-                </address>
+
+                    <div class="text-sm text-gray-900 dark:text-white leading-none">
+                        <div rel="author" class="text-base font-bold text-gray-700 dark:text-black">
+                            {{ $data->author }}
+                        </div>
+                    </div>
+                </div>
             </header>
 
             <figure>
