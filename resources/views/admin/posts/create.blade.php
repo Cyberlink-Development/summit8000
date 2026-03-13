@@ -44,6 +44,16 @@
                             </div>
                         </div>
                     </div>
+                    @if(Request::segment(2) == 'blogs')
+                        <div class="form-group">
+                                <label for="inputStandard" class="col-lg-2 control-label">Author</label>
+                            <div class="col-lg-9">
+                                <div class="bs-component">
+                                    <input type="text" id="" name="post_author" class="form-control" placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     @if($category->count() > 0)
                         <div class="form-group">
                             <label for="inputSelect" class="col-lg-2 control-label"> Category </label>
