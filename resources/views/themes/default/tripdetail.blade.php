@@ -1279,37 +1279,55 @@ new Chart(ctx, {
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "TouristTrip",
-        "name": "{{ $data->trip_title }}",
-        "description": "{{ strip_tags($data->sub_title) }}",
-        "url": "{{ url()->current() }}",
-        "image": "{{ asset('/uploads/banners/'.$data->banner) }}",
+        "@graph":[
+            {
+                "@type": "TouristTrip",
+                "name": "{{ $data->trip_title }}",
+                "description": "{{ strip_tags($data->sub_title) }}",
+                "url": "{{ url()->current() }}",
+                "image": "{{ asset('/uploads/banners/'.$data->banner) }}",
 
-        "offers": {
-            "@type": "Offer",
-            "price": "{{ $data->price }}",
-            "priceCurrency": "USD"
-        },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "{{ $data->price }}",
+                    "priceCurrency": "USD"
+                },
 
-        "provider": {
-            "@type": "TravelAgency",
-            "name": "Summit 8000"
-        },
+                "provider": {
+                    "@type": "TravelAgency",
+                    "name": "Summit 8000"
+                },
 
-        "itinerary": {
-            "@type": "ItemList",
-            "itemListElement": [
-
-                @foreach($itinerary as $key => $value)
+                "itinerary": {
+                    "@type": "ItemList",
+                    "itemListElement": [
+                        @foreach($itinerary as $key => $value)
+                        {
+                            "@type": "ListItem",
+                            "position": "{{ $key+1 }}",
+                            "name": "Day {{ $value->days }}: {{ $value->title }}",
+                            "description": "{{ strip_tags($value->content) }}"
+                        }@if(!$loop->last),@endif
+                        @endforeach
+                    ]
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    @foreach($faqs as $key => $value)
                     {
-                        "@type": "ListItem",
-                        "position": "{{ $key+1 }}",
-                        "name": "Day {{ $value->days }}: {{ $value->title }}",
-                        "description": "{{ strip_tags($value->content) }}"
+                        "@type": "Question",
+                        "name": "{{ strip_tags($value->title) }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{{ strip_tags($value->content) }}"
+                        }
                     }@if(!$loop->last),@endif
-                @endforeach
-            ]
-        }
+                    @endforeach
+                ]
+            }
+        ]
     }
     </script>
 @endsection
