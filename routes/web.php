@@ -36,6 +36,7 @@ Route::get('/contact-verify/{token}', 'FrontendControllers\FrontpageController@v
 
 // Normal Pages
 Route::get('blogs/{uri}', 'FrontendControllers\FrontpageController@pagedetail')->name('page.pagedetail');
+Route::get('team/{uri}', 'FrontendControllers\FrontpageController@pagedetail')->name('page.teamdetail');
 Route::get('company/{uri}', 'FrontendControllers\FrontpageController@posttype')->name('page.posttype_detail');
 
 Route::get('expeditions/{uri}', 'FrontendControllers\FrontpageController@trip_lists')->name('expedition-list');
