@@ -52,10 +52,12 @@ class BannerController extends Controller
             $banner = $request->file('picture')->getClientOriginalName();
             $extension = $request->file('picture')->getClientOriginalExtension();
             $banner = explode('.', $banner);
-            $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
+            $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.webp';
+            // $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
             $destinationPath = public_path('uploads/banners');
             $banner_picture = Image::make($file->getRealPath());
-            $banner_picture->save($destinationPath . '/' . $banner_name);
+            // $banner_picture->save($destinationPath . '/' . $banner_name);
+            $banner_picture->encode('webp', 85)->save($destinationPath . '/' . $banner_name);
             $req['picture'] = $banner_name;
         }
         if ($request->hasFile('video')) {
@@ -126,10 +128,12 @@ class BannerController extends Controller
             $banner = $request->file('picture')->getClientOriginalName();
             $extension = $request->file('picture')->getClientOriginalExtension();
             $banner = explode('.', $banner);
-            $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
+            // $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.' . $extension;
+            $banner_name = Str::slug($banner[0]) . '-' . Str::random(5) . '.webp';
             $destinationPath = public_path('uploads/banners');
             $banner_picture = Image::make($file->getRealPath());
-            $banner_picture->save($destinationPath . '/' . $banner_name);
+            // $banner_picture->save($destinationPath . '/' . $banner_name);
+            $banner_picture->encode('webp', 85)->save($destinationPath . '/' . $banner_name);
             $data->picture = $banner_name;
         }
 
