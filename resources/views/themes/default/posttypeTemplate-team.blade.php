@@ -36,8 +36,7 @@
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                     <!-- Team Member 1: Cody Fisher -->
                     @foreach($posts as $post)
-                        <a href="{{$post->page_thumbnail ? asset('uploads/medium/' . $post->page_thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}"
-                            data-fancybox="certificates" data-caption="{{ $post->post_title }}"
+                        <a href="{{ route('page.teamdetail', $post->uri) }}"
                             class="group relative block document-card rounded-xl overflow-hidden bg-white border border-gray-200 flex flex-col">
                             <img src="{{$post->page_thumbnail ? asset('uploads/medium/' . $post->page_thumbnail) : asset('theme-assets/assets/trip/8000.jpg')}}"
                                 alt="{{ $post->post_title }}" loading="lazy"
